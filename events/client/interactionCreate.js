@@ -20,6 +20,9 @@ module.exports = async (client, interaction) => {
 }
 
 async function validatedAt(client, interaction) {
+  console.warn(`DISABLED CODE. interactionCreate.js:23`)
+  return; // DISABLED CODE DUE TO USELESS DATABASE
+  
   try {
     const user = await client.db.users.findOne({
       userID: interaction.user.id,

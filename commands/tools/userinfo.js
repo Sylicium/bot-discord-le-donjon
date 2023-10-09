@@ -14,6 +14,15 @@ module.exports = {
     type: 6
   }],
   run: async (client, interaction) => {
+
+
+    /****** DISABLED COMMAND ******/
+    return client.disabledCommand(interaction)
+    /****** DISABLED COMMAND ******/
+
+
+
+
     const user = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
     const userDB = await client.db.users.findOne({
       userID: user.id,

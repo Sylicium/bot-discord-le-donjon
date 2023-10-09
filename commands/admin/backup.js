@@ -8,6 +8,13 @@ module.exports = {
   description: "faire une backup",
   default_member_permissions: ['Administrator'],
   run: async (client, interaction) => {
+
+    /****** DISABLED COMMAND ******/
+    return client.disabledCommand(interaction)
+    /****** DISABLED COMMAND ******/
+
+
+
     const dtb = {
       users: [],
       guilds: []

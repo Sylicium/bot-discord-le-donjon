@@ -8,7 +8,25 @@ module.exports = async (client) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }).then(async () => {
-      client.db = db
+      client.db = (...args) => {
+        if(db) {
+          return db(...args)
+        } else {
+          return {}
+        }
+      }
+
+      client.disabledCommand = (interaction) => {
+        return interaction.reply({
+          content: "",
+          embeds: [
+            new Discord.EmbedBuilder()
+              .setColor("FF0000")
+              .setDescription(`Cette commande a été désactivée.`)
+          ]
+        })
+      }
+
       console.log(`Connecté à MongoDB`);
       console.log(`${client.user.tag} est prêt ✔`);
     }).catch((err) => {

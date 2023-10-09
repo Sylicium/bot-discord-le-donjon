@@ -1,7 +1,8 @@
+const Discord = require('discord.js');
 const {
   ApplicationCommandType,
   AttachmentBuilder
-} = require('discord.js');
+} = Discord
 const Canvas = require('@napi-rs/canvas');
 const {
   request
@@ -46,6 +47,16 @@ module.exports = {
     required: true
   }],
   async run(client, interaction) {
+
+    /****** DISABLED COMMAND ******/
+    return client.disabledCommand(interaction)
+    /****** DISABLED COMMAND ******/
+
+
+
+
+
+
     const access = interaction.options.getString('accès');
     const userId = interaction.options.getUser('membre').id;
     const guild = client.guilds.cache.get('1094318705883762719');
@@ -91,10 +102,10 @@ module.exports = {
         name: 'profile-image.png'
       });
 
-      const user = await client.db.users.findOne({
+      const user = (await client.db?.users?.findOne({
         userID: member.user.id,
         guildID: member.guild.id
-      });
+      })) ?? false
 
       if (!user) return interaction.reply({ content: `Cette personne n'a pas de bdd`, ephemeral: true });
 

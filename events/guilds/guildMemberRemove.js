@@ -2,7 +2,16 @@ const { EmbedBuilder } = require('discord.js');
 
 const delay = ms => new Promise(res => setTimeout(res, ms))
 
+
+
+
 module.exports = async (client, member) => {
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. guildMemberRemove.js:6")
+  return;
+  /****** DISABLED CODE ******/
+
   const user = await client.db.users.findOne({
     userID: member.id
   });

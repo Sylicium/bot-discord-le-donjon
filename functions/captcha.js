@@ -2,6 +2,14 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
   create: async function (client, member) {
+
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. captcha.js:8")
+  return;
+  /****** DISABLED CODE ******/
+
+
     member?.roles?.add("1094318705883762721"); // Role pour l'accès au salon "Validation"
 
     const captchas = [{

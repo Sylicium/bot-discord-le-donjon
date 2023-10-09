@@ -7,6 +7,11 @@ const { AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBu
 
 module.exports = {
   editProfile: async function (client, interaction) {
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. canvasCmd.js:12")
+  return;
+  /****** DISABLED CODE ******/
     const user = await client.db.users.findOne({ userID: interaction.user.id, guildID: interaction.guild.id }).catch(e => { console.log(e) });
     if (interaction.type === 2) {
       const rows = await createRows(user);
@@ -40,6 +45,12 @@ module.exports = {
     }
   },
   sendProfile: async function (client, interaction) {
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. canvasCmd.js:48")
+  return;
+  /****** DISABLED CODE ******/
+
     const guild = client.guilds.cache.get(interaction.guild.id);
     const user = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
     const users = await client.db.users.find({ guildID: interaction.guild.id }).catch(e => { console.log(e) });
@@ -158,6 +169,13 @@ module.exports = {
     });
   },
   sendLeaderBoard: async function (client, interaction) {
+
+    
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. canvasCmd.js:175")
+  return;
+  /****** DISABLED CODE ******/
+
     const guild = client.guilds.cache.get(interaction.guild.id);
     const users = await client.db.users.find({ guildID: interaction.guild.id, isMember: true }).catch(e => { console.log(e) });
 

@@ -37,6 +37,7 @@ module.exports = async (client) => {
       guilds: []
     };
 
+    /*
     const users = await client.db.users.find().catch(e => { });
     users.map(x => {
       dtb.users.push(x);
@@ -46,6 +47,7 @@ module.exports = async (client) => {
     guilds.map(x => {
       dtb.guilds.push(x);
     });
+    */
 
     client?.channels?.cache?.get('1094318711202140250').send({
       files: [{

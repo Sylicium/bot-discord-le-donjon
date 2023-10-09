@@ -7,6 +7,13 @@ const checklevelUpCooldown = new Set;
 
 module.exports = {
   addMess: async function (client, message) {
+
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. userStats.js:13")
+  return;
+  /****** DISABLED CODE ******/
+
     if (message.author.bot) return;
     if (message.channel.type === 1 || message.channel.type === 3) return;
 

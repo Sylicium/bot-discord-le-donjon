@@ -36,16 +36,9 @@ module.exports = {
     var n = -1
     
 
-    let role = roles.find(x => {
+    roles.find(x => {
       return x.name == subCommand
     })
-
-    console.log("role:",role)
-
-    interaction.reply({
-      content: `Role: \`\`\`json\n${JSON.stringify(role)}\`\`\``
-    })
-    return;
 
 
 

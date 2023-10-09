@@ -66,6 +66,14 @@ module.exports = {
     options: options
   }
   ], async run(client, interaction) {
+
+
+    /****** DISABLED COMMAND ******/
+    return client.disabledCommand(interaction)
+    /****** DISABLED COMMAND ******/
+
+
+
     const Subcommand = interaction.options.getSubcommand() || null;
     if (!Subcommand) return interaction.reply({ content: 'Quelque chose s\'est mal passé..', ephemeral: true });
 
