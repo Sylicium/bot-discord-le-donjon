@@ -1,7 +1,13 @@
 
 const db = require("../../mongoDB");
+const somef = require("../../someFunctions")
+
 
 module.exports = async (client) => {
+  console.log(`[BOT] Bot démarré en tant que ${client.user.tag} (${client.user.id})`)
+
+  client.somef = somef
+
   if (client.config.mongodbURL) {
     const mongoose = require("mongoose")
     mongoose.connect(client.config.mongodbURL, {

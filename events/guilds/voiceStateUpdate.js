@@ -2,6 +2,24 @@ const { EmbedBuilder } = require('discord.js');
 const delay = ms => new Promise(res => setTimeout(res, ms))
 
 module.exports = async (client, oldState, newState) => {
+
+  // console.log("voiceStateUpdate OLD:",oldState)
+  // console.log("voiceStateUpdate OLD:",newState)
+
+  let whiteList_voiceCamera = client.config.static.voiceChannels.filter(x => { return x.whitelistCamera }).map(x => { return x.id })
+
+  if(newState.channel && newState.selfVideo) {
+    if(!whiteList_voiceCamera.includes(newState.channel.id)) {
+      newState.member.user.send({
+        content: `[**${newState.channel.guild.name}**] Vous n'avez pas le droit de mettre votre caméra en vocal ! Vous avez été kick du salon vocal en conséquences.`
+      }).then(() => {}).catch(e => {
+        console.log(e)
+      })
+      return newState.member.voice.disconnect("Caméra allumée");
+    }
+  }
+
+
   client.config.vocs.map(x => {
     let role = x.role // Role pour le salon muted
 

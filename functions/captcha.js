@@ -3,14 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
   create: async function (client, member) {
 
-
-  /****** DISABLED CODE ******/
-  console.warn("DISABLED CODE. captcha.js:8")
-  return;
-  /****** DISABLED CODE ******/
-
-
-    member?.roles?.add("1094318705883762721"); // Role pour l'accès au salon "Validation"
+    member?.roles?.add("1160467551252385853"); // Role pour l'accès au salon "Validation"
 
     const captchas = [{
       image: "bondage.png",
@@ -23,7 +16,7 @@ module.exports = {
       result: "edgeplay"
     }];
 
-    const channel = client.channels.cache.get('1094318707456618609'); //ID du channel "Validation"
+    const channel = client.channels.cache.get('1160467551797657613'); //ID du channel "Validation"
     const random = Math.floor(Math.random() * captchas.length);
     const embed = new EmbedBuilder()
       .setImage(`attachment://${captchas[random].image}`)
@@ -34,6 +27,7 @@ module.exports = {
 
       collector.on('collect', async m => {
 
+        /*
         const user = await client.db.users.findOne({
           userID: member.id,
           guildID: member.guild.id
@@ -41,6 +35,8 @@ module.exports = {
 
         user.join.captchedAt = Date.now();
         await user.save().catch(e => { console.log(e) });
+        */
+
         msg.delete();
         channel.messages.fetch().then((messages) => {
           messages.map(mess => {
@@ -48,7 +44,7 @@ module.exports = {
               mess.delete();
           });
         });
-        member.roles.remove("1094318705883762721"); // Role pour l'accès au salon "Validation"
+        member.roles.remove("1160467551252385853"); // Role pour l'accès au salon "Validation"
         member.send({ content: "Bonjour " + "<@" + member.user.id + ">" + "\n 🙏 Pour demander à intégrer le Donjon, merci d'ouvrir un ticket, après avoir lu et accepté le <#1101963365657628722>\n ⚠️ Lisez attentivement le règlement avant de le valider : __il sera masqué lorsque vous aurez à répondre au court questionnaire__\n_\n_\n" }).catch(e => { });
       });
 
@@ -60,7 +56,7 @@ module.exports = {
               mess.delete();
           });
         });
-        if (member._roles.includes('1094318705883762721')) // Role pour l'accès au salon "Validation"
+        if (member._roles.includes('1160467551252385853')) // Role pour l'accès au salon "Validation"
           member.kick();
       });
     });

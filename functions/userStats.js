@@ -43,6 +43,14 @@ module.exports = {
     }, client.config.stats.msg.cooldown * 1000);
   },
   addReact: async function (client, reaction, reactUser) {
+
+
+    /****** DISABLED CODE ******/
+    console.warn("DISABLED CODE. userStats.js:49")
+    return;
+    /****** DISABLED CODE ******/
+
+
     const channel = client.channels.cache.get(reaction.message.channelId);
 
     if (reactUser.bot) return;
@@ -73,6 +81,13 @@ module.exports = {
     }, client.config.stats.react.cooldown * 1000);
   },
   addImg: async function (client, message) {
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. userStats.js:86")
+  return;
+  /****** DISABLED CODE ******/
+
+
     if (message.author.bot) return;
     if (message.channel.type === 1 || message.channel.type === 3) return;
 
@@ -100,6 +115,14 @@ module.exports = {
     }, client.config.stats.img.cooldown * 1000);
   },
   addVoc: function (client) {
+
+
+    /****** DISABLED CODE ******/
+    console.warn("DISABLED CODE. userStats.js:121")
+    return;
+    /****** DISABLED CODE ******/
+
+
     const guild = client.guilds.cache.get('1094318705883762719');
 
     guild.voiceStates.cache.map(async x => {
@@ -148,6 +171,14 @@ module.exports = {
 
   },
   createUser: async function (client, member, inviter) {
+
+
+    /****** DISABLED CODE ******/
+    console.warn("DISABLED CODE. userStats.js:177")
+    return;
+    /****** DISABLED CODE ******/
+
+
     const user = await client.db.users.findOne({
       userID: member.user.id,
       guildID: member.guild.id
@@ -178,6 +209,13 @@ module.exports = {
 };
 
 async function checklevelUp(client, user) {
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. userStats.js:214")
+  return;
+  /****** DISABLED CODE ******/
+
+
   if (checklevelUpCooldown.has(user.userID)) return;
   checklevelUpCooldown.add(user.userID);
 
@@ -194,6 +232,14 @@ async function checklevelUp(client, user) {
 }
 
 async function levelUp(client, userID, lvl) {
+
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. userStats.js:238")
+  return;
+  /****** DISABLED CODE ******/
+
+
   const guild = client?.guilds?.cache?.get('1094318705883762719');
   const channel = guild?.channels?.cache?.get('1094318707678904384');
   const member = guild?.members?.cache?.get(userID) || null;
@@ -224,6 +270,15 @@ async function levelUp(client, userID, lvl) {
 }
 
 async function getDesc(roles, config, desc, lvl) {
+
+
+  /****** DISABLED CODE ******/
+  console.warn("DISABLED CODE. userStats.js:276")
+  return;
+  /****** DISABLED CODE ******/
+
+
+
   //Bypass
   if (roles.some(element => {
     return config.roles.generic.includes(element)

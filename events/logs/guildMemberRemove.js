@@ -9,6 +9,30 @@ const {
 const moment = require("moment");
 
 module.exports = async (client, member) => {
+
+	let logChannel = client.channels.cache.get(client.config.static.logChannels.welcome)
+	if(!logChannel) {
+	  return console.log(`[guildMemberRemove] logChannel undefined. No channel found with ID=${client.config.static.logChannels.welcome}`)
+	}
+  
+	logChannel.send({
+	  embeds: [
+		new EmbedBuilder()  
+		.setColor("00FF00")
+		.setAuthor({ name: member.nickname ?? member.user.username, iconURL: member.displayAvatarURL() })
+		.setDescription([
+		  `Aurevoir **${member.nickname ?? member.user.username}** ..`
+		].join("\n"))
+		.setThumbnail(member.displayAvatarURL())
+		.setTimestamp()
+	  ]
+	})
+
+
+
+	return;
+/*
+
 	const guild = client.guilds.cache.get('1094318705883762719');
 	const lchannel = guild.channels.cache.get('1094318707456618600');
 	const logChannel = guild.channels.cache.get('1102614305771364412')
@@ -114,6 +138,7 @@ module.exports = async (client, member) => {
 		.setTimestamp()
 
 	logChannel.send({ content: `${member.user}`, embeds: [embed] });
+	*/
 }
 
 async function delWelcomeMessage(chan, userId) {

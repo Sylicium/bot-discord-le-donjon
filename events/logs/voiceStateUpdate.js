@@ -3,8 +3,11 @@ const {
 } = require('discord.js');
 
 module.exports = async (client, oldState, newState) => {
-  const guild = client.guilds.cache.get('1094318705883762719')
-  const channel = guild.channels.cache.get('1094318710430380039')
+
+
+  //const guild = client.guilds.cache.get('1094318705883762719')
+  const guild = (newState.channel ?? oldState.channel).guild
+  const channel = guild.channels.cache.get(client.config.static.logChannels.global)
   const member = guild.members.cache.get(oldState.id);
 
   if (oldState.channelId === null) {
@@ -42,6 +45,28 @@ module.exports = async (client, oldState, newState) => {
       const embed = new EmbedBuilder()
         .setTitle("Fin de stream")
         .setDescription(`${member.user} a arrêté son stream.`)
+        .setColor(0xAA0000)
+        .setTimestamp()
+
+      channel.send({
+        embeds: [embed]
+      })
+    }
+  } else if (oldState.selfVideo != newState.selfVideo) {
+    if (newState.selfVideo) {
+      const embed = new EmbedBuilder()
+        .setTitle("Début de stream")
+        .setDescription(`${member.user} a allumé sa caméra.`)
+        .setColor(0x00AA00)
+        .setTimestamp()
+
+      channel.send({
+        embeds: [embed]
+      })
+    } else {
+      const embed = new EmbedBuilder()
+        .setTitle("Fin de stream")
+        .setDescription(`${member.user} a coupé sa caméra.`)
         .setColor(0xAA0000)
         .setTimestamp()
 

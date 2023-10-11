@@ -1,0 +1,164 @@
+File created on 10/10/2023, 20:37:31
+
+[10/10/2023, 20:37:31 ERROR] (unknown): Uncaught Exception (process.on handle) ReferenceError: logger is not defined
+[10/10/2023, 20:37:31 ERROR] (unknown):     at MessageCollector.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\commands\admin\captcha.js:127:19)
+[10/10/2023, 20:37:31 ERROR] (unknown):     at MessageCollector.emit (node:events:402:35)
+[10/10/2023, 20:37:31 ERROR] (unknown):     at MessageCollector.stop (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\structures\interfaces\Collector.js:233:10)
+[10/10/2023, 20:37:31 ERROR] (unknown):     at Timeout.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\structures\interfaces\Collector.js:96:61)
+[10/10/2023, 20:37:31 ERROR] (unknown):     at listOnTimeout (node:internal/timers:557:17)
+[10/10/2023, 20:37:31 ERROR] (unknown):     at processTimers (node:internal/timers:500:7)
+[10/10/2023, 20:37:31 ERROR] (unknown): 
+[10/10/2023, 21:15:07 ERROR] (unknown): Uncaught Exception (process.on handle) DiscordAPIError[50035]: Invalid Form Body
+[10/10/2023, 21:15:07 ERROR] (unknown): action_type[NUMBER_TYPE_COERCE]: Value "MESSAGE_DELETE" is not int.
+[10/10/2023, 21:15:07 ERROR] (unknown):     at handleErrors (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:687:13)
+[10/10/2023, 21:15:07 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:15:07 ERROR] (unknown):     at async SequentialHandler.runRequest (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:1072:23)
+[10/10/2023, 21:15:07 ERROR] (unknown):     at async SequentialHandler.queueRequest (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:913:14)
+[10/10/2023, 21:15:07 ERROR] (unknown):     at async _REST.request (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:1218:22)
+[10/10/2023, 21:15:07 ERROR] (unknown):     at async Guild.fetchAuditLogs (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\structures\Guild.js:760:18)
+[10/10/2023, 21:15:07 ERROR] (unknown):     at async module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:14:14)
+[10/10/2023, 21:15:07 ERROR] (unknown): 
+[10/10/2023, 21:22:25 ERROR] (unknown): Uncaught Exception (process.on handle) ReferenceError: fetchedLogs is not defined
+[10/10/2023, 21:22:25 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:18:22)
+[10/10/2023, 21:22:25 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:22:25 ERROR] (unknown): 
+[10/10/2023, 21:22:46 ERROR] (unknown): Uncaught Exception (process.on handle) ReferenceError: messageDelete is not defined
+[10/10/2023, 21:22:46 ERROR] (unknown):     at C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:19:20
+[10/10/2023, 21:22:46 ERROR] (unknown):     at Map.find (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\collection\dist\index.js:172:11)
+[10/10/2023, 21:22:46 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:18:42)
+[10/10/2023, 21:22:46 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:22:46 ERROR] (unknown): 
+[10/10/2023, 21:24:20 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of null (reading 'id')
+[10/10/2023, 21:24:20 ERROR] (unknown):     at C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:19:35
+[10/10/2023, 21:24:20 ERROR] (unknown):     at Map.find (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\collection\dist\index.js:172:11)
+[10/10/2023, 21:24:20 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:18:42)
+[10/10/2023, 21:24:20 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:24:20 ERROR] (unknown): 
+[10/10/2023, 21:30:54 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[10/10/2023, 21:30:54 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:49)
+[10/10/2023, 21:30:54 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:30:54 ERROR] (unknown): 
+[10/10/2023, 21:31:21 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[10/10/2023, 21:31:21 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:49)
+[10/10/2023, 21:31:21 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:31:21 ERROR] (unknown): 
+[10/10/2023, 21:32:14 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[10/10/2023, 21:32:14 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:25:31)
+[10/10/2023, 21:32:14 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:32:14 ERROR] (unknown): 
+[10/10/2023, 21:32:25 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[10/10/2023, 21:32:25 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:25:31)
+[10/10/2023, 21:32:25 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[10/10/2023, 21:32:25 ERROR] (unknown): 
+[11/10/2023, 20:25:22 ERROR] (unknown): Unhandled Rejection (process.on handle) DiscordAPIError[50007]: Cannot send messages to this user
+[11/10/2023, 20:25:22 ERROR] (unknown):     at handleErrors (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:687:13)
+[11/10/2023, 20:25:22 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:25:22 ERROR] (unknown):     at async SequentialHandler.runRequest (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:1072:23)
+[11/10/2023, 20:25:22 ERROR] (unknown):     at async SequentialHandler.queueRequest (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:913:14)
+[11/10/2023, 20:25:22 ERROR] (unknown):     at async _REST.request (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:1218:22)
+[11/10/2023, 20:25:22 ERROR] (unknown):     at async DMChannel.send (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\structures\interfaces\TextBasedChannel.js:162:15)
+[11/10/2023, 20:25:22 ERROR] (unknown): 
+[11/10/2023, 20:25:32 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[11/10/2023, 20:25:32 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:31)
+[11/10/2023, 20:25:32 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:25:32 ERROR] (unknown): 
+[11/10/2023, 20:26:04 ERROR] (unknown): Unhandled Rejection (process.on handle) DiscordAPIError[50007]: Cannot send messages to this user
+[11/10/2023, 20:26:04 ERROR] (unknown):     at handleErrors (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:687:13)
+[11/10/2023, 20:26:04 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:26:04 ERROR] (unknown):     at async SequentialHandler.runRequest (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:1072:23)
+[11/10/2023, 20:26:04 ERROR] (unknown):     at async SequentialHandler.queueRequest (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:913:14)
+[11/10/2023, 20:26:04 ERROR] (unknown):     at async _REST.request (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\rest\dist\index.js:1218:22)
+[11/10/2023, 20:26:04 ERROR] (unknown):     at async DMChannel.send (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\structures\interfaces\TextBasedChannel.js:162:15)
+[11/10/2023, 20:26:04 ERROR] (unknown): 
+[11/10/2023, 20:26:15 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[11/10/2023, 20:26:15 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:31)
+[11/10/2023, 20:26:15 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:26:15 ERROR] (unknown): 
+[11/10/2023, 20:26:45 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[11/10/2023, 20:26:45 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:31)
+[11/10/2023, 20:26:45 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:26:45 ERROR] (unknown): 
+[11/10/2023, 20:26:56 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[11/10/2023, 20:26:56 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:31)
+[11/10/2023, 20:26:56 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:26:56 ERROR] (unknown): 
+[11/10/2023, 20:35:25 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'channels')
+[11/10/2023, 20:35:25 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\logs\voiceStateUpdate.js:7:25)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at Client.emit (node:events:402:35)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at VoiceStateUpdate.handle (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\VoiceStateUpdate.js:38:14)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at Object.module.exports [as VOICE_STATE_UPDATE] (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\VOICE_STATE_UPDATE.js:4:35)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:35:25 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[11/10/2023, 20:35:25 ERROR] (unknown): 
+[11/10/2023, 20:36:30 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'send')
+[11/10/2023, 20:36:30 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\logs\voiceStateUpdate.js:20:13)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at Client.emit (node:events:402:35)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at VoiceStateUpdate.handle (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\VoiceStateUpdate.js:38:14)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at Object.module.exports [as VOICE_STATE_UPDATE] (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\VOICE_STATE_UPDATE.js:4:35)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:36:30 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[11/10/2023, 20:36:30 ERROR] (unknown): 
+[11/10/2023, 20:37:16 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of null (reading 'guild')
+[11/10/2023, 20:37:16 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\logs\voiceStateUpdate.js:9:34)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at Client.emit (node:events:402:35)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at VoiceStateUpdate.handle (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\VoiceStateUpdate.js:38:14)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at Object.module.exports [as VOICE_STATE_UPDATE] (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\VOICE_STATE_UPDATE.js:4:35)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:37:16 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[11/10/2023, 20:37:16 ERROR] (unknown): 
+[11/10/2023, 20:46:25 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[11/10/2023, 20:46:25 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:31)
+[11/10/2023, 20:46:25 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:46:25 ERROR] (unknown): 
+[11/10/2023, 20:46:36 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of undefined (reading 'executor')
+[11/10/2023, 20:46:36 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\messageDelete.js:24:31)
+[11/10/2023, 20:46:36 ERROR] (unknown):     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[11/10/2023, 20:46:36 ERROR] (unknown): 
+[11/10/2023, 20:48:02 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of null (reading 'guild')
+[11/10/2023, 20:48:02 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\voiceStateUpdate.js:13:39)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at Client.emit (node:events:402:35)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at VoiceStateUpdate.handle (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\VoiceStateUpdate.js:38:14)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at Object.module.exports [as VOICE_STATE_UPDATE] (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\VOICE_STATE_UPDATE.js:4:35)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:48:02 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[11/10/2023, 20:48:02 ERROR] (unknown): 
+[11/10/2023, 20:50:31 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of null (reading 'guild')
+[11/10/2023, 20:50:31 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\voiceStateUpdate.js:13:39)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at Client.emit (node:events:402:35)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at VoiceStateUpdate.handle (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\VoiceStateUpdate.js:38:14)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at Object.module.exports [as VOICE_STATE_UPDATE] (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\VOICE_STATE_UPDATE.js:4:35)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:50:31 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[11/10/2023, 20:50:31 ERROR] (unknown): 
+[11/10/2023, 20:50:35 ERROR] (unknown): Uncaught Exception (process.on handle) TypeError: Cannot read properties of null (reading 'guild')
+[11/10/2023, 20:50:35 ERROR] (unknown):     at module.exports (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\events\guilds\voiceStateUpdate.js:13:39)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at Client.emit (node:events:402:35)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at VoiceStateUpdate.handle (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\VoiceStateUpdate.js:38:14)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at Object.module.exports [as VOICE_STATE_UPDATE] (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\VOICE_STATE_UPDATE.js:4:35)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
+[11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[11/10/2023, 20:50:35 ERROR] (unknown): 

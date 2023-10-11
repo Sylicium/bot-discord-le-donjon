@@ -48,25 +48,17 @@ module.exports = {
   }],
   async run(client, interaction) {
 
-    /****** DISABLED COMMAND ******/
-    return client.disabledCommand(interaction)
-    /****** DISABLED COMMAND ******/
-
-
-
-
-
 
     const access = interaction.options.getString('accès');
     const userId = interaction.options.getUser('membre').id;
-    const guild = client.guilds.cache.get('1094318705883762719');
+    const guild = client.guilds.cache.get(interaction.guild.id);
     const member = guild.members.cache.get(userId);
 
     if (access === "tampon") {
-      member.roles.add('1094318706248646868');
-      member.roles.remove('1094318706248646869');
+      member.roles.add('1160467551403393046'); // Tampon
+      member.roles.remove('1160467551403393047'); // Lu et Approuvé
 
-      const channel = guild.channels.cache.get('1094318707116888093');
+      const welcomeChannel = guild.channels.cache.get('1160948126065106994'); // welcome channel
 
       const canvas = Canvas.createCanvas(1024, 500);
       const context = canvas.getContext('2d');
@@ -74,15 +66,15 @@ module.exports = {
       const background = await Canvas.loadImage('./pictures/client_Entree_red.png');
       context.drawImage(background, 0, 0, 1024, 500);
 
-      context.font = '42px sans-serif';
+      context.font = '42px Comic Sans MS';
       context.fillStyle = '#ffffff';
       context.textAlign = "center";
       context.fillText(member.user.username, 512, 410);
 
-      context.font = '20px sans-serif';
-      context.fillStyle = '#ffffff';
-      context.textAlign = "center";
-      context.fillText('Compte créé le : ' + moment(member.user.createdAt).locale('fr').format("LL"), 512, 482);
+      // context.font = '20px Comic Sans MS';
+      // context.fillStyle = '#ffffff';
+      // context.textAlign = "center";
+      // context.fillText('Compte créé le : ' + moment(member.user.createdAt).locale('fr').format("LL"), 512, 482);
 
       context.beginPath();
       context.arc(512, 166, 119, 0, Math.PI * 2, true);
@@ -94,6 +86,9 @@ module.exports = {
       } = await request(member.user.displayAvatarURL({
         extension: 'png'
       }));
+      console.log("avatarurl:",member.user.displayAvatarURL({
+        extension: 'png'
+      }))
       const avatar = await Canvas.loadImage(await body.arrayBuffer());
 
       context.drawImage(avatar, 393, 37, 238, 238);
@@ -102,6 +97,7 @@ module.exports = {
         name: 'profile-image.png'
       });
 
+      /*
       const user = (await client.db?.users?.findOne({
         userID: member.user.id,
         guildID: member.guild.id
@@ -112,8 +108,9 @@ module.exports = {
       user.isMember = true;
 
       await user.save().catch(e => console.log(e));
+      */
 
-      channel.send({
+      welcomeChannel.send({
         content: `${member}`,
         files: [attachment]
       });
@@ -125,32 +122,33 @@ module.exports = {
     } else {
       const table = {
         blanche: {
-          chat: "1094318708425490503",
-          global: ["1094318706378682382"],
+          chat: "1160467552716197919", // #⚪╏grande-salle
+          global: ["1160467551403393049"],
         },
         noire: {
-          chat: "1094318708865912894",
-          clef: "1094318706378682384",
-          global: ["1094318706403836057"],
+          chat: "1160467552716197925", // #⚫╏salle-des-trophées
+          clef: "",
+          global: ["1160467551403393051"],
         },
         rouge: {
-          chat: "1094318708865912900",
-          clef: "1094318706403836059",
-          global: ["1094318706437410906", "1110661879224868944"],
+          chat: "1161087406183817307", // #chambre-rouge
+          clef: "",
+          global: ["1160467551403393053", "1160467551403393053"],
         },
       }
 
       for (const role of table[access].global) {
-        if (!member.roles.cache.has(role))
-          member.roles.add(role);
+        if (!member.roles.cache.has(role)) member.roles.add(role);
       }
+      /*
       if (table[access].clef)
         if (member.roles.cache.has(table[access].clef))
           member.roles.remove(table[access].clef);
+        */
 
       if (table[access].chat) {
-        const channel = guild.channels.cache.get(table[access].chat);
-        channel.send({ content: `**${member} vient tout juste de rejoindre la chambre ${access}.**`, files: [`./pictures/portes/${access}.png`] })
+        const chan = guild.channels.cache.get(table[access].chat);
+        chan.send({ content: `**${member} vient tout juste de rejoindre la chambre ${access}.**`, files: [`./pictures/portes/${access}.png`] })
 
         interaction.reply({ content: `Ajoute de ${member} à la chambre ${access}.`, ephemeral: true });
       } else {

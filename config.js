@@ -35,6 +35,48 @@ module.exports = {
       }
     }
   },
+  static: {
+    emojis: {
+      loading: {
+        tag: "<a:loading:1161357384682307615>"
+      }
+    },
+    logChannels: {
+      global: "1160948126065106994",
+      welcome: "1160948126065106994"
+    },
+    channels: {
+      verification: "1160467551797657613"
+    },
+    roles: {
+      nonVerifie: "1160467551252385853",
+      captcha: "1160467551252385854",
+      luEtApprouve: "1160467551403393047", 
+    },
+    voiceChannels: [
+      {
+        id: "AA",
+        whitelistCamera: true
+      }
+    ]
+  },
+  rolesChambre: [
+    {
+      niveau: 0,
+      name: "Chambre blanche",
+      roleID: "1160467551403393049"
+    },
+    {
+      niveau: 1,
+      name: "Chambre noire",
+      roleID: "1160467551403393051"
+    },
+    {
+      niveau: 2,
+      name: "Chambre rouge",
+      roleID: "1160467551403393053"
+    },
+  ],
   tempResetChan: "1", //Minutes pour reset le channel écris lié aux channels.
   vocs: [{
     chan: "1094318707930583085", 

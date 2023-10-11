@@ -11,7 +11,7 @@ const {
 } = require('../../config');
 
 module.exports = {
-  name: "embed",
+  name: "embed2",
   type: ApplicationCommandType.ChatInput,
   description: "votre genre",
   default_member_permissions: ['Administrator'],

@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 
 module.exports = async (client, oldChannel, newChannel) => {
-  console.log("channel Update")
+  console.log("channel Update", oldChannel, newChannel)
+
+
 
   /** Récuère le log correspondant à l'évent channelUpdate émit actuel **/
   newChannel._getLog = async () => {
@@ -9,6 +11,7 @@ module.exports = async (client, oldChannel, newChannel) => {
       limit: 10,
       type: Discord.AuditLogEvent
     })).entries
+      console.log("logs:",logs)
     let logs2 = logs.map(x => x).filter(x => {
       return x.target == newChannel.id
     })
@@ -19,6 +22,8 @@ module.exports = async (client, oldChannel, newChannel) => {
   
 	const guild = client.guilds.cache.get('1160467551252385852');
 	const logChannel = guild.channels.cache.get('1160467552888176744')
+
+  console.log("(await newChannel._getLog()):",(await newChannel._getLog()))
 
   let executor = (await newChannel._getLog()).executor
 

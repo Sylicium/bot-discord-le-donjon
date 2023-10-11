@@ -29,8 +29,8 @@ module.exports = {
         required: true
       }]
     }, {
-      name: "warn",
-      description: "Warn d'un membre en l'affichant bien gentillement dans le pilori.",
+      name: "mute",
+      description: "Mute (timeout/exclure) un membre en l'affichant bien gentillement dans le pilori.",
       type: 1,
       options: [{
         type: 6,
@@ -40,12 +40,12 @@ module.exports = {
       }, {
         type: 3,
         name: 'temps',
-        description: 'Écris le temps de warn. Exemple: 3d, 2d 5h, 2h 3m, 5d 1h 7m',
+        description: 'Écris le temps de mute. Exemple: 3d, 2d 5h, 2h 3m, 5d 1h 7m',
         required: true
       }, {
         type: 3,
         name: 'raison',
-        description: 'Raison du warn.',
+        description: 'Raison du mute.',
         required: false
       }, {
         type: 3,
@@ -65,7 +65,7 @@ module.exports = {
       }, {
         type: 3,
         name: 'raison',
-        description: 'Raison du warn.',
+        description: 'Raison du ban.',
         required: false
       }, {
         type: 3,
@@ -85,7 +85,7 @@ module.exports = {
       }, {
         type: 3,
         name: 'raison',
-        description: 'Raison du warn.',
+        description: 'Raison du ban.',
         required: false
       }, {
         type: 3,
