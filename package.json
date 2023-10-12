@@ -9,9 +9,11 @@
   "author": "Sylicium",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/voice": "^0.16.0",
     "@napi-rs/canvas": "^0.1.44",
     "ascii-table3": "^0.8.2",
     "discord-html-transcripts": "^3.2.0",
+    "discord-speech-recognition": "^3.4.1",
     "discord.js": "^14.13.0",
     "emoji-regex": "^10.2.1",
     "moment": "^2.29.4",

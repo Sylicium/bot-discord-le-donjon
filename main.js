@@ -1,8 +1,43 @@
-const { Client, IntentsBitField, Partials, Collection } = require('discord.js');
+const Discord = require("discord.js");
+const { Client, IntentsBitField, Partials, Collection } = Discord;
 const intents = new IntentsBitField(3276799)
-const client = new Client({intents, partials: [Partials.Channel, Partials.Message, Partials.User, Partials.GuildMember, Partials.Reaction]});
+const client = new Client({
+    intents: [
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.DirectMessageReactions,
+        Discord.GatewayIntentBits.DirectMessageTyping,
+        Discord.GatewayIntentBits.DirectMessages,
+        Discord.GatewayIntentBits.GuildModeration,
+        Discord.GatewayIntentBits.GuildEmojisAndStickers,
+        Discord.GatewayIntentBits.GuildIntegrations,
+        Discord.GatewayIntentBits.GuildInvites,
+        Discord.GatewayIntentBits.GuildMembers,
+        Discord.GatewayIntentBits.GuildMessageReactions,
+        Discord.GatewayIntentBits.GuildMessageTyping,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.GuildPresences,
+        Discord.GatewayIntentBits.GuildScheduledEvents,
+        Discord.GatewayIntentBits.GuildVoiceStates,
+        Discord.GatewayIntentBits.GuildWebhooks,
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.MessageContent
+    ],
+    partials: [
+        Discord.Partials.Channel,
+        Discord.Partials.GuildMember,
+        Discord.Partials.GuildScheduledEvent,
+        Discord.Partials.Message,
+        Discord.Partials.Reaction,
+        Discord.Partials.ThreadMember,
+        Discord.Partials.User
+    ]
+});
 const config = require("./config");
 const desc = require("./desc.js");
+
+
+const { joinVoiceChannel } = require("@discordjs/voice");
+const { addSpeechEvent, SpeechEvents } = require("discord-speech-recognition");
 
 client.config = config;
 client.desc = desc;
@@ -60,4 +95,78 @@ process
   .on('uncaughtException', err => {
       console.log(err, '[BOT] Uncaught Exception thrown BBBBBBBBBB');
       writeUncaughException(err, "Uncaught Exception (process.on handle)")
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+const speechOptions = addSpeechEvent(client, { lang: "fr-FR" });
+
+client.on("messageCreate", (msg) => {
+    const voiceChannel = msg.member?.voice.channel;
+    if (voiceChannel) {
+      joinVoiceChannel({
+        channelId: voiceChannel.id,
+        guildId: voiceChannel.guild.id,
+        adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+        selfDeaf: false,
+      });
+    }
   });
+
+
+client.on(SpeechEvents.speech, (msg) => {
+
+    console.log("speech:", msg)
+
+    if(!msg.guild) return;
+
+
+    if(msg.duration < 1.5) return;
+
+    if(msg.member.id != "300399893611151361") return;
+
+
+    let chan = client.channels.cache.get("1160948126065106994") // Le bar
+
+    // console.log(`audioBuffer (${msg.duration}):`,Buffer.byteLength(msg.audioBuffer), "SOIT ", Buffer.byteLength(msg.audioBuffer)/msg.duration )
+
+    if(!msg.content) {
+
+        return;
+
+        chan.send({
+            embeds: [
+                new Discord.EmbedBuilder()
+                    .setAuthor({ name: (msg.member.nickname ?? msg.author.username), url: msg.author.displayAvatarURL() })
+                    .setColor("FF0000")
+                    .setDescription(`Le québécois a dis quelque chose mais l'IA que je suis n'a rien compris ;-;`)
+            ]
+        }).then(() => {}).catch(e => {
+            console.log(e)
+        })
+    } else {
+        chan.send({
+            embeds: [
+                new Discord.EmbedBuilder()
+                    .setAuthor({ name: (msg.member.nickname ?? msg.author.username), url: msg.author.displayAvatarURL() })
+                    .setColor("FDFFFF")
+                    .setDescription(`${msg.content}`)
+            ]
+        }).then(() => {}).catch(e => {
+            console.log(e)
+        })
+    }
+
+  
+    
+});
