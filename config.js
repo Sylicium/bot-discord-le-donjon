@@ -43,6 +43,7 @@ module.exports = {
     },
     logChannels: {
       global: "1160948126065106994",
+      tickets: "1160948126065106994",
       welcome: "1160948126065106994"
     },
     channels: {
