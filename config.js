@@ -1,7 +1,6 @@
 module.exports = {
-  token: "MTE2MDU2NTU3NjQ2MTIwOTcwMA.Gpgk_s.6Koq3zpavbD6GnluCpTeCWZ1KJAJ4_sZ-oJMos", // Le Donjon
-  // token: "MTA1MDgxNTU3MTkzMzAwMzg2Ng.GgK1xR.RIffZhYIdqVEvPh-oCjhMwmHyi4l5oZXqpOoCc", // Donjon Test
-  mongodbURL: "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.0",
+  token: process.env.TOKEN, // Le Donjon
+  mongodbURL: process.env.MONGODB_URL,
   stats: {
     img: {
       cooldown: 120, // Seconde d'attente pour le gain d'XP lors d'envois d'image
