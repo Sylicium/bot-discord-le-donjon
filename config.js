@@ -83,7 +83,19 @@ module.exports = {
     },
     voiceChannels: [
       {
-        id: "1161068132484526081, 1161066757881069568, 1162498653617934376, 1160282909480079400",
+        id: "1161068132484526081",
+        whitelistCamera: true
+      },
+      {
+        id: "1161066757881069568",
+        whitelistCamera: true
+      },
+      {
+        id: "1162498653617934376",
+        whitelistCamera: true
+      },
+      {
+        id: "1160282909480079400",
         whitelistCamera: true
       }
     ]
