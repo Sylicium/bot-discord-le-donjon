@@ -116,7 +116,12 @@ module.exports = {
         member.send(`Tu as intégré le serveur le **${moment(member.joinedAt).locale('fr').format("LLL")}** et été expulsé pour ne pas avoir validé le règlement et/ou ouvert de ticket sur le donjon, si tu souhaites revenir, voici un lien du serveur https://discord.gg/M8ayrPf85z`).then(m => {
           member.kick("Retard validation règlement / non ouverture ticket.").then(m => {
             interaction.reply({ content: `Vous venez de kick <@${member.id}>.`, ephemeral: true });
-          });
+          }).catch(e => {
+            console.log(e)
+            interaction.reply({
+              content: `Impossible de kick cet utilisateur \`\`\`js\n${e}\`\`\``
+            })
+          })
         });
         break
       case 'ban':
@@ -181,9 +186,14 @@ module.exports = {
 
         await delay(500);
 
-        member?.timeout(warnTime, reason).then(m => {
+        member.timeout(warnTime, reason).then(m => {
           interaction?.reply({ content: 'Warn fait!', ephemeral: true });
-        });
+        }).catch(e => {
+          console.log(e)
+          interaction.reply({
+            content: `Impossible de timeout (mute) cet utilisateur \`\`\`js\n${e}\`\`\``
+          })
+        })
 
         break
       case 'clear':
