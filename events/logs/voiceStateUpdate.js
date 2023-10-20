@@ -1,13 +1,14 @@
+const Discord = require('discord.js');
 const {
   EmbedBuilder
-} = require('discord.js');
+} = Discord;
 
 module.exports = async (client, oldState, newState) => {
 
 
   //const guild = client.guilds.cache.get('1094318705883762719')
   const guild = (newState.channel ?? oldState.channel).guild
-  const channel = guild.channels.cache.get(client.config.static.logChannels.global)
+  const channel = guild.channels.cache.get(client.config.static.logChannels.voice)
   const member = guild.members.cache.get(oldState.id);
 
   if (oldState.channelId === null) {
@@ -20,6 +21,19 @@ module.exports = async (client, oldState, newState) => {
     channel.send({
       embeds: [embed]
     })
+
+    let temp = [...newState.guild.channels.cache.map(x => x)]
+    let le_no_micro_channel = temp.filter(x => {
+      return (x.name == newState.channel.name) && (x.type == Discord.ChannelType.GuildText)
+    })
+    if(le_no_micro_channel) {
+      le_no_micro_channel[0].send({
+        embeds: [embed]
+      }).catch(e => {
+        console.log("pas envoyé:",e)
+      })
+    }
+    
   } else if (newState.channelId === null) {
     const embed = new EmbedBuilder()
       .setTitle("Déconnection d'un channel")
@@ -30,6 +44,24 @@ module.exports = async (client, oldState, newState) => {
     channel.send({
       embeds: [embed]
     })
+
+    
+    let temp = [...newState.guild.channels.cache.map(x => x)]
+    let le_no_micro_channel = temp.filter(x => {
+      return (x.name == oldState.channel.name) && (x.type == Discord.ChannelType.GuildText)
+    })
+    if(le_no_micro_channel) {
+      le_no_micro_channel[0].send({
+        embeds: [
+          new Discord.EmbedBuilder()
+            .setAuthor
+        ]
+      }).catch(e => {
+        console.log("pas envoyé:",e)
+      })
+    }
+
+
   } else if (oldState.streaming != newState.streaming) {
     if (newState.streaming) {
       const embed = new EmbedBuilder()

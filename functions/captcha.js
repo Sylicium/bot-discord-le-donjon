@@ -52,12 +52,11 @@ module.exports = {
         msg.delete().catch(e => { })
         channel.messages.fetch().then((messages) => {
           messages.map(mess => {
-            if (mess.author.id === member.id)
-              mess.delete();
+            if (mess.author.id === member.id) mess.delete();
           });
         });
-        if (member._roles.includes('1160467551252385853')) // Role pour l'accès au salon "Validation"
-          member.kick();
+        if (member._roles.includes('1160467551252385853')) member.kick(); // Role pour l'accès au salon "Validation"
+
       });
     });
   }

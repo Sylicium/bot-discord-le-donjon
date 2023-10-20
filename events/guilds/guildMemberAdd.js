@@ -24,7 +24,7 @@ module.exports = async (client, member) => {
 
     let roleNonVerifie = member.guild.roles.cache.get(client.config.static.roles.nonVerifie)
     let roleCaptcha = member.guild.roles.cache.get(client.config.static.roles.captcha)
-    let roleLuEtApprouve = member.guild.roles.cache.get(client.config.static.roles.nonVerifie)
+    let roleLuEtApprouve = member.guild.roles.cache.get(client.config.static.roles.luEtApprouve)
 
     let verifChannel = member.guild.channels.cache.get(client.config.static.channels.verification)
 

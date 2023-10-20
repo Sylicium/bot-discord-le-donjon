@@ -18,7 +18,6 @@ module.exports = async (client, message) => {
 
   function checkForSpam() {
 
-    if(message.author.id == "770334301609787392") return;
 
     MessagesTemp.push({
       channelID: message.channel.id,
@@ -55,7 +54,9 @@ module.exports = async (client, message) => {
       && ( x.channelID == message.channel.id )
       && ( x.authorID == message.author.id )
     }).length
-    console.log(`${amount} messages`)
+    console.log(`[messageCreate:AntiSpam] ${amount} messages`)
+    
+    if(message.author.id == "770334301609787392") return;
 
     if(amount > messageAmountThreshold) {
       message.member.timeout(muteDuration).then(() => {

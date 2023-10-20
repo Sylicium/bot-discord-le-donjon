@@ -112,6 +112,7 @@ process
 const speechOptions = addSpeechEvent(client, { lang: "fr-FR" });
 
 client.on("messageCreate", (msg) => {
+    return;
     const voiceChannel = msg.member?.voice.channel;
     if (voiceChannel) {
       joinVoiceChannel({

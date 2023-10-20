@@ -11,12 +11,10 @@ const {
 } = require('@discordjs/rest')
 
 
-const {
-	token
-} = require('./../config');
-const TOKEN = token;
-const clientId = '1160565576461209700' // '1101909347061211287'; // Ton bot ID
-const guildId = '1160467551252385852' // '1094318705883762719'; // Ta guild ID
+const config = require('./../config');
+const TOKEN = config.token;
+const clientId =  config.clientId[config.startMode]
+const guildId = config.guildId[config.startMode]
 
 const rest = new REST({
 	version: '10'

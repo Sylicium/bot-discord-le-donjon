@@ -15,6 +15,7 @@
     "discord-html-transcripts": "^3.2.0",
     "discord-speech-recognition": "^3.4.1",
     "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
     "emoji-regex": "^10.2.1",
     "moment": "^2.29.4",
     "mongoose": "^7.6.0",
@@ -29,5 +30,6 @@
   "bugs": {
     "url": "https://github.com/Sylicium/bot-discord-le-donjon/issues"
   },
-  "homepage": "https://github.com/Sylicium/bot-discord-le-donjon#readme"
+  "homepage": "https://github.com/Sylicium/bot-discord-le-donjon#readme",
+  "devDependencies": {}
 }

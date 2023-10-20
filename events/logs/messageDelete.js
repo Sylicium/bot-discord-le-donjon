@@ -5,7 +5,7 @@ const moment = require('moment');
 
 module.exports = async (client, message) => {
 
-  if (message.channel.parentId === "1094318710715580571") return;
+  if (message.channel.parentId == client.config.static.logChannels.logs_categoryID) return;
 
   const embed = new EmbedBuilder()
     .setTitle("Message Supprimé")
@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
     .setTimestamp()
 
   try {
-    message.guild.channels.cache.get('1094318710430380038').send({
+    message.guild.channels.cache.get(client.config.static.logChannels.messages).send({
       embeds: [embed]
     });
   } catch (err) { }
@@ -29,7 +29,7 @@ module.exports = async (client, message) => {
         .setTimestamp()
 
       try {
-        message.guild.channels.cache.get('1094318710430380038').send({
+        message.guild.channels.cache.get(client.config.static.logChannels.messages).send({
           embeds: [embed]
         });
       } catch (err) { }
