@@ -121,19 +121,26 @@ module.exports = {
         break
       case 'ban':
 
-        member?.send({ content: `Tu as été banni par <@${interaction?.user?.id}>${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` })
-        if (url) member?.send({ content: url });
+        member.send({ content: `Tu as été banni par <@${interaction?.user?.id}>${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` }).catch(e => { })
+        if (url) member.send({ content: url }).catch(e => { })
 
         // reportChannel?.send({ content: `Pseudo: ${member.username}\nID: ${member.id}` });
 
-        channel?.send({ content: `<@${interaction?.user?.id}> a banni ${member}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
-        if (url) channel?.send({ content: url });
+        channel.send({ content: `<@${interaction?.user?.id}> a banni ${member}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
+        if (url) channel.send({ content: url });
 
         await delay(500);
 
-        member?.ban().then(m => {
+        member.ban().then(m => {
           interaction?.reply({ content: 'Pilori fait!', ephemeral: true });
-        });
+        }).catch(e => {
+          console.log(e)
+          interaction.reply({
+            content: `Impossible de bannir cet utilisateur \`\`\`js\n${e}\`\`\``
+          })
+        })
+
+
         break
       case 'ban_id':
         // reportChannel?.send({ content: `Pseudo: / \nID: ${member.id}` });
@@ -164,12 +171,12 @@ module.exports = {
 
         let warnTime = (d || 0) + (h || 0) + (m || 0);
 
-        member?.send({ content: `Tu as été warn pendant ${time} par <@${interaction.user.id}>${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
-        channel?.send({ content: `<@${interaction.user.id}> a warn ${member} pendant ${time}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` })
+        member.send({ content: `Tu as été warn pendant ${time} par <@${interaction.user.id}>${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` }).catch(e => { })
+        channel.send({ content: `<@${interaction.user.id}> a warn ${member} pendant ${time}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` })
 
         if (url) {
-          member?.send({ content: url });
-          channel?.send({ content: url });
+          member.send({ content: url }).catch(e => { })
+          channel.send({ content: url });
         }
 
         await delay(500);
