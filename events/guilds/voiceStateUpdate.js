@@ -6,9 +6,14 @@ module.exports = async (client, oldState, newState) => {
   // console.log("voiceStateUpdate OLD:",oldState)
   // console.log("voiceStateUpdate OLD:",newState)
 
-  let whiteList_voiceCamera = client.config.static.voiceChannels.filter(x => { return x.whitelistCamera }).map(x => { return x.id })
+  let whiteList_voiceCamera_pre = client.config.static.voiceChannels.filter(x => { return x.whitelistCamera == true })
+
+  console.log("whiteList_voiceCamera_pre:",whiteList_voiceCamera_pre)
+  let whiteList_voiceCamera = whiteList_voiceCamera_pre.map(x => { return x.id })
+  console.log("whiteList_voiceCamera:",whiteList_voiceCamera)
 
   if(newState.channel && newState.selfVideo) {
+    if(newState.member.hasPermission("ADMINISTRATOR")) return;
     if(!whiteList_voiceCamera.includes(newState.channel.id)) {
       newState.member.user.send({
         content: `[**${newState.channel.guild.name}**] Vous n'avez pas le droit de mettre votre caméra en vocal ! Vous avez été kick du salon vocal en conséquences.`
