@@ -30,18 +30,25 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `➕ ${oldState.member.nickname ?? oldState.member.user.username} a rejoint le vocal`, icon_url: oldState.member.user.displayAvatarURL() })
+            .setAuthor({ name: `➕ ${newState.member.nickname ?? newState.member.username} a rejoint le vocal`, icon_url: newState.member.displayAvatarURL() })
             .setColor("00FF00")
         ]
       }).catch(e => {
         console.log("pas envoyé:",e)
       })
+      if(newState.member.id == client.config.static.users.seikam) {
+        le_no_micro_channel.send({
+          content: "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+        }).catch(e => {
+          console.log("pas envoyé:",e)
+        })
+      }
     }
     
   } else if (newState.channelId === null) {
     const embed = new EmbedBuilder()
       .setTitle("Déconnection d'un channel")
-      .setDescription(`➖ ${member.user} a quitté le salon <#${oldState.channelId}>`)
+      .setDescription(`${member.user} a quitté le salon <#${oldState.channelId}>`)
       .setColor(0xff5555)
       .setTimestamp()
 
@@ -58,12 +65,19 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `${oldState.member.nickname ?? oldState.member.user.username} a quitté le vocal`, icon_url: oldState.member.user.displayAvatarURL() })
+            .setAuthor({ name: `➖ ${oldState.member.nickname ?? oldState.member.username} a rejoint le vocal`, icon_url: oldState.member.displayAvatarURL() })
             .setColor("FF0000")
         ]
       }).catch(e => {
         console.log("pas envoyé:",e)
       })
+      if(oldState.member.id == client.config.static.users.seikam) {
+        le_no_micro_channel.send({
+          content: "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+        }).catch(e => {
+          console.log("pas envoyé:",e)
+        })
+      }
     }
 
 
