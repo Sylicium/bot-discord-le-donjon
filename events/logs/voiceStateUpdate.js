@@ -28,7 +28,11 @@ module.exports = async (client, oldState, newState) => {
     })
     if(le_no_micro_channel) {
       le_no_micro_channel[0].send({
-        embeds: [embed]
+        embeds: [
+          new Discord.EmbedBuilder()
+            .setAuthor({ name: `➕ ${oldState.member.nickname ?? oldState.member.user.username} a rejoint le vocal`, icon_url: oldState.member.user.displayAvatarURL() })
+            .setColor("00FF00")
+        ]
       }).catch(e => {
         console.log("pas envoyé:",e)
       })
@@ -37,7 +41,7 @@ module.exports = async (client, oldState, newState) => {
   } else if (newState.channelId === null) {
     const embed = new EmbedBuilder()
       .setTitle("Déconnection d'un channel")
-      .setDescription(`${member.user} a quitté le salon <#${oldState.channelId}>`)
+      .setDescription(`➖ ${member.user} a quitté le salon <#${oldState.channelId}>`)
       .setColor(0xff5555)
       .setTimestamp()
 
@@ -54,7 +58,8 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor
+            .setAuthor({ name: `${oldState.member.nickname ?? oldState.member.user.username} a quitté le vocal`, icon_url: oldState.member.user.displayAvatarURL() })
+            .setColor("FF0000")
         ]
       }).catch(e => {
         console.log("pas envoyé:",e)

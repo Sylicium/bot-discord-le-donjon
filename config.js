@@ -68,6 +68,7 @@ module.exports = {
       chambre_noire: "1160233656984551506",
       chambre_rouge: "1164887556077408327",
       selectRoles: "1159894126607740968",
+      ban_pilori: "1159895318440202433"
     },
     voiceChannels: {
     },
@@ -479,7 +480,7 @@ module.exports = {
       color: '',
       roles: [{
         desc: "Animations",
-        emoji: "dé",
+        emoji: "♠",
         role: "1160169630015426631"
       },{
         desc: "Partenariat",

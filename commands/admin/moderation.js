@@ -99,8 +99,8 @@ module.exports = {
     if (!Subcommand) return interaction.reply({ content: 'Quelque chose s\'est mal passé..', ephemeral: true });
 
     const guild = client.guilds.cache.get(interaction.guild.id);
-    const channel = guild?.channels?.cache?.get('1094318707456618601');
-    const reportChannel = guild?.channels?.cache?.get('1142171389021913120');
+    const channel = guild?.channels?.cache?.get(client.config.static.channels.ban_pilori);
+    // const reportChannel = guild?.channels?.cache?.get('1111111111111111'); // Disabled
     const userId = interaction.options.getString('membre_id') || interaction?.options?.getUser('membre')?.id || null;
     const time = interaction?.options?.getString('temps') || null;
     const reason = interaction.options.getString('raison') || null;
@@ -108,8 +108,7 @@ module.exports = {
 
     var member;
 
-    if (userId)
-      member = guild.members.cache.get(userId);
+    if (userId) member = guild.members.cache.get(userId);
     if (!member && Subcommand != 'clear' && Subcommand != 'ban_id') return interaction.reply({ content: 'Quelque chose s\'est mal passé..', ephemeral: true });
 
     switch (Subcommand) {
@@ -123,14 +122,12 @@ module.exports = {
       case 'ban':
 
         member?.send({ content: `Tu as été banni par <@${interaction?.user?.id}>${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` })
-        if (url)
-          member?.send({ content: url });
+        if (url) member?.send({ content: url });
 
-        reportChannel?.send({ content: `Pseudo: ${member.username}\nID: ${member.id}` });
+        // reportChannel?.send({ content: `Pseudo: ${member.username}\nID: ${member.id}` });
 
         channel?.send({ content: `<@${interaction?.user?.id}> a banni ${member}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
-        if (url)
-          channel?.send({ content: url });
+        if (url) channel?.send({ content: url });
 
         await delay(500);
 
@@ -139,7 +136,7 @@ module.exports = {
         });
         break
       case 'ban_id':
-        reportChannel?.send({ content: `Pseudo: / \nID: ${member.id}` });
+        // reportChannel?.send({ content: `Pseudo: / \nID: ${member.id}` });
 
         guild.bans.create(userId, {
           reason: reason
