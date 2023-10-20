@@ -1,1 +1,1 @@
-git pull pull https://github.com/Sylicium/bot-discord-le-donjon.git
+git pull pull https://github.com/Sylicium/bot-discord-le-donjon.git --force
