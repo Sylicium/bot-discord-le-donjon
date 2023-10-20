@@ -37,7 +37,7 @@ module.exports = async (client, oldState, newState) => {
         console.log("pas envoyé:",e)
       })
       if(newState.member.id == client.config.static.users.seikam) {
-        le_no_micro_channel.send({
+        le_no_micro_channel[0].send({
           content: "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
         }).catch(e => {
           console.log("pas envoyé:",e)
@@ -72,7 +72,7 @@ module.exports = async (client, oldState, newState) => {
         console.log("pas envoyé:",e)
       })
       if(oldState.member.id == client.config.static.users.seikam) {
-        le_no_micro_channel.send({
+        le_no_micro_channel[0].send({
           content: "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
         }).catch(e => {
           console.log("pas envoyé:",e)
