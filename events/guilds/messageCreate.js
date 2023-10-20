@@ -64,9 +64,17 @@ module.exports = async (client, message) => {
           embeds: [
             new Discord.EmbedBuilder()
               .setColor("FF0000")
-              .setDescription(`**${message.member.nickname ?? message.author.username}** a été mute.\nFin du mute <t:${Math.floor((Date.now()+muteDuration)/1000)}:R>`)
+              .setDescription(`**${message.member.nickname ?? message.author.username}** a été mute pour spam.\nFin du mute <t:${Math.floor((Date.now()+muteDuration)/1000)}:R>`)
           ]
         })
+
+        try {
+          message.author.send({
+            content: `Vous avez été mute sur **${message.guild.name}** pour spam.\nFin du mute <t:${Math.floor((Date.now()+muteDuration)/1000)}:R>`
+          })
+        } catch(e) {
+          console.log(e)
+        }
         
       }).catch((e) => {
         console.log(e)
