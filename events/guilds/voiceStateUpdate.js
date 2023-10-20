@@ -13,7 +13,7 @@ module.exports = async (client, oldState, newState) => {
   console.log("whiteList_voiceCamera:",whiteList_voiceCamera)
 
   if(newState.channel && newState.selfVideo) {
-    if(newState.member.permissions.has("ADMINISTRATOR")) return;
+    if(newState.member.permissions.has(8n)) return; // 8n ADMINISTRATOR
     if(!whiteList_voiceCamera.includes(newState.channel.id)) {
       newState.member.user.send({
         content: `[**${newState.channel.guild.name}**] Vous n'avez pas le droit de mettre votre caméra en vocal ! Vous avez été kick du salon vocal en conséquences.`

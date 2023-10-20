@@ -9,7 +9,10 @@ module.exports = async (client, oldState, newState) => {
   //const guild = client.guilds.cache.get('1094318705883762719')
   const guild = (newState.channel ?? oldState.channel).guild
   const channel = guild.channels.cache.get(client.config.static.logChannels.voice)
-  const member = guild.members.cache.get(oldState.id);
+  const member = oldState.member ?? newState.member
+
+  console.log("member.displayAvatarURL",member.displayAvatarURL())
+  console.log("member.user.displayAvatarURL",member.user.displayAvatarURL())
 
   if (oldState.channelId === null) {
     const embed = new EmbedBuilder()
@@ -20,17 +23,24 @@ module.exports = async (client, oldState, newState) => {
 
     channel.send({
       embeds: [embed]
+    }).catch(e => {
+      console.log(e)
     })
 
     let temp = [...newState.guild.channels.cache.map(x => x)]
     let le_no_micro_channel = temp.filter(x => {
-      return (x.name == newState.channel.name) && (x.type == Discord.ChannelType.GuildText)
+      return (x.type == Discord.ChannelType.GuildText)
+      && (
+        (x.name == newState.channel.name)
+        || (x.name == newState.channel.name.split(" ").join("-"))
+        || (x.name == newState.channel.name.split(" ").join(""))
+      )
     })
     if(le_no_micro_channel) {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `➕ ${member.nickname ?? member.username} a rejoint le vocal`, icon_url: member.user.displayAvatarURL() })
+            .setAuthor({ name: `${member.nickname ?? member.user.username} est arrivé !`, iconURL: member.displayAvatarURL() })
             .setColor("00FF00")
         ]
       }).catch(e => {
@@ -54,19 +64,27 @@ module.exports = async (client, oldState, newState) => {
 
     channel.send({
       embeds: [embed]
+    }).catch(e => {
+      console.log(e)
     })
 
     
     let temp = [...newState.guild.channels.cache.map(x => x)]
     let le_no_micro_channel = temp.filter(x => {
-      return (x.name == oldState.channel.name) && (x.type == Discord.ChannelType.GuildText)
+      return (x.type == Discord.ChannelType.GuildText)
+      && (
+        (x.name == oldState.channel.name)
+        || (x.name == oldState.channel.name.split(" ").join("-"))
+        || (x.name == oldState.channel.name.split(" ").join(""))
+      )
     })
-    if(le_no_micro_channel) {
+    console.log("le_no_micro_channel:",le_no_micro_channel)
+    if(le_no_micro_channel.length > 0) {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `➖ ${member.nickname ?? member.username} a quitté le vocal`, icon_url: member.user.displayAvatarURL() })
-            .setColor("00FF00")
+            .setAuthor({ name: `${member.nickname ?? member.user.username} est parti ..`, iconURL: member.displayAvatarURL() })
+            .setColor("FF0000")
         ]
       }).catch(e => {
         console.log("pas envoyé:",e)

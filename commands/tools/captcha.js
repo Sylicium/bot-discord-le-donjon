@@ -20,9 +20,7 @@ module.exports = {
     name: "captcha",
     type: ApplicationCommandType.ChatInput,
     description: "Test captcha",
-    default_member_permissions: ['Administrator'],    
     run: async (client, interaction) => {
-
 
       await interaction.deferReply()
 
