@@ -30,7 +30,7 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `➕ ${newState.member.nickname ?? newState.member.username} a rejoint le vocal`, icon_url: newState.member.displayAvatarURL() })
+            .setAuthor({ name: `➕ ${member.nickname ?? member.username} a rejoint le vocal`, icon_url: member.user.displayAvatarURL() })
             .setColor("00FF00")
         ]
       }).catch(e => {
@@ -65,8 +65,8 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `➖ ${oldState.member.nickname ?? oldState.member.username} a rejoint le vocal`, icon_url: oldState.member.displayAvatarURL() })
-            .setColor("FF0000")
+            .setAuthor({ name: `➖ ${member.nickname ?? member.username} a quitté le vocal`, icon_url: member.user.displayAvatarURL() })
+            .setColor("00FF00")
         ]
       }).catch(e => {
         console.log("pas envoyé:",e)

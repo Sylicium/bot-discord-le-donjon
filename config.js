@@ -53,6 +53,9 @@ module.exports = {
         tag: "<a:loading:1161357384682307615>"
       }
     },
+    users: {
+      seikam: "467333274314997760"
+    },
     logChannels: {
       global: "1160246355927773235",
       voice: "1160246392736977046",
