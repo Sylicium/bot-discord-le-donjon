@@ -55,10 +55,11 @@ module.exports = {
     const member = guild.members.cache.get(userId);
 
     if (access === "tampon") {
-      member.roles.add('1160467551403393046'); // Tampon
-      member.roles.remove('1160467551403393047'); // Lu et Approuvé
+      member.roles.add(client.config.static.roles.tampon); // Tampon
+      member.roles.remove(client.config.static.roles.tampon.captcha); // Captcha
+      member.roles.remove(client.config.static.roles.tampon.luEtApprouve); // Lu et Approuvé
 
-      const welcomeChannel = guild.channels.cache.get('1160948126065106994'); // welcome channel
+      const welcomeChannel = guild.channels.cache.get(client.config.static.channels.welcome); // welcome channel
 
       const canvas = Canvas.createCanvas(1024, 500);
       const context = canvas.getContext('2d');
@@ -116,24 +117,24 @@ module.exports = {
       });
 
       interaction.reply({
-        content: `Félicitations ${member}, tu peux désormais choisir tes <#1110048370459947008>`,
+        content: `Félicitations ${member}, tu peux désormais choisir tes <#${client.config.static.channels.selectRoles}>`,
         files: [`./pictures/tampon.png`]
       });
     } else {
       const table = {
         blanche: {
-          chat: "1160467552716197919", // #⚪╏grande-salle
-          global: ["1160467551403393049"],
+          chat: client.config.static.channels.chambre_blanche, // #⚪╏grande-salle
+          global: [client.config.static.channels.porte_blanche],
         },
         noire: {
-          chat: "1160467552716197925", // #⚫╏salle-des-trophées
+          chat: client.config.static.channels.chambre_noire, // #⚫╏salle-des-trophées
           clef: "",
-          global: ["1160467551403393051"],
+          global: [client.config.static.channels.porte_noire],
         },
         rouge: {
-          chat: "1161087406183817307", // #chambre-rouge
+          chat: client.config.static.channels.chambre_rouge, // #chambre-rouge
           clef: "",
-          global: ["1160467551403393053", "1160467551403393053"],
+          global: [client.config.static.channels.chambre_rouge],
         },
       }
 

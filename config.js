@@ -62,12 +62,24 @@ module.exports = {
       logs_categoryID: "1159893939873136781",
     },
     channels: {
-      verification: "1160467551797657613"
+      welcome: "1160948126065106994",
+      verification: "1160467551797657613",
+      chambre_blanche: "1160233330474758204",
+      chambre_noire: "1160233656984551506",
+      chambre_rouge: "1164887556077408327",
+      selectRoles: "1159894126607740968",
+    },
+    voiceChannels: {
     },
     roles: {
       nonVerifie: "1160239536975118436",
-      captcha: "1160238993020043364",
-      luEtApprouve: "1159934558679076936", 
+      captcha: "1160948126065106994",
+      luEtApprouve: "1159934558679076936",
+      tampon: "1159934688194994308",
+      porte_blanche: "1159950689355694132",
+      porte_noire: "1159950621160525854",
+      porte_rouge: "1160165910510845992",
+
     },
     voiceChannels: [
       {
