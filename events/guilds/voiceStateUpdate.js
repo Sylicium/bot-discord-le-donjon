@@ -8,9 +8,9 @@ module.exports = async (client, oldState, newState) => {
 
   let whiteList_voiceCamera_pre = client.config.static.voiceChannels.filter(x => { return x.whitelistCamera == true })
 
-  console.log("whiteList_voiceCamera_pre:",whiteList_voiceCamera_pre)
+  // console.log("whiteList_voiceCamera_pre:",whiteList_voiceCamera_pre)
   let whiteList_voiceCamera = whiteList_voiceCamera_pre.map(x => { return x.id })
-  console.log("whiteList_voiceCamera:",whiteList_voiceCamera)
+  // console.log("whiteList_voiceCamera:",whiteList_voiceCamera)
 
   if(newState.channel && newState.selfVideo) {
     if(newState.member.permissions.has(8n)) return; // 8n ADMINISTRATOR

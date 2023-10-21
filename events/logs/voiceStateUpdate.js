@@ -11,8 +11,8 @@ module.exports = async (client, oldState, newState) => {
   const channel = guild.channels.cache.get(client.config.static.logChannels.voice)
   const member = oldState.member ?? newState.member
 
-  console.log("member.displayAvatarURL",member.displayAvatarURL())
-  console.log("member.user.displayAvatarURL",member.user.displayAvatarURL())
+  // console.log("member.displayAvatarURL",member.displayAvatarURL())
+  // console.log("member.user.displayAvatarURL",member.user.displayAvatarURL())
 
   if (oldState.channelId === null) {
     const embed = new EmbedBuilder()

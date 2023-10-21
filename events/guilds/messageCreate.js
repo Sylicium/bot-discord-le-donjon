@@ -18,6 +18,8 @@ module.exports = async (client, message) => {
 
   function checkForSpam() {
 
+    if(message.author.bot) return;
+
 
     MessagesTemp.push({
       channelID: message.channel.id,
