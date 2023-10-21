@@ -55,10 +55,10 @@ module.exports = {
     const member = guild.members.cache.get(userId);
 
     if (access === "tampon") {
-      member.roles.add(client.config.static.roles.tampon); // Tampon
-      member.roles.remove(client.config.static.roles.captcha); // Captcha
-      member.roles.remove(client.config.static.roles.luEtApprouve); // Lu et Approuvé
-
+      await member.roles.add(client.config.static.roles.tampon); // Tampon
+      await member.roles.remove(client.config.static.roles.captcha); // Captcha
+      await member.roles.remove(client.config.static.roles.luEtApprouve); // Lu et Approuvé
+ 
       const welcomeChannel = guild.channels.cache.get(client.config.static.channels.welcome); // welcome channel
 
       const canvas = Canvas.createCanvas(1024, 500);

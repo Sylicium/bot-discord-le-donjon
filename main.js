@@ -43,7 +43,6 @@ client.config = config;
 client.desc = desc;
 client.newUsersCD = new Set();
 client.commands = new Collection();
-client.newUsersCD = new Set();
 
 ['loadCommands', 'loadEvents'].forEach((handler) => {
   require(`./handlers/${handler}`)(client)
