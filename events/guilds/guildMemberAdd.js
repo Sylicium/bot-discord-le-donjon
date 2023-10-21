@@ -109,6 +109,20 @@ module.exports = async (client, member) => {
                         `Captcha correct. Bienvenue sur le serveur`,
                     ].join("\n"))
                     .setTimestamp()),
+            tentative: (tentatives, tentativesMax) => { return (
+                new EmbedBuilder()
+                    .setTitle(`Captcha > ${client.config.static.emojis.loading.tag}`)
+                    .setAuthor({ name: member.nickname ?? member.user.username, iconURL: member.user.displayAvatarURL() })
+                    .setColor("FDFFFF")
+                    .setDescription([
+                        `Bonjour <@${member.id}>, pour continuer vous devez remplir ce captcha`,
+                        `Lisez attentivement le code sur l'image ci-dessus constitué de **chiffres et lettres minuscules et majuscules.**`,
+                        ``,
+                        `Temps restant: <t:${Math.floor(Date.now()/1000)+Math.floor(captchaTimeToSolve/1000)}:R>`,
+                        `Tentatives restantes: \`${tentatives}/${tentativesMax}\``,
+                    ].join("\n"))
+                    .setTimestamp()
+                )},
             invalid: (
                 new EmbedBuilder()
                     .setTitle(`Captcha > ❌ Invalide`)
@@ -138,15 +152,20 @@ module.exports = async (client, member) => {
                 new Discord.AttachmentBuilder(data, "SPOILER_captcha.png")
             ]
         })*/
+
+        let tentativesMax = 5
+        let tentatives = parseInt(`${tentativesMax}`)
         
         const filter = m => { return (m.author.id == member.id) }; // m.author.id == interaction.user.id
-        const collector = await verifChannel.createMessageCollector({ filter, time: captchaTimeToSolve, max:1 });
+        const collector = await verifChannel.createMessageCollector({ filter, time: captchaTimeToSolve, max: tentativesMax });
 
         let answered = false
 
         collector.on('collect', m => {
             console.log("[DEBUG:guildMemberAdd.js] collect collector",m)
-            answered = true
+            tentatives--
+            if(tentatives == 0) { answered = true }
+
             m.delete().catch(e => {
                 console.log(`[WARN:guildMemberAdd.js] Can't delete captcha response message: ${e}`)
             })
@@ -165,7 +184,7 @@ module.exports = async (client, member) => {
                     })
                     member.roles.add(client.config.static.roles.captcha).then(x => {}).catch(e => { console.log(e) })
                 }, 500)
-            } else {
+            } else if(tentatives == 0) {
                 captchaBotMessage.edit({
                     embeds: [embeds_answers.invalid]
                 }).then(temp_m => { setTimeout(() => {
@@ -188,6 +207,20 @@ module.exports = async (client, member) => {
                 setTimeout(() => {
                     member.kick(`Captcha invalide: Wrong answer`)
                 }, 3000)
+            } else {
+                captchaBotMessage.edit({
+                    embeds: [embeds_answers.tentative(tentatives, tentativesMax)]
+                }).then(temp_m => { setTimeout(() => {temp_m.delete()},10*1000)})
+
+                setTimeout(() => {
+                    member.roles.remove(client.config.static.roles.nonVerifie).then(x => {
+                        //console.log("Captcha valide: member.roles.remove(client.config.static.roles.nonVerifie)",x)
+                    }).catch(e => {
+                        //console.log("Captcha valide CATCH ERROR: member.roles.remove(client.config.static.roles.nonVerifie)",x)
+                        console.log(e)
+                    })
+                    member.roles.add(client.config.static.roles.captcha).then(x => {}).catch(e => { console.log(e) })
+                }, 500)
             }
 
         })
@@ -203,7 +236,7 @@ module.exports = async (client, member) => {
                             new EmbedBuilder()
                                 .setColor("FF0000")
                                 .setDescription([
-                                    `En rejoignant le serveur **${member.guild.name}**, vous deviez remplir un captcha mais vous avez pris trop de temps.`,
+                                    `En rejoignant le serveur **${member.guild.name}**, vous deviez remplir un captcha mais vous avez pris trop de temps pour le compléter.`,
                                     `En conséquences et par sécurité, vous avez été expulsé.e du serveur.`,
                                 ].join("\n"))
                                 .setTimestamp()
