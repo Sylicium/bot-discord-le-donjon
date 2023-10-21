@@ -157,7 +157,12 @@ module.exports = async (client, member) => {
                 }).then(temp_m => { setTimeout(() => {temp_m.delete()},10*1000)})
 
                 setTimeout(() => {
-                    member.roles.remove(client.config.static.roles.nonVerifie).then(x => {}).catch(e => { console.log(e) })
+                    member.roles.remove(client.config.static.roles.nonVerifie).then(x => {
+                        //console.log("Captcha valide: member.roles.remove(client.config.static.roles.nonVerifie)",x)
+                    }).catch(e => {
+                        //console.log("Captcha valide CATCH ERROR: member.roles.remove(client.config.static.roles.nonVerifie)",x)
+                        console.log(e)
+                    })
                     member.roles.add(client.config.static.roles.captcha).then(x => {}).catch(e => { console.log(e) })
                 }, 500)
             } else {
