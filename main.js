@@ -126,19 +126,33 @@ client.on("messageCreate", (msg) => {
 
 client.on(SpeechEvents.speech, (msg) => {
 
-    console.log("speech:", msg)
+    //console.log("speech:", msg)
 
     if(!msg.guild) return;
 
 
     if(msg.duration < 1.5) return;
 
-    if(msg.member.id != "300399893611151361") return;
+    if(msg.member.id != "300399893611151361" && msg.member.id != "770334301609787392") return;
 
 
-    let chan = client.channels.cache.get("1160948126065106994") // Le bar
 
     // console.log(`audioBuffer (${msg.duration}):`,Buffer.byteLength(msg.audioBuffer), "SOIT ", Buffer.byteLength(msg.audioBuffer)/msg.duration )
+
+
+    let temp = [...msg.guild.channels.cache.map(x => x)]
+    let le_no_micro_channel_list = temp.filter(x => {
+        return (x.type == Discord.ChannelType.GuildText)
+        && (
+          (x.name == msg.channel.name)
+          || (x.name == msg.channel.name.split(" ").join("-"))
+          || (x.name == msg.channel.name.split(" ").join(""))
+        )
+    })
+
+    if(le_no_micro_channel_list.length == 0) return;
+
+    let chan = le_no_micro_channel_list[0] // Le bar
 
     if(!msg.content) {
 
@@ -147,7 +161,7 @@ client.on(SpeechEvents.speech, (msg) => {
         chan.send({
             embeds: [
                 new Discord.EmbedBuilder()
-                    .setAuthor({ name: (msg.member.nickname ?? msg.author.username), url: msg.author.displayAvatarURL() })
+                    .setAuthor({ name: (msg.member.nickname ?? msg.author.username), iconURL: msg.author.displayAvatarURL() })
                     .setColor("FF0000")
                     .setDescription(`Le québécois a dis quelque chose mais l'IA que je suis n'a rien compris ;-;`)
             ]
@@ -158,7 +172,7 @@ client.on(SpeechEvents.speech, (msg) => {
         chan.send({
             embeds: [
                 new Discord.EmbedBuilder()
-                    .setAuthor({ name: (msg.member.nickname ?? msg.author.username), url: msg.author.displayAvatarURL() })
+                    .setAuthor({ name: (msg.member.nickname ?? msg.author.username), iconURL: msg.author.displayAvatarURL() })
                     .setColor("FDFFFF")
                     .setDescription(`${msg.content}`)
             ]
