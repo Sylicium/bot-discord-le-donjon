@@ -24,7 +24,7 @@ module.exports = async (client, message) => {
   if(executor.bot) {
     return console.log(`[messageDelete] Deleted by a bot (${executor}) -> Not logging messageDelete.`)
   }
-  console.log("message:",message)
+  // console.log("message:",message)
 
   try {
     logChannel.send({
