@@ -17,6 +17,8 @@ svgCaptcha.options.connectionPathDeviation      = 10.0 // 10.0
 
 module.exports = async (client, member) => {
 
+    let tentativesMax = 5
+
 
     const captchaTimeToSolve = 180 * 1000 // en millisecondes
 
@@ -90,6 +92,7 @@ module.exports = async (client, member) => {
                     `Lisez attentivement le code sur l'image ci-dessus constitué de **chiffres et lettres minuscules et majuscules.**`,
                     ``,
                     `Temps restant: <t:${Math.floor(Date.now()/1000)+Math.floor(captchaTimeToSolve/1000)}:R>`,
+                    `Tentatives restantes: \`${tentativesMax}/${tentativesMax}\``,
                 ].join("\n"))
                 .setTimestamp()
             ],
@@ -153,7 +156,6 @@ module.exports = async (client, member) => {
             ]
         })*/
 
-        let tentativesMax = 5
         let tentatives = parseInt(`${tentativesMax}`)
         
         const filter = m => { return (m.author.id == member.id) }; // m.author.id == interaction.user.id
@@ -190,7 +192,6 @@ module.exports = async (client, member) => {
                 }).then(temp_m => { setTimeout(() => {
                     temp_m.delete()
                 },10*1000)})
-
                     member.user.send({
                         embeds: [
                             new EmbedBuilder()
@@ -210,17 +211,7 @@ module.exports = async (client, member) => {
             } else {
                 captchaBotMessage.edit({
                     embeds: [embeds_answers.tentative(tentatives, tentativesMax)]
-                }).then(temp_m => { setTimeout(() => {temp_m.delete()},10*1000)})
-
-                setTimeout(() => {
-                    member.roles.remove(client.config.static.roles.nonVerifie).then(x => {
-                        //console.log("Captcha valide: member.roles.remove(client.config.static.roles.nonVerifie)",x)
-                    }).catch(e => {
-                        //console.log("Captcha valide CATCH ERROR: member.roles.remove(client.config.static.roles.nonVerifie)",x)
-                        console.log(e)
-                    })
-                    member.roles.add(client.config.static.roles.captcha).then(x => {}).catch(e => { console.log(e) })
-                }, 500)
+                })
             }
 
         })
