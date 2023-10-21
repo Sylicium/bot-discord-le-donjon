@@ -36,7 +36,7 @@ module.exports = async (client, oldState, newState) => {
         || (x.name == newState.channel.name.split(" ").join(""))
       )
     })
-    if(le_no_micro_channel) {
+    if(le_no_micro_channel.length > 0) {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
@@ -53,6 +53,8 @@ module.exports = async (client, oldState, newState) => {
           console.log("pas envoyé:",e)
         })
       }
+    } else {
+      console.log("No no-mic channel found for voiceUpdate join.")
     }
     
   } else if (newState.channelId === null) {
@@ -78,7 +80,6 @@ module.exports = async (client, oldState, newState) => {
         || (x.name == oldState.channel.name.split(" ").join(""))
       )
     })
-    console.log("le_no_micro_channel:",le_no_micro_channel)
     if(le_no_micro_channel.length > 0) {
       le_no_micro_channel[0].send({
         embeds: [
@@ -96,6 +97,8 @@ module.exports = async (client, oldState, newState) => {
           console.log("pas envoyé:",e)
         })
       }
+    } else {
+      console.log("No no-mic channel found for voiceUpdate join.")
     }
 
 
