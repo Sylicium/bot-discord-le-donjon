@@ -16,6 +16,7 @@ module.exports = async (client, interaction) => {
 
     if(interaction.customId == "btn_roleSelect_membre_membre") {
       interaction.member.roles.remove(client.config.static.roles.tampon)
+      // pas de return car fin du code exécuté plus tard, notamment pour ajouter le role membre
     }
 
     console.log(`interaction customId (${interaction.customId}):`,interaction)
