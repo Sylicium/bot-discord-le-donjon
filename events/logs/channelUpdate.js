@@ -11,7 +11,7 @@ module.exports = async (client, oldChannel, newChannel) => {
       limit: 10,
       type: Discord.AuditLogEvent
     })).entries
-      console.log("logs:",logs)
+      // console.log("logs:",logs)
     let logs2 = logs.map(x => x).filter(x => {
       return x.target == newChannel.id
     })
@@ -20,10 +20,12 @@ module.exports = async (client, oldChannel, newChannel) => {
   }
   /*****/
   
-	const guild = client.guilds.cache.get('1160467551252385852');
-	const logChannel = guild.channels.cache.get('1160467552888176744')
+	const guild = client.guilds.cache.get(client.config.getCurrentGuildID());
+	const logChannel = guild.channels.cache.get(client.config.static.logChannels.channelUpdate)
 
-  console.log("(await newChannel._getLog()):",(await newChannel._getLog()))
+  if(!logChannel) return console.log(`[channelUpdate.js] logChannel undefined. Not channel with ID=${client.config.static.logChannels.channelUpdate}`)
+
+  // console.log("(await newChannel._getLog()):",(await newChannel._getLog()))
 
   let executor = (await newChannel._getLog()).executor
 

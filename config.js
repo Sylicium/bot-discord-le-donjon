@@ -8,6 +8,8 @@ function getToken() {
   return START_MODE == 1 ? process.env.TOKEN_TEST : process.env.TOKEN_PROD
 }
 
+function getCurrentGuildID() { return CONFIG.guildId[START_MODE] }
+
 let CONFIG = {
   token: getToken(), // Le Donjon
   startMode: START_MODE,
@@ -19,6 +21,7 @@ let CONFIG = {
     "1": "1160467551252385852",
     "2": "1094318705883762719"
   },
+  getCurrentGuildID: () => { return getCurrentGuildID() },
   mongodbURL: process.env.MONGODB_URL,
   stats: {
     img: {
@@ -66,6 +69,7 @@ let CONFIG = {
       global: "1160246355927773235",
       voice: "1160246392736977046",
       messages: "1160246355927773235",
+      channelUpdate: "1160246355927773235",
       tickets: "1160342857840869456",
       welcome: "1160246474517512292",
       logs_categoryID: "1159893939873136781",
