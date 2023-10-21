@@ -183,7 +183,7 @@ module.exports = async (client, member) => {
                                 .setTimestamp()
                         ]
                     }).then(() => {}).catch(e => {
-                        console.log(`[INFO:guildMemberAdd.js] Cannot DM member`,e)
+                        console.log(`[INFO:guildMemberAdd.js] Cannot DM member`)
                     })
                 setTimeout(() => {
                     member.kick(`Captcha invalide: Wrong answer`)
@@ -209,7 +209,7 @@ module.exports = async (client, member) => {
                                 .setTimestamp()
                         ]
                     }).then(() => {}).catch(e => {
-                        console.log(`[INFO:guildMemberAdd.js] Cannot DM member`,e)
+                        console.log(`[INFO:guildMemberAdd.js] Cannot DM member`)
                     })
                     setTimeout(() => {
                         member.kick(`Captcha invalide: Time`)
