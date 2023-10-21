@@ -1,6 +1,6 @@
 try {
   require("dotenv").config()
-} catch(e) { console.log(e) }
+} catch (e) { console.log(e) }
 
 let START_MODE = 2 // 1: Dév | 2: Production
 
@@ -132,7 +132,7 @@ let CONFIG = {
   ],
   tempResetChan: "1", //Minutes pour reset le channel écris lié aux channels.
   vocs: [{
-    chan: "1094318707930583085", 
+    chan: "1094318707930583085",
     role: "1094318705883762727",
     noMic: "🔉╏𝚂𝚊𝚕𝚕𝚎-𝚍’𝚊𝚞𝚍𝚒𝚎𝚗𝚌𝚎"
   }, {
@@ -144,10 +144,10 @@ let CONFIG = {
     role: "1094318705883762725",
     noMic: "⚪╏𝚂𝚊𝚕𝚕𝚎-𝚊̀-𝚖𝚊𝚗𝚐𝚎𝚛"
   }, {
-    chan: "1094318708425490511", 
+    chan: "1094318708425490511",
     role: "1094318705883762724",
     noMic: "⚪╏𝙻𝚘𝚟𝚎-𝚛𝚘𝚘𝚖"
-  }, 
+  },
   // {
   //   chan: "1141490773049745488",
   //   role: "1148804474056495124",
@@ -155,18 +155,18 @@ let CONFIG = {
   // }, 
   {
     chan: "1127670087453777960",
-    role: "1094318705883762723", 
+    role: "1094318705883762723",
     noMic: "⚫╏𝚂𝚊𝚗𝚌𝚝𝚞𝚊𝚒𝚛𝚎"
   }, {
     chan: "1094318709209837599",
     role: "1094318705883762722",
     noMic: "🔴╏𝙲𝚑𝚎𝚗𝚒𝚕𝚜"
   }, {
-    chan: "1128365806871400459", 
+    chan: "1128365806871400459",
     role: "1128365219303923782",
     noMic: "🦋╏𝙲𝚘𝚌𝚘𝚘𝚗"
   }],
-  chanStats: [ ],
+  chanStats: [],
   roles: [{
     name: "genre",
     type: 3,
@@ -176,23 +176,28 @@ let CONFIG = {
       roles: [{
         desc: "Femme",
         emoji: "<:role_F:1160178010641678376> ",
-        role: "1159937649847582833"
+        role: "1159937649847582833",
+        buttonCustomId: "btn_roleSelect_genre_femme"
       }, {
         desc: "MTF",
         emoji: "<:role_MtF:1160178017386119188>",
-        role: "1159950187620466890"
+        role: "1159950187620466890",
+        buttonCustomId: "btn_roleSelect_genre_mtf"
       }, {
         desc: "Autre(s) ",
         emoji: "<:role_NB:1160178018963181649> ",
-        role: "1159938917932478525"
+        role: "1159938917932478525",
+        buttonCustomId: "btn_roleSelect_genre_autre"
       }, {
         desc: "FTM",
         emoji: "<:role_FtM:1160178012759785515>",
-        role: "1159950299742609438"
+        role: "1159950299742609438",
+        buttonCustomId: "btn_roleSelect_genre_ftm"
       }, {
         desc: "Homme",
         emoji: "<:role_M:1160178014752079882>",
-        role: "1159938789112823860"
+        role: "1159938789112823860",
+        buttonCustomId: "btn_roleSelect_genre_homme"
       }]
     }]
   }, {
@@ -204,15 +209,18 @@ let CONFIG = {
       roles: [{
         desc: "Elle",
         emoji: "<:elle:1160189693745430598>",
-        role: "1159935784523153479"
+        role: "1159935784523153479",
+        buttonCustomId: "btn_roleSelect_pronom_elle"
       }, {
         desc: "Iel",
         emoji: "<:iel:1160189696274612364>",
-        role: "1159935499893489744"
+        role: "1159935499893489744",
+        buttonCustomId: "btn_roleSelect_pronom_iel"
       }, {
         desc: "Il",
         emoji: "<:il:1160189697881014282>",
-        role: "1159934859247104161"
+        role: "1159934859247104161",
+        buttonCustomId: "btn_roleSelect_pronom_il"
       }]
     }]
   }, {
@@ -224,23 +232,28 @@ let CONFIG = {
       roles: [{
         desc: "18-24 ans",
         emoji: "👧",
-        role: "1159941097699692564"
+        role: "1159941097699692564",
+        buttonCustomId: "btn_roleSelect_age_18_24"
       }, {
         desc: "25-30 ans",
         emoji: "👦",
-        role: "1159933053800550470"
+        role: "1159933053800550470",
+        buttonCustomId: "btn_roleSelect_age_25_30"
       }, {
         desc: "31-35 ans",
         emoji: "👩",
-        role: "1159933316506603550"
+        role: "1159933316506603550",
+        buttonCustomId: "btn_roleSelect_age_31_35"
       }, {
         desc: "36-40 ans",
         emoji: "🧑",
-        role: "1159933161959067759"
+        role: "1159933161959067759",
+        buttonCustomId: "btn_roleSelect_age_36_40"
       }, {
         desc: "41 et plus",
         emoji: "🧓",
-        role: "1159934198400958475"
+        role: "1159934198400958475",
+        buttonCustomId: "btn_roleSelect_age_41_plus"
       }]
     }]
   }, {
@@ -252,46 +265,56 @@ let CONFIG = {
       roles: [{
         desc: "En Couple",
         emoji: "❤️",
-        role: "1159933544047591504"
+        role: "1159933544047591504",
+        buttonCustomId: "btn_roleSelect_situation_couple"
       }, {
         desc: "Célibataire",
         emoji: "💔",
-        role: "1159936494530723870"
+        role: "1159936494530723870",
+        buttonCustomId: "btn_roleSelect_situation_celibataire"
       }, {
         desc: "Compliqué",
         emoji: "🤍",
-        role: "1159936494530723870"
+        role: "1159936494530723870",
+        buttonCustomId: "btn_roleSelect_situation_complique"
       }, {
         desc: "Relation Libre",
         emoji: "💯",
-        role: "1159951312658645002"
+        role: "1159951312658645002",
+        buttonCustomId: "btn_roleSelect_situation_relation_libre"
       }, {
         desc: "Relation Polyamoureuse",
         emoji: "💘",
-        role: "1159943088882593823"
+        role: "1159943088882593823",
+        buttonCustomId: "btn_roleSelect_situation_polyamoureuse"
       }]
     }, {
       color: '',
       roles: [{
         desc: "Relation D/S",
         emoji: "<:d_s:1160238721325617254>",
-        role: "1159943158524809216"
+        role: "1159943158524809216",
+        buttonCustomId: "btn_roleSelect_situation_bdsm_DS"
       }, {
         desc: "Relation M/E",
         emoji: "<:m_e:1160238726702698516>",
-        role: "1159943312795512974"
+        role: "1159943312795512974",
+        buttonCustomId: "btn_roleSelect_situation_bdsm_ME"
       }, {
         desc: "Sous protection",
         emoji: "<:protection:1160238728762106016>",
-        role: "1159943438351994890"
+        role: "1159943438351994890",
+        buttonCustomId: "btn_roleSelect_situation_bdsm_protection"
       }, {
         desc: "Sous Contrat",
         emoji: "📃",
-        role: "1159942064147017830"
+        role: "1159942064147017830",
+        buttonCustomId: "btn_roleSelect_situation_bdsm_contrat"
       }, {
         desc: "Sous Collier",
         emoji: "📿",
-        role: "1159942246599229510"
+        role: "1159942246599229510",
+        buttonCustomId: "btn_roleSelect_situation_bdsm_collier"
       }]
     }]
   }, {
@@ -303,30 +326,36 @@ let CONFIG = {
       roles: [{
         desc: "Hétérosexuel.le",
         emoji: "💑",
-        role: "1159942632231936080"
+        role: "1159942632231936080",
+        buttonCustomId: "btn_roleSelect_orientation_heterosexuel"
       }, {
         desc: "Homosexuel.le",
         emoji: "🌈",
-        role: "1159942817750200351"
+        role: "1159942817750200351",
+        buttonCustomId: "btn_roleSelect_orientation_homosexuel"
       }, {
         desc: "Bisexuel.le",
         emoji: "<:bi:1160257466811043870>",
-        role: "1159942903947333682"
+        role: "1159942903947333682",
+        buttonCustomId: "btn_roleSelect_orientation_bisexuel"
       }]
     }, {
       color: '',
       roles: [{
         desc: "Pansexuel.le",
         emoji: "💕",
-        role: "1159948087448571944"
+        role: "1159948087448571944",
+        buttonCustomId: "btn_roleSelect_orientation_pansexuel"
       }, {
         desc: "Asexuel.le",
         emoji: "❣️",
-        role: "1159947091863408700"
+        role: "1159947091863408700",
+        buttonCustomId: "btn_roleSelect_orientation_asexuel"
       }, {
         desc: "Autre",
         emoji: "❓",
-        role: "1159947158439612567"
+        role: "1159947158439612567",
+        buttonCustomId: "btn_roleSelect_orientation_autre"
       }]
     }]
   }, {
@@ -338,11 +367,13 @@ let CONFIG = {
       roles: [{
         desc: "Sur demande",
         emoji: "<:MP_demande:1160184316807098399>",
-        role: "1159947318930444328"
+        role: "1159947318930444328",
+        buttonCustomId: "btn_roleSelect_mp_demande"
       }, {
         desc: "Fermés",
         emoji: "<:MP_dtc:1160184366786416721>",
-        role: "1159951382216966214"
+        role: "1159951382216966214",
+        buttonCustomId: "btn_roleSelect_mp_ferme"
       }]
     }]
   }, {
@@ -354,62 +385,75 @@ let CONFIG = {
       roles: [{
         desc: "Dominant.e",
         emoji: "<:Dom:1160184304232562790>",
-        role: "1159947481535238315"
+        role: "1159947481535238315",
+        buttonCustomId: "btn_roleSelect_bdsm_dominant"
       }, {
         desc: "Maître.sse",
         emoji: "<:Master:1160184307944521789>",
-        role: "1159951638526689372"
+        role: "1159951638526689372",
+        buttonCustomId: "btn_roleSelect_bdsm_maitre"
       }, {
         desc: "Brat tamer",
         emoji: "<:BT:1160184303288852520>",
-        role: "1159951902092570745"
+        role: "1159951902092570745",
+        buttonCustomId: "btn_roleSelect_bdsm_brat_tamer"
       },
       {
         desc: "Daddy-Mommy",
         emoji: "<:DS:1160184299203596329>",
-        role: "1159951972598820985"
+        role: "1159951972598820985",
+        buttonCustomId: "btn_roleSelect_bdsm_daddy_mommy"
       }]
     }, {
       color: '',
       roles: [{
         desc: "Soumis.e",
         emoji: "<:Sub:1160184310293344296>",
-        role: "1159951823143190549"
+        role: "1159951823143190549",
+        buttonCustomId: "btn_roleSelect_bdsm_soumis"
       }, {
         desc: "Esclave",
         emoji: "<:Slave:1160184306585587803>",
-        role: "1159950965672247326"
+        role: "1159950965672247326",
+        buttonCustomId: "btn_roleSelect_bdsm_slave"
       }, {
         desc: "Brat",
         emoji: "<:brat:1160184301082656809>",
-        role: "1159951745099776182"
+        role: "1159951745099776182",
+        buttonCustomId: "btn_roleSelect_bdsm_brat"
       }, {
         desc: "Little",
         emoji: "<:little:1160184315007742075>",
-        role: "1159951054893486122"
+        role: "1159951054893486122",
+        buttonCustomId: "btn_roleSelect_bdsm_little"
       }]
     }, {
       color: '',
       roles: [{
         desc: "Switch",
         emoji: "<:Switch:1160184311715205180>",
-        role: "1159954472991203390"
+        role: "1159954472991203390",
+        buttonCustomId: "btn_roleSelect_bdsm_switch"
       }, {
         desc: "Ageplay",
         emoji: "<a:ageplay:1160267570583195748>",
-        role: "1159955220248412231"
+        role: "1159955220248412231",
+        buttonCustomId: "btn_roleSelect_bdsm_ageplay"
       }, {
         desc: "Petplay",
         emoji: "<a:patoune5:1159892429948846090>",
-        role: "1159955868134162542"
+        role: "1159955868134162542",
+        buttonCustomId: "btn_roleSelect_bdsm_petplay"
       }, {
         desc: "En questionnement",
         emoji: "<:en_questionnement:1160238725071126618>",
-        role: "1159956125635063828"
+        role: "1159956125635063828",
+        buttonCustomId: "btn_roleSelect_bdsm_questionnement"
       }, {
         desc: "Vanilla",
         emoji: "<:Vanilla:1160184313086738492>",
-        role: "1159956237711065110"
+        role: "1159956237711065110",
+        buttonCustomId: "btn_roleSelect_bdsm_vanilla"
       }]
     }]
   }, {
@@ -421,19 +465,23 @@ let CONFIG = {
       roles: [{
         desc: "Novice",
         emoji: "<:KN1:1160184615055667231>",
-        role: "1159956348482625647"
+        role: "1159956348482625647",
+        buttonCustomId: "btn_roleSelect_kn_novice"
       }, {
         desc: "Amateur",
         emoji: "<:KN2:1160184616326533160>",
-        role: "1159956580821901390"
+        role: "1159956580821901390",
+        buttonCustomId: "btn_roleSelect_kn_amateur"
       }, {
         desc: "Confirmé",
         emoji: "<:KN3:1160184618406916106>",
-        role: "1159956799777144832"
+        role: "1159956799777144832",
+        buttonCustomId: "btn_roleSelect_kn_confirme"
       }, {
         desc: "Expérimenté",
         emoji: "<:KN4:1160184619958804550>",
-        role: "1159956863085985832"
+        role: "1159956863085985832",
+        buttonCustomId: "btn_roleSelect_kn_experimente"
       }]
     }]
   }, {
@@ -445,19 +493,23 @@ let CONFIG = {
       roles: [{
         desc: "Novice",
         emoji: "<:XP1:1160184647066591353>",
-        role: "1159956957164208168"
+        role: "1159956957164208168",
+        buttonCustomId: "btn_roleSelect_xp_novice"
       }, {
         desc: "Amateur",
         emoji: "<:XP2:1160184649386049538>",
-        role: "1159957178728321034"
+        role: "1159957178728321034",
+        buttonCustomId: "btn_roleSelect_xp_amateur"
       }, {
         desc: "Confirmé",
         emoji: "<:XP3:1160184651311230976>",
-        role: "1159957295548076162"
+        role: "1159957295548076162",
+        buttonCustomId: "btn_roleSelect_xp_confirme"
       }, {
         desc: "Expérimenté ",
         emoji: "<:XP4:1160184653563576390>",
-        role: "1159957420324433970"
+        role: "1159957420324433970",
+        buttonCustomId: "btn_roleSelect_xp_experimente"
       }]
     }]
   }, {
@@ -469,19 +521,23 @@ let CONFIG = {
       roles: [{
         desc: "Novice",
         emoji: "<:XV1:1160184681531183224>",
-        role: "1159957557058752532"
+        role: "1159957557058752532",
+        buttonCustomId: "btn_roleSelect_xv_novice"
       }, {
         desc: "Amateur",
         emoji: "<:XV2:1160184683758370846>",
-        role: "1159957669763887135"
+        role: "1159957669763887135",
+        buttonCustomId: "btn_roleSelect_xv_amateur"
       }, {
         desc: "Confirmé",
         emoji: "<:XV3:1160184685297676358>",
-        role: "1159957779340070923"
+        role: "1159957779340070923",
+        buttonCustomId: "btn_roleSelect_xv_confirme"
       }, {
         desc: "Expérimenté",
         emoji: "<:XV4:1160184686438527017>",
-        role: "1159958446163120269"
+        role: "1159958446163120269",
+        buttonCustomId: "btn_roleSelect_xv_experimente"
       }]
     }]
   }, {
@@ -493,16 +549,18 @@ let CONFIG = {
       roles: [{
         desc: "Animations",
         emoji: "♠",
-        role: "1160169630015426631"
-      },{
+        role: "1160169630015426631",
+        buttonCustomId: "btn_roleSelect_pings_animation"
+      }, {
         desc: "Partenariat",
         emoji: "🤝",
-        role: "1160169655164473416"
-      },
-      {
+        role: "1160169655164473416",
+        buttonCustomId: "btn_roleSelect_pings_partenariat"
+      }, {
         desc: "Gaming",
         emoji: "🎮",
-        role: "1160169712978755614"
+        role: "1160169712978755614",
+        buttonCustomId: "btn_roleSelect_pings_gaming"
       }]
     }]
   }, {
@@ -514,21 +572,23 @@ let CONFIG = {
       roles: [{
         desc: "Membre",
         emoji: "<a:stark:1160481171596120094>",
-        role: "1159856520289341480"
+        role: "1159856520289341480",
+        buttonCustomId: "btn_roleSelect_membre_membre"
       }]
     }]
   }, {
-    name: "relgement",
+    name: "reglement",
     type: 3,
     embed: [{
       color: '',
       roles: [{
         desc: "lu et approuvé",
         emoji: "<a:check:1162660402145017926>",
-        role: "1159934558679076936"
+        role: "1159934558679076936",
+        buttonCustomId: "btn_roleSelect_reglement_reglement"
       }]
     }]
-  },{
+  }, {
     name: "régression",
     type: 3,
     embed: [{
@@ -536,18 +596,8 @@ let CONFIG = {
       roles: [{
         desc: "J'accepte le règlement",
         emoji: "<a:bibi:1160994479369621504>",
-        role: "1160230257148841984"
-      }]
-    }]
-  }, {
-    name: "action-verite",
-    type: 3,
-    embed: [{
-      color: '',
-      roles: [{
-        desc: "Prenez ce rôle uniquement si vous voulez accéder à action ou vérité",
-        emoji: "<:action_verite:1143155367765876737>",
-        role: "1143150582526378044"
+        role: "1160230257148841984",
+        buttonCustomId: "btn_roleSelect_regression_regression"
       }]
     }]
   }, {
@@ -558,7 +608,8 @@ let CONFIG = {
       roles: [{
         desc: "Prenez ce rôle uniquement si vous voulez accéder culot",
         emoji: "<:fuck:1104154757565784134>",
-        role: "1158679830464835615"
+        role: "1158679830464835615",
+        buttonCustomId: "btn_roleSelect_culot_culot"
       }]
     }]
   }]
