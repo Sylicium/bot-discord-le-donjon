@@ -124,17 +124,17 @@ module.exports = {
       const table = {
         blanche: {
           chat: client.config.static.channels.chambre_blanche, // #⚪╏grande-salle
-          global: [client.config.static.channels.porte_blanche],
+          global: [client.config.static.roles.porte_blanche],
         },
         noire: {
           chat: client.config.static.channels.chambre_noire, // #⚫╏salle-des-trophées
           clef: "",
-          global: [client.config.static.channels.porte_noire],
+          global: [client.config.static.roles.porte_noire],
         },
         rouge: {
           chat: client.config.static.channels.chambre_rouge, // #chambre-rouge
           clef: "",
-          global: [client.config.static.channels.chambre_rouge],
+          global: [client.config.static.roles.chambre_rouge],
         },
       }
 
