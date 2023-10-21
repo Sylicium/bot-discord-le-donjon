@@ -56,8 +56,8 @@ module.exports = {
 
     if (access === "tampon") {
       member.roles.add(client.config.static.roles.tampon); // Tampon
-      member.roles.remove(client.config.static.roles.tampon.captcha); // Captcha
-      member.roles.remove(client.config.static.roles.tampon.luEtApprouve); // Lu et Approuvé
+      member.roles.remove(client.config.static.roles.captcha); // Captcha
+      member.roles.remove(client.config.static.roles.luEtApprouve); // Lu et Approuvé
 
       const welcomeChannel = guild.channels.cache.get(client.config.static.channels.welcome); // welcome channel
 
@@ -134,7 +134,7 @@ module.exports = {
         rouge: {
           chat: client.config.static.channels.chambre_rouge, // #chambre-rouge
           clef: "",
-          global: [client.config.static.roles.chambre_rouge],
+          global: [client.config.static.roles.porte_rouge],
         },
       }
 

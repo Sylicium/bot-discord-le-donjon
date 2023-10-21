@@ -2,9 +2,15 @@ try {
   require("dotenv").config()
 } catch(e) { console.log(e) }
 
-module.exports = {
-  token: process.env.TOKEN, // Le Donjon
-  startMode: 2, // 1: Dév | 2: Production
+let START_MODE = 2 // 1: Dév | 2: Production
+
+function getToken() {
+  return START_MODE == 1 ? process.env.TOKEN_TEST : process.env.TOKEN_PROD
+}
+
+let CONFIG = {
+  token: getToken(), // Le Donjon
+  startMode: START_MODE,
   clientId: {
     "1": "1160565576461209700",
     "2": "1160598942044672000"
@@ -65,8 +71,8 @@ module.exports = {
       logs_categoryID: "1159893939873136781",
     },
     channels: {
-      welcome: "1160948126065106994",
-      verification: "1160467551797657613",
+      welcome: "1159895213578399885",
+      verification: "1160239538506047507",
       chambre_blanche: "1160233330474758204",
       chambre_noire: "1160233656984551506",
       chambre_rouge: "1164887556077408327",
@@ -77,13 +83,12 @@ module.exports = {
     },
     roles: {
       nonVerifie: "1160239536975118436",
-      captcha: "1160948126065106994",
+      captcha: "1160238993020043364",
       luEtApprouve: "1159934558679076936",
       tampon: "1159934688194994308",
       porte_blanche: "1159950689355694132",
       porte_noire: "1159950621160525854",
       porte_rouge: "1160165910510845992",
-
     },
     voiceChannels: [
       {
@@ -554,3 +559,4 @@ module.exports = {
     }]
   }]
 }
+module.exports = CONFIG
