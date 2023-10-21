@@ -27,7 +27,12 @@ module.exports = async (client, oldChannel, newChannel) => {
 
   // console.log("(await newChannel._getLog()):",(await newChannel._getLog()))
 
-  let executor = (await newChannel._getLog()).executor
+  let temp1 = (await newChannel._getLog())
+  if(!temp1) {
+    console.log("[logs/channelUpdate.js] Logs are undefined. Cannot read property .executor > Not logging anything.")
+    return;
+  }
+  let executor = temp1.executor
 
 
   function getChannelTypeString(num) {
