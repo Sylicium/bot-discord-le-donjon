@@ -43,6 +43,7 @@ module.exports = async (client, oldState, newState) => {
     { id: "770334301609787392", name: "Oh ! Une dév" },
     { id: "467333274314997760", name: "Le diktateur" },
     { id: "575402346591420447", name: "La salope du diktateur" },
+    { id: "959198467224387584", name: "La soubrette du Donjon" }
   ]
 
   let specialNickname = specialNickname_list.find(x => {
