@@ -36,6 +36,19 @@ module.exports = async (client, oldState, newState) => {
     }
   ]
 
+  let specialNickname_list = [
+    { id: "526528898876440608", name: "Le souffre douleur d'Angelyne" },
+    { id: "233322709604368385", name: "Hémistiche, heu Emy" },
+    { id: "904401609939886100", name: "The Mother of Dragonjons" },
+    { id: "770334301609787392", name: "Oh ! Une dév" },
+    { id: "467333274314997760", name: "Le diktateur" },
+    { id: "575402346591420447", name: "La salope du diktateur" },
+  ]
+
+  let specialNickname = specialNickname_list.find(x => {
+    return x.id == newState.member.id
+  })?.name ?? null
+
 
   if(oldState.channelId != newState.channelId) {
     let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(x => {
@@ -82,7 +95,7 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `${member.nickname ?? member.user.username} est arrivé !`, iconURL: member.displayAvatarURL() })
+            .setAuthor({ name: `${specialNickname ?? member.nickname ?? member.user.username} est arrivé !`, iconURL: member.displayAvatarURL() })
             .setColor("00FF00")
         ]
       }).catch(e => {
@@ -130,7 +143,7 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `${member.nickname ?? member.user.username} est parti ..`, iconURL: member.displayAvatarURL() })
+            .setAuthor({ name: `${specialNickname ?? member.nickname ?? member.user.username} est parti ..`, iconURL: member.displayAvatarURL() })
             .setColor("FF0000")
         ]
       }).catch(e => {
@@ -153,6 +166,7 @@ module.exports = async (client, oldState, newState) => {
 
 
   } else if (oldState.streaming != newState.streaming) {
+    console.log("streaming:",newState)
     if (newState.streaming) {
       const embed = new EmbedBuilder()
         .setTitle("Début de stream")

@@ -133,7 +133,7 @@ client.on(SpeechEvents.speech, (msg) => {
 
     if(msg.duration < 1.5) return;
 
-    if(msg.member.id != "300399893611151361" && msg.member.id != "770334301609787392") return;
+    if(msg.member.id != "300399893611151361") return;
 
 
 
