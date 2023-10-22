@@ -30,7 +30,7 @@ module.exports = async (client, member) => {
 
     let verifChannel = member.guild.channels.cache.get(client.config.static.channels.verification)
 
-    member.roles.add(roleNonVerifie.id)
+    await member.roles.add(roleNonVerifie.id)
 
 
 
@@ -161,12 +161,12 @@ module.exports = async (client, member) => {
         const filter = m => { return (m.author.id == member.id) }; // m.author.id == interaction.user.id
         const collector = await verifChannel.createMessageCollector({ filter, time: captchaTimeToSolve, max: tentativesMax });
 
-        let answered = false
+        let answeredOnce = false
 
         collector.on('collect', m => {
             console.log("[DEBUG:guildMemberAdd.js] collect collector",m)
             tentatives--
-            if(tentatives == 0) { answered = true }
+            answeredOnce = true
 
             m.delete().catch(e => {
                 console.log(`[WARN:guildMemberAdd.js] Can't delete captcha response message: ${e}`)
@@ -175,22 +175,21 @@ module.exports = async (client, member) => {
             if(m.content == captcha.text) {
                 captchaBotMessage.edit({
                     embeds: [embeds_answers.valid]
-                }).then(temp_m => { setTimeout(() => {temp_m.delete()},10*1000)})
+                }).then(temp_m => { setTimeout(() => {temp_m.delete().catch(err => { console.log(err) }) },10*1000)})
 
-                setTimeout(() => {
-                    member.roles.remove(client.config.static.roles.nonVerifie).then(x => {
-                        //console.log("Captcha valide: member.roles.remove(client.config.static.roles.nonVerifie)",x)
-                    }).catch(e => {
-                        //console.log("Captcha valide CATCH ERROR: member.roles.remove(client.config.static.roles.nonVerifie)",x)
+                setTimeout(async () => {
+                    try {
+                        await member.roles.remove(client.config.static.roles.nonVerifie)
+                        await member.roles.add(client.config.static.roles.captcha)
+                    } catch(e) {
                         console.log(e)
-                    })
-                    member.roles.add(client.config.static.roles.captcha).then(x => {}).catch(e => { console.log(e) })
+                    }
                 }, 500)
             } else if(tentatives == 0) {
                 captchaBotMessage.edit({
                     embeds: [embeds_answers.invalid]
                 }).then(temp_m => { setTimeout(() => {
-                    temp_m.delete()
+                    temp_m.delete().catch(err => { console.log(err) })
                 },10*1000)})
                     member.user.send({
                         embeds: [
@@ -221,7 +220,7 @@ module.exports = async (client, member) => {
             console.log("[DEBUG:guildMemberAdd.js] ended collector",collected)
 
             setTimeout(() => {
-                if(!answered) {
+                if(!answeredOnce) {
                     member.user.send({
                         embeds: [
                             new EmbedBuilder()
@@ -241,7 +240,7 @@ module.exports = async (client, member) => {
 
                     captchaBotMessage.edit({
                         embeds: [embeds_answers.invalid_time]
-                    }).then(temp_m => { setTimeout(() => { temp_m.delete() },10*1000)})
+                    }).then(temp_m => { setTimeout(() => { temp_m.delete().catch(err => { console.log(err) }) },10*1000)})
                 }
             }, 200)
         })

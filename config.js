@@ -85,11 +85,13 @@ let CONFIG = {
       chambre_noire: "1160233656984551506",
       chambre_rouge: "1164887556077408327",
       selectRoles: "1159894126607740968",
-      ban_pilori: "1159895318440202433"
+      pilori: "1159895318440202433",
+      ban: "1159895365424779396",
     },
     voiceChannels: {
     },
     roles: {
+      membre: "1159856520289341480",
       nonVerifie: "1160239536975118436",
       captcha: "1160238993020043364",
       luEtApprouve: "1159934558679076936",
