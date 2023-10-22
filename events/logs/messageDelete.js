@@ -5,7 +5,7 @@ const moment = require('moment');
 
 module.exports = async (client, message) => {
 
-  if (message.channel.parentId == client.config.static.logChannels.logs_categoryID) return;
+  if (message.channel.parentId == client.config.static.categories.logs) return;
 
   const embed = new EmbedBuilder()
     .setTitle("Message Supprimé")

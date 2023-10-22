@@ -72,7 +72,10 @@ let CONFIG = {
       channelUpdate: "1160246355927773235",
       tickets: "1160342857840869456",
       welcome: "1160246474517512292",
-      logs_categoryID: "1159893939873136781",
+    },
+    categories: {
+      animation: "1160236790104477756",
+      logs: "1159893939873136781"
     },
     channels: {
       welcome: "1159895213578399885",

@@ -207,9 +207,9 @@ module.exports = async (client, interaction) => {
 
 
     } else {
-      interaction.reply({
+      /*interaction.reply({
         content: `Une erreur est survenue: **ERROR#01 ID d'interaction customId=${interaction.customId} introuvable.**\nEssayez de contacter un administrateur.`
-      })
+      })*/
     }
 
     return;
