@@ -10,37 +10,17 @@ const moment = require("moment");
 
 module.exports = async (client, member) => {
 
-	let logChannel = client.channels.cache.get(client.config.static.logChannels.welcome)
-	if(!logChannel) {
-	  return console.log(`[guildMemberRemove] logChannel undefined. No channel found with ID=${client.config.static.logChannels.welcome}`)
-	}
-  
-	logChannel.send({
-	  embeds: [
-		new EmbedBuilder()  
-		.setColor("00FF00")
-		.setAuthor({ name: member.nickname ?? member.user.username, iconURL: member.displayAvatarURL() })
-		.setDescription([
-		  `Aurevoir **${member.nickname ?? member.user.username}** ..`
-		].join("\n"))
-		.setThumbnail(member.displayAvatarURL())
-		.setTimestamp()
-	  ]
-	})
-
-
-
-	return;
-/*
-
-	const guild = client.guilds.cache.get('1094318705883762719');
-	const lchannel = guild.channels.cache.get('1094318707456618600');
-	const logChannel = guild.channels.cache.get('1102614305771364412')
-	const bchannel = guild.channels.cache.get('1094318707456618602');
-	const wchannel = guild.channels.cache.get('1094318707116888093');
+	let logChannel = client.channels.cache.get(client.config.static.logChannels.join_leave)
+	  
+	const guild = interaction.guild;
+	const lchannel = guild.channels.cache.get(client.config.static.channels.depart);
+	// const logChannel = guild.channels.cache.get('1102614305771364412')
+	const bchannel = guild.channels.cache.get(client.config.static.channels.ban_pilori);
+	const wchannel = guild.channels.cache.get(client.config.static.channels.arrivee);
 
 	delWelcomeMessage(wchannel, member.user.id);
 
+	/*
 	const user = await client?.db?.users?.findOne({
 		userID: member?.user?.id
 	});
@@ -50,8 +30,9 @@ module.exports = async (client, member) => {
 		if (ticket)
 			ticket?.send({ content: `${member} a quitté le serveur` });
 	}
+	*/
 
-	if (user && user?.isMember) {
+	if(true) { //if (user && user?.isMember) {
 		if (guild.bans.cache.get(member.user.id)) {
 			const canvas = Canvas.createCanvas(1024, 500);
 			const ctx = canvas.getContext('2d');
@@ -59,12 +40,12 @@ module.exports = async (client, member) => {
 			const background = await Canvas.loadImage('./pictures/client_Ban.png');
 			ctx.drawImage(background, 0, 0, 1024, 500);
 
-			ctx.font = '42px sans-serif';
+			ctx.font = '42px arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText(member.user.username + "#" + member.user.discriminator, 512, 410);
 
-			ctx.font = '20px sans-serif';
+			ctx.font = '20px arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText('Avait rejoint le : ' + moment(member.joinedAt).locale('fr').format("LL"), 512, 482);
@@ -90,7 +71,7 @@ module.exports = async (client, member) => {
 			bchannel.send({
 				content: `<@${member.user.id}> a été ban\n`,
 				files: [attachment]
-			}); 
+			});
 		} else {
 			const canvas = Canvas.createCanvas(1024, 500);
 			const ctx = canvas.getContext('2d');
@@ -98,12 +79,12 @@ module.exports = async (client, member) => {
 			const background = await Canvas.loadImage('./pictures/client_Sortie_red.png');
 			ctx.drawImage(background, 0, 0, 1024, 500);
 
-			ctx.font = '42px sans-serif';
+			ctx.font = '42px arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText(member.user.username + "#" + member.user.discriminator, 512, 410);
 
-			ctx.font = '20px sans-serif';
+			ctx.font = '20px arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText('Avait rejoint le : ' + moment(member.joinedAt).locale('fr').format("LL"), 512, 482);
@@ -132,13 +113,24 @@ module.exports = async (client, member) => {
 		}
 	}
 
-	const embed = new EmbedBuilder()
-		.setColor('Red')
-		.setDescription(`**Vient de quitter le serveur.**`)
-		.setTimestamp()
-
-	logChannel.send({ content: `${member.user}`, embeds: [embed] });
-	*/
+	if(logChannel) {
+		logChannel.send({
+			embeds: [
+			  new EmbedBuilder()  
+			  .setColor("00FF00")
+			  .setAuthor({ name: member.nickname ?? member.user.username, iconURL: member.displayAvatarURL() })
+			  .setDescription([
+				`Aurevoir **${member.nickname ?? member.user.username}** ..`
+			  ].join("\n"))
+			  .setThumbnail(member.displayAvatarURL())
+			  .setTimestamp()
+			]
+		})
+	} else {
+		return console.log(`[guildMemberRemove] logChannel undefined. No channel found with ID=${client.config.static.logChannels.join_leave}`)
+	}
+	
+	
 }
 
 async function delWelcomeMessage(chan, userId) {

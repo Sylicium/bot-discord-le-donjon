@@ -59,7 +59,7 @@ module.exports = {
       await member.roles.remove(client.config.static.roles.captcha); // Captcha
       await member.roles.remove(client.config.static.roles.luEtApprouve); // Lu et Approuvé
  
-      const welcomeChannel = guild.channels.cache.get(client.config.static.channels.welcome); // welcome channel
+      const welcomeChannel = guild.channels.cache.get(client.config.static.channels.arrivee); // welcome channel
 
       const canvas = Canvas.createCanvas(1024, 500);
       const context = canvas.getContext('2d');

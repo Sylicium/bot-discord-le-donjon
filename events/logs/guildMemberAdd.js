@@ -6,9 +6,9 @@ module.exports = async (client, member) => {
     .setDescription(`**Vient de rejoindre le serveur.**`)
     .setTimestamp()
 
-  let logChannel = client.channels.cache.get(client.config.static.logChannels.welcome)
+  let logChannel = client.channels.cache.get(client.config.static.logChannels.join_leave)
   if(!logChannel) {
-    return console.log(`[guildMemberAdd] logChannel undefined. No channel found with ID=${client.config.static.logChannels.welcome}`)
+    return console.log(`[guildMemberAdd] logChannel undefined. No channel found with ID=${client.config.static.logChannels.join_leave}`)
   }
 
   logChannel.send({
