@@ -75,7 +75,8 @@ let CONFIG = {
     },
     categories: {
       animation: "1160236790104477756",
-      logs: "1159893939873136781"
+      logs: "1159893939873136781",
+      regression: "1159893165331992718"
     },
     channels: {
       arrivee: "1159895213578399885",

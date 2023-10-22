@@ -48,7 +48,11 @@ module.exports = async (client, oldState, newState) => {
       })
       if(newState.member.id == client.config.static.users.seikam) {
         le_no_micro_channel[0].send({
-          content: "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+          content: (
+            newState?.channel?.parent?.id == client.config.static.categories.regression ?
+            "https://tenor.com/view/lick-c-at-cute-tongue-out-gif-15308597"
+            : "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+          )
         }).catch(e => {
           console.log("pas envoyé:",e)
         })
@@ -92,7 +96,11 @@ module.exports = async (client, oldState, newState) => {
       })
       if(oldState.member.id == client.config.static.users.seikam) {
         le_no_micro_channel[0].send({
-          content: "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+          content: (
+            newState?.channel?.parent?.id == client.config.static.categories.regression ?
+            "https://tenor.com/view/diggah-tunnah-lion-king-dig-a-tunnel-meerkat-what-was-that-gif-27707671"
+            : "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+          )
         }).catch(e => {
           console.log("pas envoyé:",e)
         })
