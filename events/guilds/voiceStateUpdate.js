@@ -12,7 +12,7 @@ module.exports = async (client, oldState, newState) => {
   let whiteList_voiceCamera = whiteList_voiceCamera_pre.map(x => { return x.id })
   // console.log("whiteList_voiceCamera:",whiteList_voiceCamera)
 
-  if(newState.channel && newState.selfVideo) {
+  if(newState.channel && newState.selfVideo && (oldState?.channel?.id == newState?.channel?.id)) {
     if(newState.member.permissions.has(8n)) return; // 8n ADMINISTRATOR
     if(!whiteList_voiceCamera.includes(newState.channel.id)) {
       newState.member.user.send({
