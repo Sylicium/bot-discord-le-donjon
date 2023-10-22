@@ -88,6 +88,7 @@ let CONFIG = {
       selectRoles: "1159894126607740968",
       pilori: "1159895318440202433",
       ban: "1159895365424779396",
+      // Pour les no_micro auto permission avec le role c'est directement dans events/logs/voiceStateUpdate.js
     },
     voiceChannels: {
     },

@@ -14,6 +14,48 @@ module.exports = async (client, oldState, newState) => {
   // console.log("member.displayAvatarURL",member.displayAvatarURL())
   // console.log("member.user.displayAvatarURL",member.user.displayAvatarURL())
 
+
+  let all_channels_with_no_mic = [
+    {
+      name: "Bar",
+      voiceID: "1161066145453969448",
+      noMicroID: "1163904727768109056",
+      roleID: "1161065670138662963"
+    },
+    {
+      name: "Cocoon",
+      voiceID: "1165025400376795316",
+      noMicroID: "1165024738146529370",
+      roleID: "1165024794920624198"
+    },
+    {
+      name: "Chambre noire",
+      voiceID: "1161068132484526081",
+      noMicroID: "1164117124873207818",
+      roleID: "1161065752170868747"
+    }
+  ]
+
+
+  if(oldState.channelId != newState.channelId) {
+    let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(x => {
+      return x.voiceID == newState.channelId
+    })
+    if(temp1_chan_no_mic_list.length > 0){
+      let temp1_chan_no_mic = temp1_chan_no_mic_list[0]
+      newState.member.roles.add(temp1_chan_no_mic.roleID)
+    }
+    
+    let temp2_chan_no_mic_list = all_channels_with_no_mic.filter(x => {
+      return x.voiceID == oldState.channelId
+    })
+    if(temp2_chan_no_mic_list.length > 0){
+      let temp2_chan_no_mic = temp2_chan_no_mic_list[0]
+      newState.member.roles.remove(temp2_chan_no_mic.roleID)
+    }
+  }
+
+
   if (oldState.channelId === null) {
     const embed = new EmbedBuilder()
       .setTitle("Connection au channel")
