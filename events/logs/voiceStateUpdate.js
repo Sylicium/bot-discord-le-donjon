@@ -38,7 +38,7 @@ module.exports = async (client, oldState, newState) => {
 
   let specialNickname_list = [
     { id: "526528898876440608", name: "Le souffre douleur d'Angelyne" },
-    { id: "233322709604368385", name: "Hémistiche, heu Emy" },
+    { id: "233322709604368385", name: "Déesse Emy" },
     { id: "904401609939886100", name: "The Mother of Dragonjons" },
     { id: "770334301609787392", name: "Oh ! Une dév" },
     { id: "467333274314997760", name: "Le diktateur" },
