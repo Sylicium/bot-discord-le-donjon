@@ -99,7 +99,7 @@ module.exports = {
     if (!Subcommand) return interaction.reply({ content: 'Quelque chose s\'est mal passé..', ephemeral: true });
 
     const guild = client.guilds.cache.get(interaction.guild.id);
-    const channel = guild?.channels?.cache?.get(client.config.static.channels.ban_pilori);
+    const channel = guild?.channels?.cache?.get(client.config.static.channels.pilori);
     // const reportChannel = guild?.channels?.cache?.get('1111111111111111'); // Disabled
     const userId = interaction.options.getString('membre_id') || interaction?.options?.getUser('membre')?.id || null;
     const time = interaction?.options?.getString('temps') || null;
@@ -131,12 +131,12 @@ module.exports = {
 
         // reportChannel?.send({ content: `Pseudo: ${member.username}\nID: ${member.id}` });
 
-        channel.send({ content: `<@${interaction?.user?.id}> a banni ${member}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
         if (url) channel.send({ content: url });
 
         await delay(500);
 
         member.ban().then(m => {
+          channel.send({ content: `<@${interaction?.user?.id}> a banni ${member}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
           interaction?.reply({ content: 'Pilori fait!', ephemeral: true });
         }).catch(e => {
           console.log(e)
