@@ -21,6 +21,8 @@ module.exports = async (client, oldMessage, newMessage) => {
 
   try {
 
+    if(oldMessage?.content === newMessage?.content) return;
+
     let fileList = oldMessage.attachments.map(x => {
       return `[${x.name}](${x.url})`
     }).join(", ")

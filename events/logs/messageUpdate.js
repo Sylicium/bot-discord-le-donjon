@@ -4,6 +4,8 @@ const {
 
 module.exports = async (client, oldMessage, newMessage) => {
 
+  return;
+
   if (oldMessage.partial) oldMessage = await oldMessage.fetch();
   if (newMessage.partial) newMessage = await newMessage.fetch();
 
