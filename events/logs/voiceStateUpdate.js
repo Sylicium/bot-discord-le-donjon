@@ -43,7 +43,12 @@ module.exports = async (client, oldState, newState) => {
     { id: "770334301609787392", name: "Oh ! Une dév" },
     { id: "467333274314997760", name: "Le diktateur" },
     { id: "575402346591420447", name: "La salope du diktateur" },
-    { id: "959198467224387584", name: "La soubrette du Donjon" }
+    { id: "959198467224387584", name: "La soubrette du Donjon" },
+    { id: "300399893611151361", name: "Le Jaybécois" },
+    { id: "964474149793828865", name: "Un black" },
+    { id: "1085400328784060476", name: "Lakobétoise" },
+    { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },
+    { id: "411916947773587456", name: "Un bot inférieur à moi" },
   ]
 
   let specialNickname = specialNickname_list.find(x => {
