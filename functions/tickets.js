@@ -90,7 +90,7 @@ module.exports.updateTickets = async (client, interaction, type) => {
         const selected = interaction?.values ? interaction?.values[0] : "form";
         let data = {
           form: {
-            chanName: "🔷╏pseudo",
+            chanName: "🔷╏ {pseudo}",
             embedTitle: null,
             embedDesc: `Tu souhaites intégrer le Donjon ?
             Parfait !
@@ -116,34 +116,34 @@ module.exports.updateTickets = async (client, interaction, type) => {
             →`
           },
           white: {
-            chanName: "⚪╏pseudo",
+            chanName: "⚪╏ {pseudo}",
             embedTitle: "Passage chambre blanche",
             embedDesc: "Tu souhaites passer la porte de la chambre **blanche** ? Pas de soucis !\nUn membre du staff va s'occuper de ton cas. \n\nMerci pour ton attente."
           },
           black: {
-            chanName: "⚫╏pseudo",
+            chanName: "⚫╏ {pseudo}",
             embedTitle: "Passage chambre noire",
             embedDesc: "Tu souhaites passer la porte de la chambre **noire** ? Pas de soucis !\nUn membre du staff va s'occuper de ton cas. \n\nMerci pour ton attente."
           },
           red: {
-            chanName: "🔴╏pseudo",
+            chanName: "🔴╏ {pseudo}",
             embedTitle: "Passage chambre rouge",
             embedDesc: "Tu souhaites passer la porte de la chambre **rouge** ? Pas de soucis !\nUn membre du staff va s'occuper de ton cas. \n\nMerci pour ton attente."
           },
           part: {
-            chanName: "🤝╏pseudo",
+            chanName: "🤝╏ {pseudo}",
             embedTitle: "Conclure un partenariat",
             embedDesc: "Si tu souhaites conclure un partenariat avec le donjon, c'est ici !\nMerci d'envoyer un message contenant la mention de <@959198467224387584> et les éléments suivants:\n- Nom du serveur\n- Nombre de membre\n- Thème du serveur\n- Lien d'invitation (Illimité)"
           },
           prob: {
-            chanName: "⚠️╏pseudo",
+            chanName: "⚠️╏ {pseudo}",
             embedTitle: "Ticket",
             embedDesc: "Merci pour l'ouverture du ticket, je t'invite à écrire en détail la raison de l'ouverture pour qu'un membre du staff puisse s'occuper de toi le plus aisément possible.\n\nMerci pour ton attente.  "
           }
         }
 
         interaction?.guild?.channels?.create({
-          name: data[selected]?.chanName?.replace('pseudo', interaction?.user?.username),
+          name: data[selected]?.chanName?.replace('{pseudo}', interaction?.user?.username),
           parent: "1102170972884303964",
           type: ChannelType.GuildText,
           permissionOverwrites: selected === "form" ? [{
