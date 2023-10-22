@@ -69,7 +69,7 @@ async function annonce(client, oldState, newState, x) {
 
     channel?.send({ content: `**${member.nickname || member.user.username}** a quitté le channel.` });
     if (member?.id === "387972033482588161") {
-      channel?.send({ content: `https://tenor.com/view/diggah-tunnah-lion-king-dig-a-tunnel-meerkat-what-was-that-gif-27707671` });
+      channel?.send({ content: `https://tenor.com/view/bye-bye-senpai-anime-smile-gif-21114850` });
     }
   }
   if (newState) {
@@ -79,7 +79,7 @@ async function annonce(client, oldState, newState, x) {
 
     channel?.send({ content: `**${member.nickname || member.user.username}** a rejoint le channel.` });
     if (member?.id === "387972033482588161") {
-      channel?.send({ content: `https://tenor.com/view/lick-c-at-cute-tongue-out-gif-15308597` });
+      channel?.send({ content: `https://tenor.com/view/love-live-static-yoshiko-tsushima-yohane-hello-chat-gif-25595129` });
     }
   }
 }
