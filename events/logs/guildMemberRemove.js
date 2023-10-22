@@ -12,10 +12,10 @@ module.exports = async (client, member) => {
 
 	let logChannel = client.channels.cache.get(client.config.static.logChannels.join_leave)
 	  
-	const guild = interaction.guild;
+	const guild = member.guild;
 	const lchannel = guild.channels.cache.get(client.config.static.channels.depart);
 	// const logChannel = guild.channels.cache.get('1102614305771364412')
-	const bchannel = guild.channels.cache.get(client.config.static.channels.ban_pilori);
+	const bchannel = guild.channels.cache.get(client.config.static.channels.ban);
 	const wchannel = guild.channels.cache.get(client.config.static.channels.arrivee);
 
 	delWelcomeMessage(wchannel, member.user.id);
@@ -32,7 +32,10 @@ module.exports = async (client, member) => {
 	}
 	*/
 
-	if(true) { //if (user && user?.isMember) {
+
+	
+
+	if(member._roles.includes(client.config.static.roles.membre)) { //if (user && user?.isMember) {
 		if (guild.bans.cache.get(member.user.id)) {
 			const canvas = Canvas.createCanvas(1024, 500);
 			const ctx = canvas.getContext('2d');
@@ -107,10 +110,12 @@ module.exports = async (client, member) => {
 				name: 'profile-image.png'
 			});
 			lchannel.send({
-				content: "<@" + member.user.id + ">" + "est parti 😥\n",
+				content: "<@" + member.user.id + ">" + " est parti 😥\n",
 				files: [attachment]
 			});
 		}
+	} else {
+		console.log(`[/logs/guildMemberRemove.js] Un membre a quitté le discord mais il n'avais pas le role membre (${client.config.static.roles.membre})`)
 	}
 
 	if(logChannel) {
