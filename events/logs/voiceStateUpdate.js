@@ -33,6 +33,12 @@ module.exports = async (client, oldState, newState) => {
       voiceID: "1161068132484526081",
       noMicroID: "1164117124873207818",
       roleID: "1161065752170868747"
+    },
+    {
+      name: "duo",
+      voiceID: "1161066757881069568",
+      noMicroID: "1164726981976412191",
+      roleID: "1161065722022199437"
     }
   ]
 
