@@ -157,6 +157,47 @@ module.exports = {
           ephemeral: true
         })).catch(console.error);
         break
+      case 'mute':
+        const times = time?.split(' ');
+
+        var d, h, m;
+
+        for (const t of times) {
+          if (t?.toLowerCase()?.includes('d')) {
+            d = Number(t?.replace('d', '') * 86400000);
+          } else if (t?.toLowerCase()?.includes('h')) {
+            h = Number(t?.replace('h', '') * 3600000);
+          } else if (t?.toLowerCase()?.includes('m')) {
+            m = Number(t?.replace('m', '') * 60000);
+          } else {
+            return interaction.reply({ content: `Erreur de syntaxe sur le temps : ${time} => **${t}**`, ephemeral: true })
+          }
+        }
+        
+        let muteTime = (d || 0) + (h || 0) + (m || 0);
+        
+        member.send({ content: `Tu as été mute pendant ${time} par <@${interaction.user.id}>${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` }).catch(e => { })
+        channel.send({ content: `<@${interaction.user.id}> a warn ${member} pendant ${time}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` }).catch(e => { })
+
+        if (url) {
+          member.send({ content: url }).catch(e => { })
+          channel.send({ content: url }).catch(e => { })
+        }
+
+        await delay(500);
+
+        member.timeout(muteTime, reason).then(m => {
+          interaction.reply({ content: 'Mute fait!', ephemeral: true });
+        }).catch(e => {
+          console.log(e)
+          interaction.reply({
+            content: `Impossible de timeout (mute) cet utilisateur \`\`\`js\n${e}\`\`\``
+          })
+        })
+
+        break;
+
+        /*
       case 'warn':
         const times = time?.split(' ');
 
@@ -195,7 +236,7 @@ module.exports = {
           })
         })
 
-        break
+        break*/
       case 'clear':
         const n = interaction.options.getNumber('nombre');
 
