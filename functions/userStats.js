@@ -10,7 +10,26 @@ let Temp = {
   userIsMember: []
 }
 
-async function user_isMember(guild_id, user_id) {
+
+async function getUserDatas(client, guild_id, user_id) {
+  let user_datas_temp = await client.db._makeQuery(`SELECT * FROM user_stats
+  WHERE
+    guild_id=? AND user_id=?`, [
+      guild_id,
+      user_id
+  ])
+
+  if(user_datas_temp.length == 0) {
+    console.log("ERROR userStats.js > checklevelUp() user_datas is empty !")
+    return;
+  }
+
+  let user_datas = user_datas_temp[0]
+  return user_datas
+}
+
+
+async function user_isMember(client, guild_id, user_id) {
 
   // prevents too much requests to database
   let getFromTemp = Temp.userIsMember.find(x => {
@@ -19,20 +38,25 @@ async function user_isMember(guild_id, user_id) {
 
   if(getFromTemp) return getFromTemp.isMember;
 
-  let userIsMember = (await client.db._makeQuery(`SELECT isMember FROM users
+  let userIsMember_temp = (await client.db._makeQuery(`SELECT isMember FROM users
     WHERE user_id=? AND guild_id=?`, [
-      member.id,
-      interaction.guild.id,
-    ]))[0].isMember
+      user_id,
+      guild_id,
+    ]))
+
+  if(userIsMember_temp.length == 0) {
+    return false
+  }
+  let user_isMember = userIsMember_temp[0].isMember
 
   Temp.userIsMember.push({
     userID: user_id,
     guildID: guild_id,
-    isMember: true,
+    isMember: user_isMember,
     lastUpdate: Date.now()
   })
 
-  return userIsMember
+  return user_isMember
 }
 
 
@@ -43,30 +67,34 @@ module.exports = {
     if (message.author.bot) return;
     if (message.channel.type === 1 || message.channel.type === 3) return;
     
-    let userIsMember = await user_isMember(message.guild.id, message.author.id)
+    let userIsMember = await user_isMember(client, message.guild.id, message.author.id)
     if(!userIsMember) return;
 
     if (!messCooldown.has(message.author.id)) {
       messCooldown.add(message.author.id);
       client.db._makeQuery(`UPDATE user_stats
-      SET message=message+1, xp=xp+?
+      SET messages=messages+1, xp=xp+?
       WHERE user_id=? AND guild_id=?`, [
         (client.config.stats.msg.noMic.list.includes(message.channel.name)
         ? client.config.stats.msg.noMic.xp
         : client.config.stats.msg.xp),
-        message.user.id,
-        message.guild.id
-      ])
+        message.author.id,
+        message.guild.id, 222
+      ]).catch(e => {
+        console.log(e)
+      })
     } else {
       client.db._makeQuery(`UPDATE user_stats
-      SET message=message+1,
+      SET messages=messages+1
       WHERE user_id=? AND guild_id=?`, [
-        message.user.id,
-        message.guild.id
-      ])
+        message.author.id,
+        message.guild.id, 222
+      ]).catch(e => {
+        console.log(e)
+      })
     }
 
-    checklevelUp(client, user);
+    checklevelUp(client, message.guild.id, message.author.id);
 
     setTimeout(() => {
       messCooldown.delete(message.author.id);
@@ -79,7 +107,7 @@ module.exports = {
     if (reactUser.bot) return;
     if (channel.type === 1 || channel.type === 3) return;
 
-    let userIsMember = await user_isMember(message.guild.id, message.author.id)
+    let userIsMember = await user_isMember(client, channel.guild.id, reactUser.id)
     if(!userIsMember) return;
 
     if (!reactCooldown.has(reactUser.id)) {
@@ -88,21 +116,21 @@ module.exports = {
       SET react=react+1, xp=xp+?
       WHERE user_id=? AND guild_id=?`, [
         client.config.stats.react.xp,
-        message.user.id,
+        message.author.id,
         message.guild.id
       ])
     } else {
       client.db._makeQuery(`UPDATE user_stats
-      SET react=react+1,
+      SET react=react+1
       WHERE user_id=? AND guild_id=?`, [
-        message.user.id,
-        message.guild.id
+        message.author.id,
+        message.guild.id, 333
       ])
     }
 
-    checklevelUp(client, user);
+    checklevelUp(client, channel.guild.id, reactUser.id);
 
-    await user.save().catch(e => console.log(e));
+    // await user.save().catch(e => console.log(e));
 
     setTimeout(() => {
       reactCooldown.delete(reactUser.id);
@@ -114,7 +142,7 @@ module.exports = {
     if (message.author.bot) return;
     if (message.channel.type === 1 || message.channel.type === 3) return;
 
-    let userIsMember = await user_isMember(message.guild.id, message.author.id)
+    let userIsMember = await user_isMember(client, message.guild.id, message.author.id)
     if(!userIsMember) return;
 
     if (!imgCooldown.has(message.author.id)) {
@@ -123,21 +151,21 @@ module.exports = {
       SET img=img+1, xp=xp+?
       WHERE user_id=? AND guild_id=?`, [
         client.config.stats.img.xp,
-        message.user.id,
+        message.author.id,
         message.guild.id
       ])
     } else {
       client.db._makeQuery(`UPDATE user_stats
-      SET img=img+1,
+      SET img=img+1
       WHERE user_id=? AND guild_id=?`, [
-        message.user.id,
-        message.guild.id
+        message.author.id,
+        message.guild.id, 444
       ])
     }
 
-    checklevelUp(client, user);
+    checklevelUp(client, message.guild.id, message.author.id)
 
-    await user.save().catch(e => console.log(e));
+    // await user.save().catch(e => console.log(e));
 
     setTimeout(() => {
       imgCooldown.delete(message.author.id);
@@ -163,12 +191,9 @@ module.exports = {
 
       if (voiceChannel.members.size < n) return;
 
-      const user = await client.db.users.findOne({
-        userID: x.id,
-        guildID: guild.id
-      }).catch(e => { });
-
-      if (!user) return; // if (!user || !user?.isMember) return;
+      
+      let userIsMember = await user_isMember(client, guild.id, x.id)
+      if(!userIsMember) return;
 
       const member = guild.members.cache.get(x.id);
 
@@ -176,36 +201,38 @@ module.exports = {
         return x.id == x.channelId
       })
 
-      if ((voiceChannelInConfig ? voiceChannelInConfig.canEarnXP : true) && !x.selfMute && !x.selfDeaf && !x.serverDeaf && !x.serverMute && user.stats.lvl >= 10) {
+      let user_datas = await getUserDatas(client, voiceChannel.guild.id, x.id)
+
+      if ((voiceChannelInConfig ? voiceChannelInConfig.canEarnXP : true) && !x.selfMute && !x.selfDeaf && !x.serverDeaf && !x.serverMute && user_datas.level >= 10) {
         if (member._roles.includes(client.config.static.roles.porte_noire) || member._roles.includes(client.config.static.roles.porte_rouge)) {
           client.db._makeQuery(`UPDATE user_stats
           SET minutesInVoice=minutesInVoice+1, xp=xp+?
           WHERE user_id=? AND guild_id=?`, [
             client.config.stats.voc.xpBlack,
-            message.user.id,
-            message.guild.id
+            x.id,
+            voiceChannel.guild.id
           ])
         } else {
           client.db._makeQuery(`UPDATE user_stats
           SET minutesInVoice=minutesInVoice+1, xp=xp+?
           WHERE user_id=? AND guild_id=?`, [
             client.config.stats.voc.xpElse,
-            message.user.id,
-            message.guild.id
+            x.id,
+            voiceChannel.guild.id
           ])
         }
       } else {
         client.db._makeQuery(`UPDATE user_stats
         SET minutesInVoice=minutesInVoice+1`, [
           client.config.stats.voc.xpElse,
-          message.user.id,
-          message.guild.id
+          x.id,
+          voiceChannel.guild.id
         ])
       }
       
-      checklevelUp(client, user);
+      checklevelUp(client, voiceChannel.guild.id, x.id);
 
-      await user.save().catch(e => console.log(e));
+      // await user.save().catch(e => console.log(e));
     });
   },
   inviteBonus: async function (client, userID) {
@@ -250,28 +277,29 @@ module.exports = {
   }
 };
 
-async function checklevelUp(client, user) {
+async function checklevelUp(client, guild_id, user_id) {
 
+  let user_datas = await getUserDatas(client, guild_id, user_id)
 
-  if (checklevelUpCooldown.has(user.userID)) return;
-  checklevelUpCooldown.add(user.userID);
+  if (checklevelUpCooldown.has(user_id)) return;
+  checklevelUpCooldown.add(user_id);
 
-  const xpMax = (user.stats.lvl * 10 + 110) * user.stats.lvl;
+  const xpMax = (user_datas.level * 10 + 110) * user_datas.level;
 
-  if (user.stats.xp > xpMax) {
+  if (user_datas.xp > xpMax) {
     client.db._makeQuery(`UPDATE user_stats
     SET level=level+1, xp=xp+?
     WHERE user_id=? AND guild_id=?`, [
       client.config.stats.voc.xpElse,
-      message.user.id,
-      message.guild.id
+      user_id,
+      guild_id
     ])
 
-    levelUp(client, user.userID, user.stats.lvl)
+    levelUp(client, user_id, user_datas.level)
   }
 
   setTimeout(() => {
-    checklevelUpCooldown.delete(user.userID);
+    checklevelUpCooldown.delete(user_id);
   }, 5000);
 }
 
@@ -279,7 +307,7 @@ async function levelUp(client, userID, lvl) {
 
 
   const guild = client.guilds.cache.get(client.config.getCurrentGuildID());
-  const channel = guild.channels.cache.get(client.config.static.roles.level_up);
+  const channel = guild.channels.cache.get(client.config.static.channels.level_up);
   const member = guild.members.cache.get(userID) || null;
   if (!member) return;
 

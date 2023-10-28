@@ -8,7 +8,7 @@ module.exports = async (client, oldState, newState) => {
 
   //const guild = client.guilds.cache.get('1094318705883762719')
   const guild = (newState.channel ?? oldState.channel).guild
-  const channel = guild.channels.cache.get(client.config.static.logChannels.voice)
+  const channel = client.channels.cache.get(client.config.static.logChannels.voice)
   const member = oldState.member ?? newState.member
 
   // console.log("member.displayAvatarURL",member.displayAvatarURL())

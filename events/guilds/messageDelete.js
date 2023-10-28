@@ -6,7 +6,7 @@ const { updateTickets } = require("../../functions/tickets");
 const { editProfile, sendLeaderBoard } = require("../../functions/canvasCmd");
 
 module.exports = async (client, message) => {
-  let logChannel = client.channels.cache.get(client.config.static.logChannels.global)
+  let logChannel = await client.channels.cache.get(client.config.static.logChannels.global)
   if(!logChannel) {
     return console.log(`[messageDelete] logChannel undefined. No channel found with ID=${client.config.static.logChannels.global}`)
   }

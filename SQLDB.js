@@ -62,7 +62,7 @@ class Database {
                 host: 'localhost', 
                 user:'root',
                 password: 'root',
-                database: 'dibim',
+                database: 'donjon',
                 connectionLimit: 100
             })
             this._Pool = await pool
@@ -119,8 +119,7 @@ class Database {
         true, // isMember
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
-      await this._makeQuery(`INSERT INTO user_stats (user_id, guild_id, xp, messages, minutesInVoice, adminGive, react, img) VALUES (?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE
-      isMember=?`, [
+      await this._makeQuery(`INSERT INTO user_stats (user_id, guild_id, xp, messages, minutesInVoice, adminGive, react, img, level) VALUES (?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
         member_id, // user_id
         guild_id, // guild_id
         0, // xp
@@ -130,7 +129,6 @@ class Database {
         0, // react
         0, // img
         0, // level
-        true,
       ])
 
     }

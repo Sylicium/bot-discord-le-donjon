@@ -8,21 +8,22 @@ module.exports = async (client) => {
   console.log(`[BOT] Bot démarré en tant que ${client.user.tag} (${client.user.id})`)
 
   client.somef = somef
+  client.db = SQLDB
 
+  /*
   if (client.config.mongodbURL) {
     const mongoose = require("mongoose")
     mongoose.connect(client.config.mongodbURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }).then(async () => {
-      /*client.db = (...args) => {
+      client.db = (...args) => {
         if(db) {
           return db(...args)
         } else {
           return {}
         }
-      }*/
-      client.db = SQLDB
+      }
 
       client.disabledCommand = (interaction) => {
         return interaction.reply({
@@ -44,5 +45,5 @@ module.exports = async (client) => {
   } else {
     console.log("Aucun lien vers la base de donnée est inscris dans la config!");
     console.log(`${client.user.tag} est prêt sans BDD ✔`);
-  }
+  }*/
 }

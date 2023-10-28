@@ -33,7 +33,7 @@ module.exports = async (client, oldMessage, newMessage) => {
       embeds: [
         new EmbedBuilder()
           .setTitle("Message modifié")
-          .setAuthor({ name: (newMessage.author ? (newMessage.member.nickname ?? newMessage.author.username) : "Cannot resolve username") , iconURL: newMessage.author?.displayAvatarURL() })
+          .setAuthor({ name: (newMessage?.author ? (newMessage?.member?.nickname ?? newMessage?.author?.username) : "Cannot resolve username") , iconURL: newMessage.author?.displayAvatarURL() })
           .setThumbnail( (newMessage.author?.displayAvatarURL() ?? "https://discord.com/assets/6debd47ed13483642cf09e832ed0bc1b.png") )
           .setDescription([
             `Channel: <#${newMessage.channel.id}>`,

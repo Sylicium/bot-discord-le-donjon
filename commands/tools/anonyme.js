@@ -77,7 +77,7 @@ module.exports = {
 			content: `> **Message anonyme**\n\n${message}`,
 			files: fichiers
 		}).then(async (msg_anonyme) => {
-			let logChannel = await interaction.guild.channels.cache.get(client.config.static.logChannels.command_anonyme)
+			let logChannel = await client.channels.cache.get(client.config.static.logChannels.command_anonyme)
 
 			let logMessage = await logChannel.send({
 				embed: [
