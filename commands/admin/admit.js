@@ -111,6 +111,9 @@ module.exports = {
       await user.save().catch(e => console.log(e));
       */
 
+      await client.db.initMemberOnGuild(interaction.guild.id, member.id)
+      
+
       welcomeChannel.send({
         content: `${member}`,
         files: [attachment]

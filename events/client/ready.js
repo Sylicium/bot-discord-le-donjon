@@ -1,5 +1,6 @@
 
-const db = require("../../mongoDB");
+//const db = require("../../mongoDB");
+const SQLDB = require("../../SQLDB");
 const somef = require("../../someFunctions")
 
 
@@ -14,13 +15,14 @@ module.exports = async (client) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }).then(async () => {
-      client.db = (...args) => {
+      /*client.db = (...args) => {
         if(db) {
           return db(...args)
         } else {
           return {}
         }
-      }
+      }*/
+      client.db = SQLDB
 
       client.disabledCommand = (interaction) => {
         return interaction.reply({

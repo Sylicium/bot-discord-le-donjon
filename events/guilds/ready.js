@@ -15,7 +15,7 @@ module.exports = async (client) => {
 
   cron.schedule('*/10 * * * * *', () => { // Toutes les 10 secondes
     try {
-      const guild = client.guilds.cache.get('1094318705883762719');
+      const guild = client.guilds.cache.get(client.config.getCurrentGuildID());
 
       client.config.chanStats.map(x => {
         const role = guild.roles.cache.get(x.role);
@@ -49,7 +49,7 @@ module.exports = async (client) => {
     });
     */
 
-    client?.channels?.cache?.get('1094318711202140250').send({
+    client.channels.cache.get('1094318711202140250').send({
       files: [{
         attachment: Buffer.from(JSON.stringify(dtb)),
         name: 'backUp.json',

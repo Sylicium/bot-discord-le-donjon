@@ -17,6 +17,7 @@
     "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
     "emoji-regex": "^10.2.1",
+    "mariadb": "^3.2.2",
     "moment": "^2.29.4",
     "mongoose": "^7.6.0",
     "node-cron": "^3.0.2",
@@ -30,6 +31,5 @@
   "bugs": {
     "url": "https://github.com/Sylicium/bot-discord-le-donjon/issues"
   },
-  "homepage": "https://github.com/Sylicium/bot-discord-le-donjon#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/Sylicium/bot-discord-le-donjon#readme"
 }
