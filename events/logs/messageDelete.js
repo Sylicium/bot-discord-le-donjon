@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
     .setTimestamp()
 
   try {
-    message.guild.channels.cache.get(client.config.static.logChannels.messages).send({
+    client.channels.cache.get(client.config.static.logChannels.messages).send({
       embeds: [embed]
     });
   } catch (err) { }
@@ -29,7 +29,7 @@ module.exports = async (client, message) => {
         .setTimestamp()
 
       try {
-        message.guild.channels.cache.get(client.config.static.logChannels.messages).send({
+        client.channels.cache.get(client.config.static.logChannels.messages).send({
           embeds: [embed]
         });
       } catch (err) { }
