@@ -265,6 +265,7 @@ module.exports = {
         if (n > 100) return errNum(interaction);
 
         let chan = interaction.guild.channels.cache.get(interaction.channelId)
+        
         try {
           chan.bulkDelete(n, true).then(info => {
             if (info.size < n) return replyOld(interaction, n, info.size);
