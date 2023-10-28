@@ -75,6 +75,8 @@ let CONFIG = {
       channelUpdate: "1160246355927773235",
       tickets: "1160342857840869456",
       join_leave: "1160246474517512292",
+      ticketTranscript: "1160342857840869456",
+      command_anonyme: "1166487392073560144",
     },
     categories: {
       animation: "1160236790104477756",
@@ -94,7 +96,6 @@ let CONFIG = {
       selectRoles: "1159894126607740968",
       pilori: "1159895318440202433",
       ban: "1159895365424779396",
-      ticketTranscript: "1160342857840869456"
       // Pour les no_micro auto permission avec le role c'est directement dans events/logs/voiceStateUpdate.js
     },
     roles: {

@@ -77,6 +77,23 @@ module.exports = {
 			content: `> **Message anonyme**\n\n${message}`,
 			files: fichiers
 		}).then(async (msg_anonyme) => {
+			let logChannel = await interaction.guild.channels.cache.get(client.config.static.logChannels.command_anonyme)
+
+			let logMessage = await logChannel.send({
+				embed: [
+					new Discord.EmbedBuilder()
+						.setTitle("/anonyme")
+						.setAuthor({ user: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
+						.setColor("00FF00")
+						.setDescription([
+							`Membre: <@${interaction.user.id}>`,
+							`Pièces jointes: **${fichiers.length ?? 0}**`,
+							`Message: \`\`\`${message}\`\`\` `,
+						].join("\n"))
+						.setTimestamp()
+				],
+				files: fichiers
+			})
 
 			function genHex(length, capitalize=false) {
 				let str = [...Array(length)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
@@ -129,6 +146,23 @@ module.exports = {
 				if(i.customId == buttonID_discard) {
 					try {
 						await msg_anonyme.delete()
+
+						logMessage.edit({
+							embed: [
+								new Discord.EmbedBuilder()
+									.setTitle("/anonyme")
+									.setAuthor({ user: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
+									.setColor("FF0000")
+									.setDescription([
+										`❌ **Envoi annulé par le membre.**`,
+										`Membre: <@${interaction.user.id}>`,
+										`Pièces jointes: **${fichiers.length ?? 0}**`,
+										`Message: \`\`\`${message}\`\`\` `,
+									].join("\n"))
+									.setTimestamp()
+							],
+							files: fichiers
+						})
 						
 						interaction.editReply({
 							embeds: [

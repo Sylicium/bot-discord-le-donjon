@@ -221,7 +221,7 @@ module.exports.updateTickets = async (client, interaction, type) => {
         if (member._roles.includes(client.config.static.roles["."])) {
           const attachment = await discordTranscripts.createTranscript(interaction.channel);
 
-          client.channels.cache.get(client.config.static.channels.ticketTranscript).send({
+          client.channels.cache.get(client.config.static.logChannels.ticketTranscript).send({
             files: [attachment]
           }).then(msg => {
             let urlToPaste = msg.attachments.map(x => x.url)
