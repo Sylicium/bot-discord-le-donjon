@@ -76,7 +76,10 @@ let CONFIG = {
     categories: {
       animation: "1160236790104477756",
       logs: "1159893939873136781",
-      regression: "1159893165331992718"
+      regression: "1159893165331992718",
+      ticketCreate: "1159895522514063390",
+      ticketClosed: "1159895522514063390",
+      ticketArchived: "1159895522514063390",
     },
     channels: {
       arrivee: "1159895213578399885",
@@ -88,11 +91,11 @@ let CONFIG = {
       selectRoles: "1159894126607740968",
       pilori: "1159895318440202433",
       ban: "1159895365424779396",
+      ticketTranscript: "1160342857840869456"
       // Pour les no_micro auto permission avec le role c'est directement dans events/logs/voiceStateUpdate.js
     },
-    voiceChannels: {
-    },
     roles: {
+      ".": "1094318706525470908",
       membre: "1159856520289341480",
       nonVerifie: "1160239536975118436",
       captcha: "1160238993020043364",
@@ -101,6 +104,7 @@ let CONFIG = {
       porte_blanche: "1159950689355694132",
       porte_noire: "1159950621160525854",
       porte_rouge: "1160165910510845992",
+      kapott: "1132987058537902120"
     },
     voiceChannels: [
       {
@@ -117,6 +121,18 @@ let CONFIG = {
       },
       {
         id: "1160282909480079400",
+        whitelistCamera: true
+      },
+      {
+        id: "1159895568789811211",
+        whitelistCamera: true
+      },
+      {
+        id: "1162498653617934376",
+        whitelistCamera: true
+      },
+      {
+        id: "1165764310153302106",
         whitelistCamera: true
       }
     ]

@@ -23,7 +23,7 @@ module.exports = {
   description: "Crée l'embed ticket.",
   default_member_permissions: ['ManageMessages'], //['Administrator']
   async run(client, interaction) {
-    const type = interaction?.options?.getString('type');
+    const type = interaction.options.getString('type');
     updateTickets(client, interaction, type);
   }
 }

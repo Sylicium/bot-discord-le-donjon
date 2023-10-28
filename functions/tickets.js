@@ -25,15 +25,19 @@ module.exports.updateTickets = async (client, interaction, type) => {
             .setStyle(ButtonStyle?.Primary)
         );
 
-      interaction?.reply({
+      interaction.reply({
         content: 'fait',
         ephemeral: true
+      }).catch(e => {
+        console.log(e)
       })
-      interaction?.channel?.send({
+      interaction.channel.send({
         files: ["./pictures/ticket.png"],
         components: [row],
         embeds: [embed]
-      });
+      }).catch(e => {
+        console.log(e)
+      })
     } else {
       const embed = new EmbedBuilder()
         .setTitle("Ouvrir un ticket")
@@ -85,7 +89,7 @@ module.exports.updateTickets = async (client, interaction, type) => {
       });
     }
   } else {
-    switch (interaction?.customId?.slice(interaction?.customId?.indexOf('_') + 1, interaction?.customId?.lastIndexOf('_'))) {
+    switch (interaction.customId.slice(interaction.customId.indexOf('_') + 1, interaction.customId.lastIndexOf('_'))) {
       case 'create': {
         const selected = interaction?.values ? interaction?.values[0] : "form";
         let data = {
@@ -142,15 +146,15 @@ module.exports.updateTickets = async (client, interaction, type) => {
           }
         }
 
-        interaction?.guild?.channels?.create({
-          name: data[selected]?.chanName?.replace('{pseudo}', interaction?.user?.username),
-          parent: "1102170972884303964",
+        interaction.guild.channels.create({
+          name: (data[selected]?.chanName ?? "{pseudo}").replace('{pseudo}', interaction.user.username),
+          parent: client.config.static.categories.ticketCreate,
           type: ChannelType.GuildText,
           permissionOverwrites: selected === "form" ? [{
-            id: interaction?.user?.id,
+            id: interaction.user.id,
             allow: ["ViewChannel", "SendMessages", "AttachFiles", "ReadMessageHistory"]
           }, {
-            id: "1132987058537902120",
+            id: client.config.static.roles.kapott,
             allow: ["ViewChannel", "SendMessages", "AttachFiles", "ReadMessageHistory"]
           }, {
             id: interaction?.guild?.id,
@@ -159,7 +163,7 @@ module.exports.updateTickets = async (client, interaction, type) => {
             id: interaction?.user?.id,
             allow: ["ViewChannel", "SendMessages", "AttachFiles", "ReadMessageHistory"]
           }, {
-            id: "1132987058537902120",
+            id: client.config.static.roles.kapott,
             allow: ["ViewChannel", "ReadMessageHistory"],
             deny: ["SendMessages", "AttachFiles"]
           }, {
@@ -177,11 +181,12 @@ module.exports.updateTickets = async (client, interaction, type) => {
           const row = new ActionRowBuilder()
             .addComponents(
               new ButtonBuilder()
-                .setCustomId(`ticket_close_${interaction?.user?.id}`)
+                .setCustomId(`ticket_close_${interaction.user.id}`)
                 .setLabel('Fermer le ticket')
                 .setStyle(ButtonStyle.Danger)
             )
 
+            /*
           const user = await client?.db?.users?.findOne({
             userID: interaction?.user?.id,
             guildID: interaction.guild.id
@@ -195,25 +200,31 @@ module.exports.updateTickets = async (client, interaction, type) => {
           if (!user.isMember) {
             embed2.setDescription(`>>> Arrivé à **${moment(user?.join.joinedAt).locale('fr').format("LTS")}**\nCaptcha validé à **${moment(user?.join.captchedAt).locale('fr').format("LTS")}**\nRèglement validé à **${moment(user?.join.validedAt).locale('fr').format("LTS")}**`) //${user.invitedBy ? `\nInvité par <@${user.invitedBy}>` : ''}
           }
+          */
 
-          chan?.send({ content: `Salut, <@${interaction?.user?.id}>`, embeds: !user.isMember ? [embed, embed2] : [embed], components: [row] })
-          interaction?.reply({ content: `Vous venez d'ouvrir un ticket: ${chan}`, ephemeral: true })
+          const embed2 = new EmbedBuilder()
+          embed2.setDescription(`>>> Arrivé à **${moment(interaction.member.joinedAt).locale('fr').format("LTS")}**`) //${user.invitedBy ? `\nInvité par <@${user.invitedBy}>` : ''}
+
+          let the_member = interaction.member
+
+          chan.send({ content: `Salut, <@${interaction.user.id}>`, embeds: the_member._roles.includes(client.config.static.roles.membre) ? [embed, embed2] : [embed], components: [row] })
+          interaction.reply({ content: `Vous venez d'ouvrir un ticket: ${chan}`, ephemeral: true })
         }).catch(err => { console.log(err) })
 
         break
       }
       case 'close': {
-        const guild = client?.guilds?.cache?.get('1094318705883762719');
-        const member = guild?.members?.cache?.get(interaction?.user?.id);
+        const guild = client.guilds.cache.get(client.config.getCurrentGuildID());
+        const member = guild.members.cache.get(interaction.user.id);
 
 
-        if (member?._roles?.includes('1094318706525470908') || member?._roles?.includes('543844179118129163')) {
-          const attachment = await discordTranscripts?.createTranscript(interaction?.channel);
+        if (member._roles.includes(client.config.static.roles["."])) {
+          const attachment = await discordTranscripts.createTranscript(interaction.channel);
 
-          client?.channels?.cache?.get('1094318711202140250').send({
+          client.channels.cache.get(client.config.static.channels.ticketTranscript).send({
             files: [attachment]
           }).then(msg => {
-            let urlToPaste = msg?.attachments?.map(x => x.url)
+            let urlToPaste = msg.attachments.map(x => x.url)
 
             const embed = new EmbedBuilder()
               .setAuthor({
@@ -229,23 +240,25 @@ module.exports.updateTickets = async (client, interaction, type) => {
               .setDescription(`📰 Logs de votre ticket \`${interaction?.channel?.name}\`: [**Clique ici pour voir les logs**](${urlToPaste})`)
               .setTimestamp();
 
-            client?.channels?.cache?.get('1094318710430380037').send({
+            /*client.channels.cache.get('1094318710430380037').send({
               embeds: [embed]
-            });
+            });*/
 
 
-            client?.users?.cache?.get(interaction?.customId?.replace('ticket_close_', '')).send({
+            client.users.cache.get(interaction.customId.replace('ticket_close_', '')).send({
               embeds: [embed2]
             }).catch(e => { });
 
-            interaction?.channel?.send({ content: 'En cours de fermeture...' });
+            interaction.deferUpdate()
+
+            interaction.channel.send({ content: 'En cours de fermeture...' }).then(() => {}).catch(e => { console.log(e) })
 
             setTimeout(() => {
-              interaction?.channel?.delete();
+              interaction.channel.delete().then(() => {}).catch(e => { console.log(e) })
             }, 5000)
           });
         } else {
-          interaction?.reply({ content: 'Vous ne pouvez pas fermer le ticket, seul un membre du staff le peut.', ephemeral: true })
+          interaction.reply({ content: 'Vous ne pouvez pas fermer le ticket, seul un membre du staff le peut.', ephemeral: true })
         }
         break
       }
