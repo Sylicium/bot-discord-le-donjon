@@ -112,7 +112,7 @@ module.exports = async (client, oldState, newState) => {
           content: (
             newState?.channel?.parent?.id == client.config.static.categories.regression ?
             "https://tenor.com/view/lick-c-at-cute-tongue-out-gif-15308597"
-            : "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+            : "https://cdn.discordapp.com/attachments/1156047495034580992/1166083008709795940/patoune_5.gif"
           )
         }).catch(e => {
           console.log("pas envoyé:",e)
@@ -160,7 +160,7 @@ module.exports = async (client, oldState, newState) => {
           content: (
             newState?.channel?.parent?.id == client.config.static.categories.regression ?
             "https://tenor.com/view/diggah-tunnah-lion-king-dig-a-tunnel-meerkat-what-was-that-gif-27707671"
-            : "https://cdn.discordapp.com/attachments/1164697507805286440/1165021256161169459/0F3DECC.gif"
+            : "https://cdn.discordapp.com/attachments/1156047495034580992/1166082828019187783/1136331007004524584.gif"
           )
         }).catch(e => {
           console.log("pas envoyé:",e)
