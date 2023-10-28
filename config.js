@@ -57,6 +57,9 @@ let CONFIG = {
     }
   },
   static: {
+    urls: {
+      discordgg: "https://discord.gg/WCgNhceBvP"
+    },
     emojis: {
       loading: {
         tag: "<a:loading:1161357384682307615>"

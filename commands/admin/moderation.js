@@ -113,7 +113,7 @@ module.exports = {
 
     switch (Subcommand) {
       case 'kick':
-        member.send(`Tu as intégré le serveur le **${moment(member.joinedAt).locale('fr').format("LLL")}** et été expulsé pour ne pas avoir validé le règlement et/ou ouvert de ticket sur le donjon, si tu souhaites revenir, voici un lien du serveur https://discord.gg/M8ayrPf85z`).then(m => {
+        member.send(`Tu as intégré le serveur le **${moment(member.joinedAt).locale('fr').format("LLL")}** et été expulsé pour ne pas avoir validé le règlement et/ou ouvert de ticket sur le donjon, si tu souhaites revenir, voici un lien du serveur ${client.config.static.urls.discordgg}`).then(m => {
           member.kick("Retard validation règlement / non ouverture ticket.").then(m => {
             interaction.reply({ content: `Vous venez de kick <@${member.id}>.`, ephemeral: true });
           }).catch(e => {
@@ -131,13 +131,12 @@ module.exports = {
 
         // reportChannel?.send({ content: `Pseudo: ${member.username}\nID: ${member.id}` });
 
-        if (url) channel.send({ content: url });
-
         await delay(500);
 
-        member.ban().then(m => {
-          channel.send({ content: `<@${interaction?.user?.id}> a banni ${member}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
-          interaction?.reply({ content: 'Pilori fait!', ephemeral: true });
+        member.ban().then(async m => {
+          await channel.send({ content: `<@${interaction?.user?.id}> a banni ${member}${reason ? ` pour la raison suivante: \n\n\`\`\`${reason}\`\`\`` : "."}` });
+          if (url) channel.send({ content: url });
+          await interaction?.reply({ content: 'Pilori fait!', ephemeral: true });
         }).catch(e => {
           console.log(e)
           interaction.reply({
@@ -237,6 +236,8 @@ module.exports = {
         })
 
         break*/
+
+      /*
       case 'clear':
         const n = interaction.options.getNumber('nombre');
 
@@ -253,7 +254,27 @@ module.exports = {
           errDel(interaction, n);
         }
 
-        break
+        break*/
+
+      case 'clear':
+
+      
+        let n = interaction.options.getNumber('nombre');
+
+        if (n < 1) return errNum(interaction);
+        if (n > 100) return errNum(interaction);
+
+        let chan = interaction.guild.channels.cache.get(interaction.channelId)
+        try {
+          chan.bulkDelete(n, true).then(info => {
+            if (info.size < n) return replyOld(interaction, n, info.size);
+            reply(interaction, n);
+          });
+        } catch (err) {
+          errDel(interaction, n);
+        }
+
+        break;
     }
   }
 }

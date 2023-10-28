@@ -16,15 +16,19 @@ module.exports = {
   run: async (client, interaction) => {
     const member = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
 
+    const avatar  = member?.avatar
+
+    /*
     const avatar = member?.avatar ? member?.displayAvatarURL({
-      size: 2048,
+      size: 4096,
       dynamic: true,
       format: "png",
-    }) : member?.user?.displayAvatarURL({
-      size: 2048,
+    }) : member.user.displayAvatarURL({
+      size: 4096,
       dynamic: true,
       format: "png",
     });
+    */
   
   
     const embed = new EmbedBuilder()

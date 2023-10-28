@@ -7,7 +7,7 @@ module.exports = {
     default_member_permissions: ['Administrator'],    
     run: async (client, interaction) => {
        const boosters = interaction.guild.members.cache.filter((member) => member.premiumSince !== null);
-       console.log('Membres boosters :');
+       console.log('Membres boosters :',boosters);
        boosters.forEach((member) => {
         console.log(`${member.user.tag}`);
       });
