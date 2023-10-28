@@ -101,19 +101,19 @@ module.exports = {
     ctx.drawImage(boost, 382, 91, 28, 28);
 
     //nickname
-    ctx.font = '24px arial';
+    ctx.font = '24px Arial';
     ctx.fillStyle = '#ffffff';
     ctx.textAlign = "left";
     ctx.fillText(user.nickname ? user.nickname : member.user.username, 50, 195);
 
     //username
-    ctx.font = '14px arial';
+    ctx.font = '14px Arial';
     ctx.fillStyle = '#949494';
     ctx.textAlign = "left";
     ctx.fillText("@" + member.user.username, 50, 216);
 
     //XP
-    ctx.font = '14px arial';
+    ctx.font = '14px Arial';
     ctx.fillStyle = '#fff';
     ctx.textAlign = "left";
     ctx.fillText(xpAvance + ' XP', 55, 268);
@@ -131,7 +131,7 @@ module.exports = {
     ctx.fillText("#" + N + " Lvl " + x.stats.lvl, 345, 268);
 
     //Join
-    ctx.font = '14px arial';
+    ctx.font = '14px Arial';
     ctx.fillStyle = '#fff';
     ctx.textAlign = "center";
     ctx.fillText(moment(member.joinedTimestamp).locale('fr').format("ll"), 412, 268);
@@ -250,14 +250,14 @@ module.exports = {
       context.globalAlpha = 1
 
       // Rank
-      context.font = '42px Gill Sans';
+      context.font = '42px Gill Sans MT';
       context.fillStyle = '#ffffff';
       context.textAlign = "left";
       context.textBaseline = 'middle';
       context.fillText(`#${x.class + 1}`, 100, y);
 
       // Nom
-      context.font = '42px Gill Sans';
+      context.font = '42px Gill Sans MT';
       if (x.class === 0) {
         context.fillStyle = '#DA0000'; // Premier 
       } else if (x.class === 1) {
@@ -272,7 +272,7 @@ module.exports = {
       context.fillText(`• ${x.name} •`, 500, y);
 
       // Level
-      context.font = '42px Gill Sans';
+      context.font = '42px Gill Sans MT';
       context.fillStyle = '#ffffff';
       context.textAlign = "right";
       context.textBaseline = 'middle';

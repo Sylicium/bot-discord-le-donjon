@@ -196,7 +196,7 @@ module.exports = {
       },
     }
 
-    ctx.font = `${pose[Subcommand === 'rpg' ? roll : 6].font}px arial`;
+    ctx.font = `${pose[Subcommand === 'rpg' ? roll : 6].font}px Arial`;
     ctx.fillStyle = '#fff';
     ctx.textAlign = "center";
     ctx.fillText(value, pose[Subcommand === 'rpg' ? roll : 6].x, pose[Subcommand === 'rpg' ? roll : 6].y);

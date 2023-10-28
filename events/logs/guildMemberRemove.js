@@ -43,12 +43,12 @@ module.exports = async (client, member) => {
 			const background = await Canvas.loadImage('./pictures/client_Ban.png');
 			ctx.drawImage(background, 0, 0, 1024, 500);
 
-			ctx.font = '42px arial';
+			ctx.font = '42px Arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText(member.user.username + "#" + member.user.discriminator, 512, 410);
 
-			ctx.font = '20px arial';
+			ctx.font = '20px Arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText('Avait rejoint le : ' + moment(member.joinedAt).locale('fr').format("LL"), 512, 482);
@@ -82,12 +82,12 @@ module.exports = async (client, member) => {
 			const background = await Canvas.loadImage('./pictures/client_Sortie_red.png');
 			ctx.drawImage(background, 0, 0, 1024, 500);
 
-			ctx.font = '42px arial';
+			ctx.font = '42px Arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText(member.user.username + "#" + member.user.discriminator, 512, 410);
 
-			ctx.font = '20px arial';
+			ctx.font = '20px Arial';
 			ctx.fillStyle = '#ffffff';
 			ctx.textAlign = "center";
 			ctx.fillText('Avait rejoint le : ' + moment(member.joinedAt).locale('fr').format("LL"), 512, 482);

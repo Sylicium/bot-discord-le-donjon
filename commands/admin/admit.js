@@ -67,12 +67,12 @@ module.exports = {
       const background = await Canvas.loadImage('./pictures/client_Entree_red.png');
       context.drawImage(background, 0, 0, 1024, 500);
 
-      context.font = '42px Comic Sans MS';
+      context.font = '42px Arial';
       context.fillStyle = '#ffffff';
       context.textAlign = "center";
       context.fillText(member.user.username, 512, 410);
 
-      // context.font = '20px Comic Sans MS';
+      // context.font = '20px Comic Sans MS'; // not supported, replace with 'Arial' (caps count !)
       // context.fillStyle = '#ffffff';
       // context.textAlign = "center";
       // context.fillText('Compte créé le : ' + moment(member.user.createdAt).locale('fr').format("LL"), 512, 482);
