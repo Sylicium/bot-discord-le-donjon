@@ -96,6 +96,7 @@ let CONFIG = {
       selectRoles: "1159894126607740968",
       pilori: "1159895318440202433",
       ban: "1159895365424779396",
+      level_up: "1159895807886114967"
       // Pour les no_micro auto permission avec le role c'est directement dans events/logs/voiceStateUpdate.js
     },
     roles: {
@@ -113,31 +114,38 @@ let CONFIG = {
     voiceChannels: [
       {
         id: "1161068132484526081",
-        whitelistCamera: true
+        whitelistCamera: true,
+        canEarnXP: true
       },
       {
         id: "1161066757881069568",
-        whitelistCamera: true
+        whitelistCamera: true,
+        canEarnXP: true
       },
       {
         id: "1162498653617934376",
-        whitelistCamera: true
+        whitelistCamera: true,
+        canEarnXP: true
       },
       {
         id: "1160282909480079400",
-        whitelistCamera: true
+        whitelistCamera: true,
+        canEarnXP: true
       },
       {
         id: "1159895568789811211",
-        whitelistCamera: true
+        whitelistCamera: true,
+        canEarnXP: true
       },
       {
         id: "1162498653617934376",
-        whitelistCamera: true
+        whitelistCamera: true,
+        canEarnXP: true
       },
       {
         id: "1165764310153302106",
-        whitelistCamera: true
+        whitelistCamera: true,
+        canEarnXP: true
       }
     ]
   },
@@ -303,7 +311,7 @@ let CONFIG = {
       }, {
         desc: "Compliqué",
         emoji: "🤍",
-        role: "1159936494530723870",
+        role: "1159941679101522021",
         buttonCustomId: "btn_roleSelect_situation_complique"
       }, {
         desc: "Relation Libre",
