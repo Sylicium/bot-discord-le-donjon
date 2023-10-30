@@ -106,10 +106,6 @@ class Database {
         ])
     }
 
-    async tryToAddMessageXP() {
-
-    }
-
     async initMemberOnGuild(guild_id, member_id) {
         await this._makeQuery(`INSERT INTO users (user_id, guild_id, isMember) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
       isMember=?
@@ -119,7 +115,7 @@ class Database {
         true, // isMember
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
-      await this._makeQuery(`INSERT INTO user_stats (user_id, guild_id, xp, messages, minutesInVoice, adminGive, react, img, level) VALUES (?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
+      await this._makeQuery(`INSERT INTO user_stats (user_id, guild_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?,?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
         member_id, // user_id
         guild_id, // guild_id
         0, // xp
@@ -129,9 +125,26 @@ class Database {
         0, // react
         0, // img
         0, // level
+        0, // bonus
       ])
 
     }
+
+    async getUserDatas(guild_id, user_id) {
+        let user_datas_temp = await this._makeQuery(`SELECT * FROM user_stats
+        WHERE
+          guild_id=? AND user_id=?`, [
+            guild_id,
+            user_id
+        ])
+      
+        if(user_datas_temp.length == 0) {
+          return null
+        }
+      
+        let user_datas = user_datas_temp[0]
+        return user_datas
+      }
 
 
 

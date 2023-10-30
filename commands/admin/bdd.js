@@ -1,17 +1,15 @@
 const { ApplicationCommandType, ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ComponentType } = require('discord.js');
 
-const types = ["Bonus", "LVL", "XP"];
+
 const options = [{
   name: "type",
   description: "Type de statistique souhaitée.",
   type: 3,
-  choices: types.map(x => {
-    let choix = {
-      name: x,
-      value: x.toLowerCase()
-    }
-    return choix;
-  }),
+  choices: [
+    { name: "Bonus", value: "bonus" },
+    { name: "LVL", value: "level" },
+    { name: "XP", value: "xp" },
+  ],
   required: true
 }, {
   name: "valeur",
@@ -67,17 +65,15 @@ module.exports = {
   }
   ], async run(client, interaction) {
 
-
-    /****** DISABLED COMMAND ******/
-    return client.disabledCommand(interaction)
-    /****** DISABLED COMMAND ******/
-
-
-
     const Subcommand = interaction.options.getSubcommand() || null;
     if (!Subcommand) return interaction.reply({ content: 'Quelque chose s\'est mal passé..', ephemeral: true });
 
     if (Subcommand === "backup") {
+      
+      /****** DISABLED COMMAND ******/
+      return client.disabledCommand(interaction)
+      /****** DISABLED COMMAND ******/
+
       const dtb = {
         users: [],
         guilds: []
@@ -122,6 +118,11 @@ module.exports = {
         });
       });
     } else if (Subcommand === "transfer") {
+
+      /****** DISABLED COMMAND ******/
+      return client.disabledCommand(interaction)
+      /****** DISABLED COMMAND ******/
+
       const pastID = interaction.options.getString('ancien');
       const newID = interaction.options.getString('nouveau');
 
@@ -131,33 +132,46 @@ module.exports = {
         return interaction.reply({ content: "Cela s'est mal passé!" })
       });
     } else {
+
+
+
+      let _DB_queriesBuffer = []
+      function appendQuery(query, params) {
+        _DB_queriesBuffer.push([query, params])
+      }
+      async function processQueriesInBuffer() {
+        for(let i in _DB_queriesBuffer) {
+          let queryDatas = _DB_queriesBuffer[i]
+          await client.db._makeQuery(queryDatas[0], queryDatas[1])
+        }
+      }
+
+
+
       const target = interaction.options.getUser('membre');
       const type = interaction.options.getString('type');
       const value = interaction.options.getNumber('valeur');
 
-      const user = await client.db.users.findOne({
-        userID: target.id,
-        guildID: interaction.guild.id
-      }).catch(e => { });
+      const user = await client.db.getUserDatas(interaction.guild.id, target.id)
 
       if (!user) return interaction.reply({ content: `${target}, n'est pas dans la base de donnée.`, ephemeral: true });
 
-      const newXP = calculXP(await newValue(Subcommand, user.stats.lvl, value));
-      const newLvl = calculLVL(await newValue(Subcommand, user.stats.xp, value));
+      const newXP = calculXP(await newValue(Subcommand, user.level, value));
+      const newLvl = calculLVL(await newValue(Subcommand, user.xp, value));
 
       const desc = {
         give: {
-          xp: `Vous êtes sur le point de donner ${value} xp à ${target}. \n${user.stats.lvl != newLvl ? `Ceci lui fera passer niveau ${newLvl}.` : 'Ceci ne lui fera passer aucun niveau.'}`,
+          xp: `Vous êtes sur le point de donner ${value} xp à ${target}. \n${user.level != newLvl ? `Ceci lui fera passer niveau ${newLvl}.` : 'Ceci ne lui fera passer aucun niveau.'}`,
           lvl: `Vous êtes sur le point de donner ${value} lvl à ${target}.`,
-          bonus: `Vous êtes sur le point de donner ${value} points bonus à ${target}. \n${user.stats.lvl != newLvl ? `Ceci lui fera passer niveau ${newLvl}.` : 'Ceci ne lui fera passer aucun niveau.'}`
+          bonus: `Vous êtes sur le point de donner ${value} points bonus à ${target}. \n${user.level != newLvl ? `Ceci lui fera passer niveau ${newLvl}.` : 'Ceci ne lui fera passer aucun niveau.'}`
         },
         set: {
-          xp: `Vous êtes sur le point définir l'xp de ${target} sur ${value}. \n${user.stats.lvl != newLvl ? `Ceci lui fera passer niveau ${newLvl}.` : 'Ceci ne lui fera passer aucun niveau.'}`,
+          xp: `Vous êtes sur le point définir l'xp de ${target} sur ${value}. \n${user.level != newLvl ? `Ceci lui fera passer niveau ${newLvl}.` : 'Ceci ne lui fera passer aucun niveau.'}`,
           lvl: `Vous êtes sur le point de définir le lvl de ${target} sur ${value}.`,
           bonus: `Vous êtes sur le point définir le nombre de points bonus de ${target} sur ${value}. \nCeci n'affectera ni son niveau, ni son XP total.`
         },
         take: {
-          xp: `Vous êtes sur le point de retirer ${value} xp à ${target}. \n${user.stats.lvl != newLvl ? `Ceci lui re fera passer niveau ${newLvl}.` : 'Ceci ne lui fera perdre aucun niveau.'}`,
+          xp: `Vous êtes sur le point de retirer ${value} xp à ${target}. \n${user.level != newLvl ? `Ceci lui re fera passer niveau ${newLvl}.` : 'Ceci ne lui fera perdre aucun niveau.'}`,
           lvl: `Vous êtes sur le point de retirer ${value} lvl à ${target}`,
           bonus: `Vous êtes sur le point de retirer ${value} point bonus à ${target}.\nCeci n'affectera ni son niveau, ni son XP total.\nImpossible d'aller dans le négatif ^^.`
         }
@@ -183,39 +197,107 @@ module.exports = {
       switch (Subcommand) {
         case 'give': {
           if (type === "lvl") {
-            user.stats.lvl += value;
-            user.stats.xp = newXP;
+            appendQuery(`UPDATE user_stats
+            SET level=level+?, xp=?
+            WHERE user_id=? AND guild_id=?`, [
+              value,
+              newXP,
+              user_id,
+              guild_id
+            ])
           } else {
-            if (type === "bonus")
-              user.stats.bonus += value;
-            user.stats.lvl = newLvl;
-            user.stats.xp += value;
+            if (type === "bonus") {
+              appendQuery(`UPDATE user_stats
+              SET level=level+?, xp=?, bonus=bonus+?
+              WHERE user_id=? AND guild_id=?`, [
+                newLvl,
+                value,
+                value,
+                user_id,
+                guild_id
+              ])
+            } else {
+              appendQuery(`UPDATE user_stats
+              SET level=level+?, xp=?
+              WHERE user_id=? AND guild_id=?`, [
+                newLvl,
+                value,
+                user_id,
+                guild_id
+              ])
+            }
+            
           }
           break
         }
         case 'set': {
           if (type === "lvl") {
-            user.stats.lvl = value;
-            user.stats.xp = newXP;
+            appendQuery(`UPDATE user_stats
+            SET level=?, xp=?
+            WHERE user_id=? AND guild_id=?`, [
+              value,
+              newXP,
+              user_id,
+              guild_id
+            ])
           } else if (type === "xp") {
-            user.stats.lvl = newLvl;
-            user.stats.xp = value;
+            appendQuery(`UPDATE user_stats
+            SET level=?, xp=?
+            WHERE user_id=? AND guild_id=?`, [
+              newLvl,
+              value,
+              user_id,
+              guild_id
+            ])
           } else if (type === "bonus") {
-            user.stats.bonus = value;
+            appendQuery(`UPDATE user_stats
+            SET bonus=?
+            WHERE user_id=? AND guild_id=?`, [
+              value,
+              user_id,
+              guild_id
+            ])
           }
           break
         }
         case 'take': {
           if (type === "lvl") {
-            user.stats.lvl -= value;
-            user.stats.xp = newXP;
+            appendQuery(`UPDATE user_stats
+            SET level=level-?, xp=?
+            WHERE user_id=? AND guild_id=?`, [
+              value,
+              newXP,
+              user_id,
+              guild_id
+            ])
           } else if (type === "xp") {
-            user.stats.lvl = newLvl;
-            user.stats.xp -= value;
+            appendQuery(`UPDATE user_stats
+            SET level=?, xp=xp-?
+            WHERE user_id=? AND guild_id=?`, [
+              newLvl,
+              value,
+              user_id,
+              guild_id
+            ])
           } else if (type === "bonus") {
-            user.stats.bonus < value ?
-              user.stats.bonus = 0 :
-              user.stats.bonus -= value;
+
+            if(user.bonus < value) {
+              appendQuery(`UPDATE user_stats
+              SET bonus=?
+              WHERE user_id=? AND guild_id=?`, [
+                0,
+                user_id,
+                guild_id
+              ])
+            } else {
+              appendQuery(`UPDATE user_stats
+              SET bonus=bonus-?
+              WHERE user_id=? AND guild_id=?`, [
+                value,
+                user_id,
+                guild_id
+              ])
+            }
           }
           break
         }
@@ -226,7 +308,8 @@ module.exports = {
 
       collector.on('collect', async i => {
         if (i.customId === "confirm") {
-          await user.save().catch(e => console.log(e));
+          //await user.save().catch(e => console.log(e));
+          await processQueriesInBuffer()
           i.reply({ content: `> **Action exécutée.**` });
 
           const confirm = new ButtonBuilder()

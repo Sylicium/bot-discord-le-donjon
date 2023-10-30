@@ -12,20 +12,7 @@ let Temp = {
 
 
 async function getUserDatas(client, guild_id, user_id) {
-  let user_datas_temp = await client.db._makeQuery(`SELECT * FROM user_stats
-  WHERE
-    guild_id=? AND user_id=?`, [
-      guild_id,
-      user_id
-  ])
-
-  if(user_datas_temp.length == 0) {
-    console.log("ERROR userStats.js > checklevelUp() user_datas is empty !")
-    return;
-  }
-
-  let user_datas = user_datas_temp[0]
-  return user_datas
+  return await client.db.getUserDatas(guild_id, user_id)
 }
 
 
