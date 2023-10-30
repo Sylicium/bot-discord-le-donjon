@@ -1,9 +1,8 @@
 const Discord = require('discord.js');
 
 module.exports = async (client, oldChannel, newChannel) => {
-  console.log("channel Update", oldChannel, newChannel)
 
-
+  //console.log("channel Update", oldChannel, newChannel)
 
   /** Récuère le log correspondant à l'évent channelUpdate émit actuel **/
   newChannel._getLog = async () => {

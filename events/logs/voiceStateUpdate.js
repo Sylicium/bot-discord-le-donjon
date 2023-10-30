@@ -178,7 +178,7 @@ module.exports = async (client, oldState, newState) => {
 
 
   } else if (oldState.streaming != newState.streaming) {
-    console.log("streaming:",newState)
+    //console.log("streaming:",newState)
     if (newState.streaming) {
       const embed = new EmbedBuilder()
         .setTitle("Début de stream")
