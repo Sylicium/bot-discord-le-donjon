@@ -7,7 +7,7 @@ const options = [{
   type: 3,
   choices: [
     { name: "Bonus", value: "bonus" },
-    { name: "LVL", value: "level" },
+    { name: "LVL", value: "lvl" },
     { name: "XP", value: "xp" },
   ],
   required: true

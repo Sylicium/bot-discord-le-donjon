@@ -16,8 +16,8 @@ module.exports = async (client, oldMessage, newMessage) => {
     return console.log(`[messageUpdate] logChannel undefined. No channel found with ID=${client.config.static.logChannels.global}`)
   }
 
-  console.log("oldMessage:",oldMessage)
-  console.log("newMessage:",newMessage)
+  //console.log("oldMessage:",oldMessage)
+  //console.log("newMessage:",newMessage)
 
   try {
 

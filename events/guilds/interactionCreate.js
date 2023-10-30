@@ -72,7 +72,7 @@ module.exports = async (client, interaction) => {
 
     let all_config_role_list_ONLY_ROLES = _getAllRolesOnly()
 
-    console.log("all_config_role_list",all_config_role_list)
+    //console.log("all_config_role_list",all_config_role_list)
 
     function getAllRolesFromType(type) {
       let temp1 = all_config_role_list.filter(x => x.type == type)
