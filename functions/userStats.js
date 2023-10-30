@@ -103,15 +103,15 @@ module.exports = {
       SET react=react+1, xp=xp+?
       WHERE user_id=? AND guild_id=?`, [
         client.config.stats.react.xp,
-        message.author.id,
-        message.guild.id
+        reactUser.id,
+        channel.guild.id
       ])
     } else {
       client.db._makeQuery(`UPDATE user_stats
       SET react=react+1
       WHERE user_id=? AND guild_id=?`, [
-        message.author.id,
-        message.guild.id, 333
+        reactUser.id,
+        channel.guild.id, 333
       ])
     }
 
