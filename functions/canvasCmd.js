@@ -56,7 +56,7 @@ module.exports = {
     
     const member = interaction.guild.members.cache.get(user.id);
 
-    const userDatas = await client.db.getUserDatas(interaction.guild.id, user.id)
+    const userDatas = await client.db.getUserDatas(user.id)
 
 
     let nextXp = (Number(userDatas.level) * 10 + 110) * Number(userDatas.level);

@@ -11,16 +11,16 @@ let Temp = {
 }
 
 
-async function getUserDatas(client, guild_id, user_id) {
-  return await client.db.getUserDatas(guild_id, user_id)
+async function getUserDatas(client, user_id) {
+  return await client.db.getUserDatas(user_id)
 }
 
 
-async function user_isMember(client, guild_id, user_id) {
+async function user_isMember(client, user_id) {
 
   // prevents too much requests to database
   let getFromTemp = Temp.userIsMember.find(x => {
-    return x.userID == user_id && x.guildID == guild_id
+    return x.userID == user_id
   })
 
   if(getFromTemp) return getFromTemp.isMember;
@@ -61,21 +61,19 @@ module.exports = {
       messCooldown.add(message.author.id);
       client.db._makeQuery(`UPDATE user_stats
       SET messages=messages+1, xp=xp+?
-      WHERE user_id=? AND guild_id=?`, [
+      WHERE user_id=?`, [
         (client.config.stats.msg.noMic.list.includes(message.channel.name)
         ? client.config.stats.msg.noMic.xp
         : client.config.stats.msg.xp),
-        message.author.id,
-        message.guild.id, 222
+        message.author.id
       ]).catch(e => {
         console.log(e)
       })
     } else {
       client.db._makeQuery(`UPDATE user_stats
       SET messages=messages+1
-      WHERE user_id=? AND guild_id=?`, [
-        message.author.id,
-        message.guild.id, 222
+      WHERE user_id=?`, [
+        message.author.id
       ]).catch(e => {
         console.log(e)
       })
@@ -101,17 +99,15 @@ module.exports = {
       reactCooldown.add(reactUser.id);
       client.db._makeQuery(`UPDATE user_stats
       SET react=react+1, xp=xp+?
-      WHERE user_id=? AND guild_id=?`, [
+      WHERE user_id=?`, [
         client.config.stats.react.xp,
-        reactUser.id,
-        channel.guild.id
+        reactUser.id
       ])
     } else {
       client.db._makeQuery(`UPDATE user_stats
       SET react=react+1
-      WHERE user_id=? AND guild_id=?`, [
-        reactUser.id,
-        channel.guild.id, 333
+      WHERE user_id=?`, [
+        reactUser.id
       ])
     }
 
@@ -136,17 +132,15 @@ module.exports = {
       imgCooldown.add(message.author.id);
       client.db._makeQuery(`UPDATE user_stats
       SET img=img+1, xp=xp+?
-      WHERE user_id=? AND guild_id=?`, [
+      WHERE user_id=?`, [
         client.config.stats.img.xp,
-        message.author.id,
-        message.guild.id
+        message.author.id
       ])
     } else {
       client.db._makeQuery(`UPDATE user_stats
       SET img=img+1
-      WHERE user_id=? AND guild_id=?`, [
+      WHERE user_id=?`, [
         message.author.id,
-        message.guild.id, 444
       ])
     }
 
@@ -188,32 +182,30 @@ module.exports = {
         return x.id == x.channelId
       })
 
-      let user_datas = await getUserDatas(client, voiceChannel.guild.id, x.id)
+      let user_datas = await getUserDatas(client, x.id)
 
       if ((voiceChannelInConfig ? voiceChannelInConfig.canEarnXP : true) && !x.selfMute && !x.selfDeaf && !x.serverDeaf && !x.serverMute && user_datas.level >= 10) {
         if (member._roles.includes(client.config.static.roles.porte_noire) || member._roles.includes(client.config.static.roles.porte_rouge)) {
           client.db._makeQuery(`UPDATE user_stats
           SET minutesInVoice=minutesInVoice+1, xp=xp+?
-          WHERE user_id=? AND guild_id=?`, [
+          WHERE user_id=?`, [
             client.config.stats.voc.xpBlack,
-            x.id,
-            voiceChannel.guild.id
+            x.id
           ])
         } else {
           client.db._makeQuery(`UPDATE user_stats
           SET minutesInVoice=minutesInVoice+1, xp=xp+?
-          WHERE user_id=? AND guild_id=?`, [
+          WHERE user_id=?`, [
             client.config.stats.voc.xpElse,
-            x.id,
-            voiceChannel.guild.id
+            x.id
           ])
         }
       } else {
         client.db._makeQuery(`UPDATE user_stats
-        SET minutesInVoice=minutesInVoice+1`, [
+        SET minutesInVoice=minutesInVoice+1
+        WHERE user_id=?`, [
           client.config.stats.voc.xpElse,
-          x.id,
-          voiceChannel.guild.id
+          x.id
         ])
       }
       
@@ -229,7 +221,7 @@ module.exports = {
   createUser: async function (client, member, inviter) {
 
 
-    await client.db.initMemberOnGuild(member.guild.id, member.id)
+    await client.db.initMember(member.id)
 
     /****** DISABLED CODE ******/
     console.warn("DISABLED CODE. userStats.js:177")
@@ -268,7 +260,7 @@ module.exports = {
 
 async function checklevelUp(client, guild_id, user_id) {
 
-  let user_datas = await getUserDatas(client, guild_id, user_id)
+  let user_datas = await getUserDatas(client, user_id)
 
   if (checklevelUpCooldown.has(user_id)) return;
   checklevelUpCooldown.add(user_id);
@@ -278,10 +270,9 @@ async function checklevelUp(client, guild_id, user_id) {
   if (user_datas.xp > xpMax) {
     client.db._makeQuery(`UPDATE user_stats
     SET level=level+1, xp=xp+?
-    WHERE user_id=? AND guild_id=?`, [
+    WHERE user_id=?`, [
       client.config.stats.voc.xpElse,
       user_id,
-      guild_id
     ])
 
     levelUp(client, user_id, user_datas.level)

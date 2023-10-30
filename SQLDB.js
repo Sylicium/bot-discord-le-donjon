@@ -93,18 +93,16 @@ class Database {
 
     __get__() { return this }
 
-    async initMemberOnGuild(guild_id, member_id) {
-        await this._makeQuery(`INSERT INTO users (user_id, guild_id, isMember) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
+    async initMember(member_id) {
+        await this._makeQuery(`INSERT INTO users (user_id, isMember) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
       isMember=?
       `, [
         member_id,
-        guild_id,
         true, // isMember
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
-      await this._makeQuery(`INSERT INTO user_stats (user_id, guild_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?,?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
+      await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?,?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
         member_id, // user_id
-        guild_id, // guild_id
         0, // xp
         0, // messages
         0, // hoursInVoice
@@ -119,15 +117,13 @@ class Database {
 
     /**
      * f(): Récupère toutes les statistiques d'un utilisateur donnée sur une guilde
-     * @param {*} guild_id - Identifiant de la guilde 
      * @param {*} user_id - Identifiant de l'utilisateur
      * @returns Object
      */
-    async getUserDatas(guild_id, user_id) {
+    async getUserDatas(user_id) {
         let user_datas_temp = await this._makeQuery(`SELECT * FROM user_stats
         WHERE
-          guild_id=? AND user_id=?`, [
-            guild_id,
+          user_id=?`, [
             user_id
         ])
       
@@ -136,8 +132,7 @@ class Database {
 
     async getUser(guild_id, user_id) {
         let user_datas_temp = await this._makeQuery(`SELECT * FROM users
-        WHERE guild_id=? AND user_id=?`, [
-            guild_id,
+        WHERE user_id=?`, [
             user_id
         ])
         return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
