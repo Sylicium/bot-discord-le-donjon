@@ -27,7 +27,7 @@ module.exports = {
   name: 'bdd',
   type: ApplicationCommandType.ChatInput,
   description: 'Groupe de commands disponibles pour l\' intéraction avec la bdd',
-  default_member_permissions: ['Administrator'],
+  //default_member_permissions: ['Administrator'],
   options: [{
     name: "backup",
     description: 'Crée une backUp de la base de donnée à l\'état actuel.',
@@ -151,6 +151,9 @@ module.exports = {
       const target = interaction.options.getUser('membre');
       const type = interaction.options.getString('type');
       const value = interaction.options.getNumber('valeur');
+
+      const user_id = target.id
+      const guild_id = interaction.guild.id
 
       const user = await client.db.getUserDatas(interaction.guild.id, target.id)
 
@@ -307,6 +310,12 @@ module.exports = {
       const collector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 30000 });
 
       collector.on('collect', async i => {
+        if(i.user.id != interaction.user.id) {
+          return interaction.reply({
+            content: `Cette interaction n'est pas pour vous !`,
+            ephemeral: true
+          })
+        }
         if (i.customId === "confirm") {
           //await user.save().catch(e => console.log(e));
           await processQueriesInBuffer()
