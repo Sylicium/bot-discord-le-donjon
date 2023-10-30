@@ -93,19 +93,6 @@ class Database {
 
     __get__() { return this }
 
-
-
-    async getStatisticOfMemberInGuild(user_id, guild_id) {
-        return await this._makeQuery(`SELECT *
-        FROM statistics
-        WHERE
-            user_id=?
-            AND guild_id=?`, [
-            user_id,
-            guild_id
-        ])
-    }
-
     async initMemberOnGuild(guild_id, member_id) {
         await this._makeQuery(`INSERT INTO users (user_id, guild_id, isMember) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
       isMember=?
@@ -130,6 +117,12 @@ class Database {
 
     }
 
+    /**
+     * f(): Récupère toutes les statistiques d'un utilisateur donnée sur une guilde
+     * @param {*} guild_id - Identifiant de la guilde 
+     * @param {*} user_id - Identifiant de l'utilisateur
+     * @returns Object
+     */
     async getUserDatas(guild_id, user_id) {
         let user_datas_temp = await this._makeQuery(`SELECT * FROM user_stats
         WHERE
@@ -138,14 +131,17 @@ class Database {
             user_id
         ])
       
-        if(user_datas_temp.length == 0) {
-          return null
-        }
-      
-        let user_datas = user_datas_temp[0]
-        return user_datas
-      }
+        return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
+    }
 
+    async getUser(guild_id, user_id) {
+        let user_datas_temp = await this._makeQuery(`SELECT * FROM users
+        WHERE guild_id=? AND user_id=?`, [
+            guild_id,
+            user_id
+        ])
+        return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
+    }
 
 
 }
