@@ -2,6 +2,7 @@
 //const db = require("../../mongoDB");
 const SQLDB = require("../../SQLDB");
 const somef = require("../../someFunctions")
+const Discord = require("discord.js")
 
 
 module.exports = async (client) => {
