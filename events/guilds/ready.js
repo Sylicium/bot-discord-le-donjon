@@ -32,12 +32,12 @@ module.exports = async (client) => {
   });
 
   cron.schedule('0 * * * *', async () => { // Toutes les heures
+    /*
     const dtb = {
       users: [],
       guilds: []
     };
 
-    /*
     const users = await client.db.users.find().catch(e => { });
     users.map(x => {
       dtb.users.push(x);
@@ -49,7 +49,13 @@ module.exports = async (client) => {
     });
     */
 
-    client.channels.cache.get('1094318711202140250').send({
+    const dtb = {
+      users: ( await client.db._makeQuery(`SELECT * FROM users`) ),
+      userstats: ( await client.db._makeQuery(`SELECT * FROM user_stats`) )
+    };
+
+
+    client.channels.cache.get(client.config.static.channels.backupSend).send({
       files: [{
         attachment: Buffer.from(JSON.stringify(dtb)),
         name: 'backUp.json',
@@ -63,7 +69,8 @@ module.exports = async (client) => {
         .setColor(0x44ff44)
         .setTimestamp();
 
-      client?.channels?.cache?.get('1135231474849820752').send({
+        
+      client?.channels?.cache?.get(client.config.static.channels.backupSend).send({
         embeds: [embed],
         components: [
           new ActionRowBuilder()
@@ -76,6 +83,8 @@ module.exports = async (client) => {
             )
         ]
       });
+      
+
     });
   });
 

@@ -19,7 +19,7 @@ module.exports = async (client, interaction) => {
       // pas de return car fin du code exécuté plus tard, notamment pour ajouter le role membre
     }
 
-    console.log(`interaction customId (${interaction.customId}):`,interaction)
+    // console.log(`interaction customId (${interaction.customId}):`,interaction)
 
     /**
      * f() : Retourne true si au moins 1 élément se trouve dans les 2 listes

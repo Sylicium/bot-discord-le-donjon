@@ -95,7 +95,8 @@ let CONFIG = {
       selectRoles: "1159894126607740968",
       pilori: "1159895318440202433",
       ban: "1159895365424779396",
-      level_up: "1159895807886114967"
+      level_up: "1159895807886114967",
+      backupSend: "1168652927292932317",
       // Pour les no_micro auto permission avec le role c'est directement dans events/logs/voiceStateUpdate.js
     },
     roles: {
