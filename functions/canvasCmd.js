@@ -46,58 +46,52 @@ module.exports = {
   },
   sendProfile: async function (client, interaction) {
 
-  /****** DISABLED CODE ******/
-  console.warn("DISABLED CODE. canvasCmd.js:48")
-  return;
-  /****** DISABLED CODE ******/
 
     const guild = client.guilds.cache.get(interaction.guild.id);
     const user = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
-    const users = await client.db.users.find({ guildID: interaction.guild.id }).catch(e => { console.log(e) });
+    const users = await client.db._makeQuery(`SELECT * FROM users
+    WHERE guild_id=?`,[
+      interaction.guild.id
+    ])
+    
     const member = interaction.guild.members.cache.get(user.id);
 
-    function checkUser(x) {
-      return x.userID === user.id;
-    }
+    const userDatas = await client.db.getUserDatas(interaction.guild.id, user.id)
 
-    let x = users.find(checkUser) || null;
-    if (x === null) return interaction.reply({
-      content: 'Il semblerait que l\'utilisateur ne soit pas présent dans la Base de donnée.',
-      ephemeral: true
-    });
 
-    let nextXp = (x.stats.lvl * 10 + 110) * x.stats.lvl;
-    let lastXp = ((x.stats.lvl - 1) * 10 + 110) * (x.stats.lvl - 1);
-    let xpPurcent = (x.stats.xp - lastXp) / (nextXp - lastXp);
-    let xpAvance = `${x.stats.xp - lastXp}/${nextXp - lastXp}`;
+    let nextXp = (Number(userDatas.level) * 10 + 110) * Number(userDatas.level);
+    let lastXp = ((Number(userDatas.level) - 1) * 10 + 110) * (Number(userDatas.level) - 1);
+    let xpPurcent = (Number(userDatas.xp) - lastXp) / (nextXp - lastXp);
+    let xpAvance = `${Number(userDatas.xp) - lastXp}/${nextXp - lastXp}`;
 
     let classement = users.sort(function (a, b) {
-      if (a.stats.lvl === b.stats.lvl) {
-        return b.stats.xp > a.stats.xp ? 1 : -1;
+      if (a.level === b.level) {
+        if(a.xp == b.xp) return 0
+        return b.xp > a.xp ? 1 : -1;
       }
-      return a.stats.lvl < b.stats.lvl ? 1 : -1;
+      return a.level < b.level ? 1 : -1;
     });
     let classArr = [];
     classement.map(x => {
-      const m = guild.members.cache.get(x.userID);
+      const m = guild.members.cache.get(userDatas.user_id);
       if (!m) return;
-      classArr.push(x.userID);
+      classArr.push(userDatas.user_id);
     });
-    let N = classArr.indexOf(x.userID) + 1
+    let N = classArr.indexOf(userDatas.user_id) + 1
 
     const canvas = Canvas.createCanvas(512, 300);
     const ctx = canvas.getContext('2d');
 
-    const banner = await Canvas.loadImage(`./pictures/profile/banner${x.profile.banner}.png`)
+    const banner = await Canvas.loadImage(`./pictures/profile/banner${userDatas?.profile?.base || 1}.png`)
     ctx.drawImage(banner, 0, 0, 512, 75);
 
-    const base = await Canvas.loadImage(`./pictures/profile/base${x.profile.base}.png`)
+    const base = await Canvas.loadImage(`./pictures/profile/base${userDatas?.profile?.base || 1}.png`)
     ctx.drawImage(base, 0, 0, 512, 300);
 
     const barres = await Canvas.loadImage('./pictures/profile/barres.png')
     ctx.drawImage(barres, 0, 0, 512, 300);
 
-    const boost = await Canvas.loadImage(member._roles.includes('1101945612523548672') ? './pictures/profile/boost.png' : './pictures/profile/noBoost.png')
+    const boost = await Canvas.loadImage(member._roles.includes(client.config.static.roles.booster) ? './pictures/profile/boost.png' : './pictures/profile/noBoost.png')
     ctx.drawImage(boost, 382, 91, 28, 28);
 
     //nickname
@@ -128,7 +122,7 @@ module.exports = {
     ctx.font = '14px arial';
     ctx.fillStyle = '#fff';
     ctx.textAlign = "right";
-    ctx.fillText("#" + N + " Lvl " + x.stats.lvl, 345, 268);
+    ctx.fillText("#" + N + " Lvl " + Number(userDatas.level), 345, 268);
 
     //Join
     ctx.font = '14px Arial';
@@ -136,9 +130,9 @@ module.exports = {
     ctx.textAlign = "center";
     ctx.fillText(moment(member.joinedTimestamp).locale('fr').format("ll"), 412, 268);
 
-    const white = await Canvas.loadImage(member.roles.cache.has('1094318706378682382') ? './pictures/profile/blanc.png' : './pictures/profile/gris.png')
-    const black = await Canvas.loadImage(member.roles.cache.has('1094318706403836057') ? './pictures/profile/noir.png' : './pictures/profile/gris.png')
-    const red = await Canvas.loadImage(member.roles.cache.has('1094318706437410906') ? './pictures/profile/rouge.png' : './pictures/profile/gris.png')
+    const white = await Canvas.loadImage(member.roles.cache.has(client.config.static.roles.porte_blanche) ? './pictures/profile/blanc.png' : './pictures/profile/gris.png')
+    const black = await Canvas.loadImage(member.roles.cache.has(client.config.static.roles.porte_noire) ? './pictures/profile/noir.png' : './pictures/profile/gris.png')
+    const red = await Canvas.loadImage(member.roles.cache.has(client.config.static.roles.porte_rouge) ? './pictures/profile/rouge.png' : './pictures/profile/gris.png')
 
     ctx.drawImage(white, 424, 95, 85 / 4.2, 105 / 4.2);
     ctx.drawImage(black, 449, 95, 85 / 4.2, 105 / 4.2);
