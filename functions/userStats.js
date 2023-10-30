@@ -16,7 +16,7 @@ async function getUserDatas(client, user_id) {
 }
 
 
-async function user_isMember(client, user_id) {
+async function user_isMember(client, guild_id, user_id) {
 
   // prevents too much requests to database
   let getFromTemp = Temp.userIsMember.find(x => {
@@ -25,16 +25,9 @@ async function user_isMember(client, user_id) {
 
   if(getFromTemp) return getFromTemp.isMember;
 
-  let userIsMember_temp = (await client.db._makeQuery(`SELECT isMember FROM users
-    WHERE user_id=? AND guild_id=?`, [
-      user_id,
-      guild_id,
-    ]))
+  let DBuser = client.db.getUser(guild_id, user_id)
 
-  if(userIsMember_temp.length == 0) {
-    return false
-  }
-  let user_isMember = userIsMember_temp[0].isMember
+  let user_isMember = !DBuser ? false : !!DBuser.isMember
 
   Temp.userIsMember.push({
     userID: user_id,
