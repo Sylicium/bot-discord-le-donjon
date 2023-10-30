@@ -16,7 +16,7 @@ module.exports = {
   run: async (client, interaction) => {
     const member = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
 
-    const avatar  = member?.avatar
+    const avatar  = (member ?? interaction.user).displayAvatarUrl().replace(".webp",".png?size=4096")
 
     /*
     const avatar = member?.avatar ? member?.displayAvatarURL({

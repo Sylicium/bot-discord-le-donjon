@@ -31,5 +31,6 @@
   "bugs": {
     "url": "https://github.com/Sylicium/bot-discord-le-donjon/issues"
   },
-  "homepage": "https://github.com/Sylicium/bot-discord-le-donjon#readme"
+  "homepage": "https://github.com/Sylicium/bot-discord-le-donjon#readme",
+  "devDependencies": {}
 }
