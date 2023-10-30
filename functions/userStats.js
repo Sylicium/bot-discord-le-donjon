@@ -242,6 +242,8 @@ module.exports = {
   createUser: async function (client, member, inviter) {
 
 
+    await client.db.initMemberOnGuild(member.guild.id, member.id)
+
     /****** DISABLED CODE ******/
     console.warn("DISABLED CODE. userStats.js:177")
     return;
