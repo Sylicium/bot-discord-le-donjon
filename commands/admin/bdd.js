@@ -311,7 +311,7 @@ module.exports = {
 
       collector.on('collect', async i => {
         if(i.user.id != interaction.user.id) {
-          return interaction.reply({
+          return i.reply({
             content: `Cette interaction n'est pas pour vous !`,
             ephemeral: true
           })
