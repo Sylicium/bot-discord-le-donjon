@@ -155,7 +155,7 @@ module.exports = {
       const user_id = target.id
       const guild_id = interaction.guild.id
 
-      const user = await client.db.getUserDatas(interaction.guild.id, target.id)
+      const user = await client.db.getUserDatas(target.id)
 
       if (!user) return interaction.reply({ content: `${target}, n'est pas dans la base de donnée.`, ephemeral: true });
 
@@ -202,31 +202,28 @@ module.exports = {
           if (type === "lvl") {
             appendQuery(`UPDATE user_stats
             SET level=level+?, xp=?
-            WHERE user_id=? AND guild_id=?`, [
+            WHERE user_id=?`, [
               value,
               newXP,
-              user_id,
-              guild_id
+              user_id
             ])
           } else {
             if (type === "bonus") {
               appendQuery(`UPDATE user_stats
               SET level=level+?, xp=?, bonus=bonus+?
-              WHERE user_id=? AND guild_id=?`, [
+              WHERE user_id=?`, [
                 newLvl,
                 value,
                 value,
-                user_id,
-                guild_id
+                user_id
               ])
             } else {
               appendQuery(`UPDATE user_stats
               SET level=level+?, xp=?
-              WHERE user_id=? AND guild_id=?`, [
+              WHERE user_id=?`, [
                 newLvl,
                 value,
-                user_id,
-                guild_id
+                user_id
               ])
             }
             
@@ -237,28 +234,25 @@ module.exports = {
           if (type === "lvl") {
             appendQuery(`UPDATE user_stats
             SET level=?, xp=?
-            WHERE user_id=? AND guild_id=?`, [
+            WHERE user_id=?`, [
               value,
               newXP,
               user_id,
-              guild_id
             ])
           } else if (type === "xp") {
             appendQuery(`UPDATE user_stats
             SET level=?, xp=?
-            WHERE user_id=? AND guild_id=?`, [
+            WHERE user_id=?`, [
               newLvl,
               value,
-              user_id,
-              guild_id
+              user_id
             ])
           } else if (type === "bonus") {
             appendQuery(`UPDATE user_stats
             SET bonus=?
-            WHERE user_id=? AND guild_id=?`, [
+            WHERE user_id=?`, [
               value,
               user_id,
-              guild_id
             ])
           }
           break
@@ -267,38 +261,34 @@ module.exports = {
           if (type === "lvl") {
             appendQuery(`UPDATE user_stats
             SET level=level-?, xp=?
-            WHERE user_id=? AND guild_id=?`, [
+            WHERE user_id=?`, [
               value,
               newXP,
               user_id,
-              guild_id
             ])
           } else if (type === "xp") {
             appendQuery(`UPDATE user_stats
             SET level=?, xp=xp-?
-            WHERE user_id=? AND guild_id=?`, [
+            WHERE user_id=?`, [
               newLvl,
               value,
               user_id,
-              guild_id
             ])
           } else if (type === "bonus") {
 
             if(user.bonus < value) {
               appendQuery(`UPDATE user_stats
               SET bonus=?
-              WHERE user_id=? AND guild_id=?`, [
+              WHERE user_id=?`, [
                 0,
                 user_id,
-                guild_id
               ])
             } else {
               appendQuery(`UPDATE user_stats
               SET bonus=bonus-?
-              WHERE user_id=? AND guild_id=?`, [
+              WHERE user_id=?`, [
                 value,
-                user_id,
-                guild_id
+                user_id
               ])
             }
           }
