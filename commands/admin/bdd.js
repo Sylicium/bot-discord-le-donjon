@@ -27,7 +27,7 @@ module.exports = {
   name: 'bdd',
   type: ApplicationCommandType.ChatInput,
   description: 'Groupe de commands disponibles pour l\' intéraction avec la bdd',
-  //default_member_permissions: ['Administrator'],
+  default_member_permissions: ['Administrator'],
   options: [{
     name: "backup",
     description: 'Crée une backUp de la base de donnée à l\'état actuel.',
