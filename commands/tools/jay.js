@@ -23,8 +23,7 @@ module.exports = {
     description: "Arrête le sous-titrage c'est trop là t'abuse",
   }],
   run: async (client, interaction) => {
-
-
+    
     let subCommand = interaction.options.getSubcommand()
 
     if(subCommand == "heure") {
