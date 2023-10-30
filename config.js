@@ -108,7 +108,8 @@ let CONFIG = {
       porte_blanche: "1159950689355694132",
       porte_noire: "1159950621160525854",
       porte_rouge: "1160165910510845992",
-      kapott: "1132987058537902120"
+      kapott: "1132987058537902120",
+      booster: "1101945612523548672"
     },
     voiceChannels: [
       {
