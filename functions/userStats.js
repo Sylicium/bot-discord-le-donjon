@@ -45,15 +45,11 @@ async function user_isMember(client, guild_id, user_id) {
 module.exports = {
   addMess: async function (client, message) {
 
-    console.log("[AKN38MZ92] AddMess debug 1")
-
     if (message.author.bot) return;
     if (message.channel.type === 1 || message.channel.type === 3) return;
-    console.log("[AKN38MZ92] AddMess debug 2")
     
     let userIsMember = await user_isMember(client, message.guild.id, message.author.id)
     if(!userIsMember) return;
-    console.log("[AKN38MZ92] AddMess debug 3")
 
     if (!messCooldown.has(message.author.id)) {
       messCooldown.add(message.author.id);
@@ -77,14 +73,10 @@ module.exports = {
       })
     }
 
-    console.log("[AKN38MZ92] AddMess debug 4")
-
     checklevelUp(client, message.guild.id, message.author.id);
 
-    console.log("[AKN38MZ92] AddMess debug 5")
 
     setTimeout(() => {
-    console.log("[AKN38MZ92] AddMess debug 6")
       messCooldown.delete(message.author.id);
     }, client.config.stats.msg.cooldown * 1000);
   },
