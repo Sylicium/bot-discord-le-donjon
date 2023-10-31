@@ -4,6 +4,7 @@ const messCooldown = new Set;
 const reactCooldown = new Set;
 const imgCooldown = new Set;
 const checklevelUpCooldown = new Set;
+const somef = require("../someFunctions")
 
 
 let Temp = {
@@ -25,9 +26,9 @@ async function user_isMember(client, guild_id, user_id) {
 
   if(getFromTemp) return getFromTemp.isMember;
 
-  let DBuser = client.db.getUser(guild_id, user_id)
+  let DBuser = await client.db.getUser(guild_id, user_id)
 
-  let user_isMember = !DBuser ? false : !!DBuser.isMember
+  let user_isMember = DBuser?.isMember ?? null
 
   Temp.userIsMember.push({
     userID: user_id,
@@ -44,11 +45,15 @@ async function user_isMember(client, guild_id, user_id) {
 module.exports = {
   addMess: async function (client, message) {
 
+    console.log("[AKN38MZ92] AddMess debug 1")
+
     if (message.author.bot) return;
     if (message.channel.type === 1 || message.channel.type === 3) return;
+    console.log("[AKN38MZ92] AddMess debug 2")
     
     let userIsMember = await user_isMember(client, message.guild.id, message.author.id)
     if(!userIsMember) return;
+    console.log("[AKN38MZ92] AddMess debug 3")
 
     if (!messCooldown.has(message.author.id)) {
       messCooldown.add(message.author.id);
@@ -72,9 +77,14 @@ module.exports = {
       })
     }
 
+    console.log("[AKN38MZ92] AddMess debug 4")
+
     checklevelUp(client, message.guild.id, message.author.id);
 
+    console.log("[AKN38MZ92] AddMess debug 5")
+
     setTimeout(() => {
+    console.log("[AKN38MZ92] AddMess debug 6")
       messCooldown.delete(message.author.id);
     }, client.config.stats.msg.cooldown * 1000);
   },
@@ -178,7 +188,12 @@ module.exports = {
       let user_datas = await getUserDatas(client, x.id)
 
       if ((voiceChannelInConfig ? voiceChannelInConfig.canEarnXP : true) && !x.selfMute && !x.selfDeaf && !x.serverDeaf && !x.serverMute && user_datas.level >= 10) {
-        if (member._roles.includes(client.config.static.roles.porte_noire) || member._roles.includes(client.config.static.roles.porte_rouge)) {
+        if (somef.any(member._roles, [
+          client.config.static.roles.porte_noire,
+          client.config.static.roles.porte_rouge,
+          client.config.static.roles["."]
+        ])
+        ) {
           client.db._makeQuery(`UPDATE user_stats
           SET minutesInVoice=minutesInVoice+1, xp=xp+?
           WHERE user_id=?`, [
