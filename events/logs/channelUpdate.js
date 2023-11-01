@@ -20,9 +20,9 @@ module.exports = async (client, oldChannel, newChannel) => {
   /*****/
   
 	const guild = client.guilds.cache.get(client.config.getCurrentGuildID());
-	const logChannel = guild.channels.cache.get(client.config.static.logChannels.channelUpdate)
+	const logChannel = await client.channels.cache.get(client.config.static.logChannels.channelUpdate)
 
-  if(!logChannel) return console.log(`[channelUpdate.js] logChannel undefined. Not channel with ID=${client.config.static.logChannels.channelUpdate}`)
+  if(!logChannel) return console.log(`[channelUpdate.js] logChannel not defined. Not channel with ID=${client.config.static.logChannels.channelUpdate}`, logChannel)
 
   // console.log("(await newChannel._getLog()):",(await newChannel._getLog()))
 

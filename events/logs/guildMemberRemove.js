@@ -125,7 +125,7 @@ module.exports = async (client, member) => {
 			});
 		}
 	} else {
-		console.log(`[/logs/guildMemberRemove.js] Un membre a quitté le discord mais il n'avais pas le role membre (${client.config.static.roles.membre})`)
+		console.log(`[/logs/guildMemberRemove.js] Un membre a quitté le discord mais il n'avais pas le role membre (userID=${member.id} / roleID=${client.config.static.roles.membre})`)
 	}
 
 	if(logChannel) {
