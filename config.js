@@ -90,7 +90,7 @@ let CONFIG = {
       depart: "1165638501908369428",
       verification: "1160239538506047507",
       chambre_blanche: "1160233330474758204",
-      chambre_noire: "1160233656984551506",
+      chambre_noire: "1160233629344080003",
       chambre_rouge: "1164887556077408327",
       selectRoles: "1159894126607740968",
       pilori: "1159895318440202433",
