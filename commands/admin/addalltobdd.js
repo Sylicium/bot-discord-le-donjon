@@ -19,7 +19,7 @@ module.exports = {
 
     let members = interaction.guild.members.cache.filter(x => {
       return x._roles.includes(client.config.static.roles.membre)
-    }).map(x => x.id)
+    })
 
 
     let ok=0;
@@ -30,7 +30,7 @@ module.exports = {
     for(let i in members) {
       let member = members[i]
       try {
-        let response = await client.db.initUser(member)
+        let response = await client.db.initUser(member.user)
         ok++
       } catch(e) {
         notok++

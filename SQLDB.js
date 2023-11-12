@@ -92,17 +92,28 @@ class Database {
 
     __get__() { return this }
 
-    async initUser(member) {
+    async initUser(user) {
+        if(
+            !user.hasOwnProperty("id")
+            || !user.hasOwnProperty("username")
+            || !user.hasOwnProperty("banner")
+            || !user.hasOwnProperty("avatar")
+            || !user.hasOwnProperty("flags")
+            || !user.hasOwnProperty("bot")
+            || !user.hasOwnProperty("accentColor")
+        ) {
+            throw new Error("the user passed seems to not be an actual user object..")
+        }
         await this._makeQuery(`INSERT INTO users (user_id, isMember, discord_username) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
       isMember=?
       `, [
-        member.id, // user_id
+        user.id, // user_id
         true, // isMember
-        member?.user?.username ?? ( member.username ?? "<erreur>"), // discord_username
+        user?.user?.username ?? ( user.username ?? "<erreur>"), // discord_username
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
       await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
-        member.id, // user_id
+        user.id, // user_id
         0, // xp
         0, // messages
         0, // hoursInVoice
