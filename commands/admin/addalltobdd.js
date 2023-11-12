@@ -30,7 +30,7 @@ module.exports = {
     for(let i in members) {
       let member = members[i]
       try {
-        client.db.initMember(member)
+        await client.db.initMember(member)
         ok++
       } catch(e) {
         notok++
