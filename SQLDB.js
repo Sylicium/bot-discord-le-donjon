@@ -92,12 +92,13 @@ class Database {
 
     __get__() { return this }
 
-    async initMember(member_id) {
-        await this._makeQuery(`INSERT INTO users (user_id, isMember) VALUES(?,?) ON DUPLICATE KEY UPDATE    
+    async initMember(user) {
+        await this._makeQuery(`INSERT INTO users (user_id, isMember, discord_username) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
       isMember=?
       `, [
-        member_id,
+        user.id, // user_id
         true, // isMember
+        user.username ?? "<erreur>", // discord_username
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
       await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
