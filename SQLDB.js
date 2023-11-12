@@ -131,11 +131,10 @@ class Database {
         return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
     }
 
-    async getUser(guild_id, user_id) {
+    async getUser(user_id) {
         let user_datas_temp = await this._makeQuery(`SELECT * FROM users
-        WHERE user_id=? AND guild_id=?`, [
-            user_id,
-            guild_id
+        WHERE user_id=? A`, [
+            user_id
         ])
         return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
     }

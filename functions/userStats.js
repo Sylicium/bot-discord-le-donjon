@@ -26,7 +26,7 @@ async function user_isMember(client, guild_id, user_id) {
 
   if(getFromTemp) return getFromTemp.isMember;
 
-  let DBuser = await client.db.getUser(guild_id, user_id)
+  let DBuser = await client.db.getUser(user_id)
 
   let user_isMember = DBuser?.isMember ?? null
 
