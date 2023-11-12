@@ -111,7 +111,7 @@ module.exports = {
       await user.save().catch(e => console.log(e));
       */
 
-      await client.db.initMember(member.id)
+      await client.db.initUser(member)
       
 
       welcomeChannel.send({
