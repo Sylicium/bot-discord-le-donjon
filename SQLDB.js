@@ -133,7 +133,7 @@ class Database {
 
     async getUser(user_id) {
         let user_datas_temp = await this._makeQuery(`SELECT * FROM users
-        WHERE user_id=? A`, [
+        WHERE user_id=?`, [
             user_id
         ])
         return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
