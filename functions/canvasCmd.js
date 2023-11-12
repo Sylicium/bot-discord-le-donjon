@@ -49,14 +49,25 @@ module.exports = {
 
     const guild = client.guilds.cache.get(interaction.guild.id);
     const user = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
-    const users = await client.db._makeQuery(`SELECT * FROM users
-    WHERE guild_id=?`,[
-      interaction.guild.id
-    ])
+    const users = await client.db._makeQuery(`SELECT * FROM users`)
+
+    const user_db = client.db.getUser(user.id)
+
+    if(!user_db) {
+      return interaction.reply({
+        content: `L'utilisateur spécifié n'est pas dans la base de données.`
+      })
+    }
     
     const member = interaction.guild.members.cache.get(user.id);
 
     const userDatas = await client.db.getUserDatas(user.id)
+
+    if(!userDatas) {
+      return interaction.reply({
+        content: `Aucune données pour cet utilisateur.`
+      })
+    }
 
 
     let nextXp = (Number(userDatas.level) * 10 + 110) * Number(userDatas.level);
