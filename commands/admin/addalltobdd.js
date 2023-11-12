@@ -17,11 +17,9 @@ module.exports = {
   // default_member_permissions: ['Administrator'],
   async run(client, interaction) {
 
-    interaction.deferReply()
-
     let members = interaction.guild.members.cache.filter(x => {
       return x._roles.includes(client.config.static.roles.membre)
-    })
+    }).map(x => x)
 
 
     let ok=0;
@@ -29,33 +27,23 @@ module.exports = {
     let total=0;
     let failedList = []
 
-    var bar = new Promise((resolve, reject) => {
-      members.forEach(async (member, index, array) => {
-        try {
-          let response = await client.db.initUser(member.user)
-          console.log(`response for ${member.id} -> `,response)
-          ok++
-        } catch(e) {
-          notok++
-          failedList.push(member)
-          console.log(e)
-        }
-        total++
-        if (index === array.length -1) resolve();
-      })
-    });
+    for(let i in members) {
+      let member = members[i]
+      try {
+        let response = await client.db.initUser(member.user)
+        console.log(`response for ${member.id} -> `,response)
+        ok++
+      } catch(e) {
+        notok++
+        failedList.push(member)
+        console.log(e)
+      }
+      total++
+    }
 
-    bar.then(() => {
-      interaction.editReply({
-        content: `OK. Opération terminée. ${ok}/${total} OK. ${notok} failed.${failedList.length == 0 ? "" : `\nFailed ID list: \`${failedList.join("\n")}\``}`
-      })
-    }).catch(e => {
-      interaction.editReply({
-        content: `Error:x: Opération terminée. ${ok}/${total} OK. ${notok} failed.${failedList.length == 0 ? "" : `\nFailed ID list: \`${failedList.join("\n")}\``}\`\`\`js\n${e.stack}\`\`\``
-      })
+    interaction.reply({
+      content: `Opération terminée. ${ok}/${total} OK. ${notok} failed.${failedList.length == 0 ? "" : `\nFailed ID list: \`${failedList.join("\n")}\``}`
     })
-    
-
 
   }
 }
