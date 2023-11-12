@@ -4,8 +4,7 @@ const Mariadb = require('mariadb');
 
 /**
  * @description Base de donnée SQL
- * @version 1.0.0
- * @core 1.0.1
+ * @version 1.1.0
  * @date 09/08/2023
  * @author Sylicium
 */
@@ -60,8 +59,8 @@ class Database {
         try {
             const pool = await this._Mariadb.createPool({
                 host: 'localhost', 
-                user:'root',
-                password: 'root',
+                user:'bot',
+                password: 'ledonjon',
                 database: 'donjon',
                 connectionLimit: 100
             })
@@ -94,22 +93,24 @@ class Database {
     __get__() { return this }
 
     async initMember(member_id) {
-        await this._makeQuery(`INSERT INTO users (user_id, isMember) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
+        await this._makeQuery(`INSERT INTO users (user_id, isMember) VALUES(?,?) ON DUPLICATE KEY UPDATE    
       isMember=?
       `, [
         member_id,
         true, // isMember
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
-      await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?,?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
+      await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
         member_id, // user_id
         0, // xp
         0, // messages
         0, // hoursInVoice
+
         0, // adminGive
         0, // react
         0, // img
         0, // level
+
         0, // bonus
       ])
 
@@ -142,7 +143,6 @@ class Database {
 
 }
 
-console.log
 let Database_ = new Database()
 
 module.exports = Database_
