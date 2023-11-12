@@ -31,6 +31,7 @@ module.exports = {
       let member = members[i]
       try {
         let response = await client.db.initUser(member.user)
+        console.log(`response for ${member.id} -> `,response)
         ok++
       } catch(e) {
         notok++

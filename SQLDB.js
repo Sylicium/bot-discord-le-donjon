@@ -104,7 +104,7 @@ class Database {
         ) {
             throw new Error("the user passed seems to not be an actual user object..")
         }
-        await this._makeQuery(`INSERT INTO users (user_id, isMember, discord_username) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
+        let res1 = await this._makeQuery(`INSERT INTO users (user_id, isMember, discord_username) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
       isMember=?
       `, [
         user.id, // user_id
@@ -112,7 +112,7 @@ class Database {
         user?.user?.username ?? ( user.username ?? "<erreur>"), // discord_username
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
-      await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
+      let res2 = await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
         user.id, // user_id
         0, // xp
         0, // messages
@@ -125,6 +125,10 @@ class Database {
 
         0, // bonus
       ])
+      return {
+        res1: res1,
+        res2: res2
+      }
 
     }
 
