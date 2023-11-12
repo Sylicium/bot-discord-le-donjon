@@ -102,7 +102,7 @@ class Database {
         true, // isMember ON DUPLICATE KEY UPDATE
       ])
       await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
-        member_id, // user_id
+        user.id, // user_id
         0, // xp
         0, // messages
         0, // hoursInVoice
