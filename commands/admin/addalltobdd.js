@@ -28,7 +28,7 @@ module.exports = {
     let failedList = []
 
     var bar = new Promise((resolve, reject) => {
-      members.forEach(async (member) => {
+      members.forEach(async (member, index, array) => {
         try {
           let response = await client.db.initUser(member.user)
           console.log(`response for ${member.id} -> `,response)
