@@ -27,23 +27,33 @@ module.exports = {
     let total=0;
     let failedList = []
 
-    for(let i in members) {
-      let member = members[i]
-      try {
-        let response = await client.db.initUser(member.user)
-        console.log(`response for ${member.id} -> `,response)
-        ok++
-      } catch(e) {
-        notok++
-        failedList.push(member)
-        console.log(e)
-      }
-      total++
-    }
+    var bar = new Promise((resolve, reject) => {
+      members.forEach(async (member) => {
+        try {
+          let response = await client.db.initUser(member.user)
+          console.log(`response for ${member.id} -> `,response)
+          ok++
+        } catch(e) {
+          notok++
+          failedList.push(member)
+          console.log(e)
+        }
+        total++
+        if (index === array.length -1) resolve();
+      })
+    });
 
-    interaction.reply({
-      content: `Opération terminée. ${ok}/${total} OK. ${notok} failed.\nFailed ID list: \`${failedList.join("\n")}\``
+    bar.then(() => {
+      interaction.reply({
+        content: `OK. Opération terminée. ${ok}/${total} OK. ${notok} failed.${failedList.length == 0 ? "" : `\nFailed ID list: \`${failedList.join("\n")}\``}`
+      })
+    }).catch(e => {
+      interaction.reply({
+        content: `Error:x: Opération terminée. ${ok}/${total} OK. ${notok} failed.${failedList.length == 0 ? "" : `\nFailed ID list: \`${failedList.join("\n")}\``}\`\`\`js\n${e.stack}\`\`\``
+      })
     })
+    
+
 
   }
 }
