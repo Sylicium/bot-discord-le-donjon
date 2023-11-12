@@ -17,6 +17,8 @@ module.exports = {
   // default_member_permissions: ['Administrator'],
   async run(client, interaction) {
 
+    interaction.deferReply()
+
     let members = interaction.guild.members.cache.filter(x => {
       return x._roles.includes(client.config.static.roles.membre)
     })
@@ -44,11 +46,11 @@ module.exports = {
     });
 
     bar.then(() => {
-      interaction.reply({
+      interaction.editReply({
         content: `OK. Opération terminée. ${ok}/${total} OK. ${notok} failed.${failedList.length == 0 ? "" : `\nFailed ID list: \`${failedList.join("\n")}\``}`
       })
     }).catch(e => {
-      interaction.reply({
+      interaction.editReply({
         content: `Error:x: Opération terminée. ${ok}/${total} OK. ${notok} failed.${failedList.length == 0 ? "" : `\nFailed ID list: \`${failedList.join("\n")}\``}\`\`\`js\n${e.stack}\`\`\``
       })
     })
