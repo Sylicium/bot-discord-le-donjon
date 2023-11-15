@@ -49,10 +49,9 @@ module.exports = async (client, oldState, newState) => {
     { id: "770334301609787392", name: "Oh ! Une dév" },
     { id: "467333274314997760", name: "Le diktateur" },
     { id: "575402346591420447", name: "La salope du diktateur" },
-    { id: "959198467224387584", name: "La soubrette du Donjon" },
+    { id: "959198467224387584", name: "La soubrette de Seikam" },
     { id: "300399893611151361", name: "Le Jaybécois" },
     { id: "964474149793828865", name: "Un black" },
-    { id: "1085400328784060476", name: "Lakobétoise" },
     { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },
     { id: "411916947773587456", name: "Un bot inférieur à moi" },
   ]
@@ -118,7 +117,7 @@ module.exports = async (client, oldState, newState) => {
           content: (
             newState?.channel?.parent?.id == client.config.static.categories.regression ?
             "https://tenor.com/view/lick-c-at-cute-tongue-out-gif-15308597"
-            : "https://cdn.discordapp.com/attachments/1156047495034580992/1166083008709795940/patoune_5.gif"
+            : "https://media.tenor.com/PMpUZsVhJiwAAAAC/diggah-tunnah-lion-king.gif"
           )
         }).catch(e => {
           console.log("pas envoyé:",e)
@@ -166,7 +165,7 @@ module.exports = async (client, oldState, newState) => {
           content: (
             newState?.channel?.parent?.id == client.config.static.categories.regression ?
             "https://tenor.com/view/diggah-tunnah-lion-king-dig-a-tunnel-meerkat-what-was-that-gif-27707671"
-            : "https://cdn.discordapp.com/attachments/1156047495034580992/1166082828019187783/1136331007004524584.gif"
+            : "https://media.tenor.com/biFbiJjGADgAAAAC/lion-king-simba.gif"
           )
         }).catch(e => {
           console.log("pas envoyé:",e)
