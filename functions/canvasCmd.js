@@ -130,11 +130,10 @@ module.exports = {
     ctx.fill();
 
     //Rank + level
-    ctx.font = '14px arial';
+    ctx.font = '14px Arial';
     ctx.fillStyle = '#fff';
     ctx.textAlign = "right";
-    ctx.fillText("#" + N + " Lvl " + Number(userDatas.level), 345, 268);
-
+    ctx.fillText(`#${N} Lvl ${Number(userDatas.level)}`, 345, 268);
     //Join
     ctx.font = '14px Arial';
     ctx.fillStyle = '#fff';
