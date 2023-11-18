@@ -85,7 +85,7 @@ let CONFIG = {
         },
       },
       {
-        userID: "467333274314997760", // clo
+        userID: "461898434346221568", // clo
         config: {
           enabled: true, // Si off, aucun gif n'est envoyé
           enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom

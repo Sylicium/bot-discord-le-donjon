@@ -45,6 +45,8 @@ class Database {
 
             let queryRes = await conn.query(query, params)
 
+            if(queryRes == undefined) throw new Error(`Database error not connected. Sent undefined after request.`)
+
             queryResponse = queryRes
         } catch (err) {
             console.log("error",err)

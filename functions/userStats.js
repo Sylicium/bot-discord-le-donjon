@@ -178,6 +178,7 @@ module.exports = {
       })
 
       let user_datas = await getUserDatas(client, x.id)
+      if(!user_datas) return;
 
       if ((voiceChannelInConfig ? voiceChannelInConfig.canEarnXP : true) && !x.selfMute && !x.selfDeaf && !x.serverDeaf && !x.serverMute && user_datas.level >= 10) {
         if (somef.any(member._roles, [

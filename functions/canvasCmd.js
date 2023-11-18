@@ -3,7 +3,8 @@ const {
   request
 } = require('undici');
 const moment = require("moment");
-const { AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const Discord = require('discord.js');
+const { AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = Discord;
 
 module.exports = {
   editProfile: async function (client, interaction) {
@@ -174,177 +175,191 @@ module.exports = {
   },
   sendLeaderBoard: async function (client, interaction) {
 
-    
-  /****** DISABLED CODE ******/
-  console.warn("DISABLED CODE. canvasCmd.js:175")
-  return;
-  /****** DISABLED CODE ******/
+    try {
 
-    const guild = client.guilds.cache.get(interaction.guild.id);
-    const users = await client.db.users.find({ guildID: interaction.guild.id, isMember: true }).catch(e => { console.log(e) });
+        const guild = client.guilds.cache.get(interaction.guild.id);
+        //const users = await client.db.users.find({ guildID: interaction.guild.id, isMember: true }).catch(e => { console.log(e) });
+        const users = await client.db._makeQuery(`SELECT * from user_stats AS u 
+        WHERE u.user_id IN (
+            SELECT e.user_id FROM users AS e WHERE isMember=1
+        )`, [])
 
-    users.sort(function (a, b) {
-      if (a.stats.lvl === b.stats.lvl) {
-        return b.stats.xp > a.stats.xp ? 1 : -1;
-      }
-      return a.stats.lvl < b.stats.lvl ? 1 : -1;
-    });
+        console.log("users:",users)
 
-    const top = [];
-    var index = 0;
-
-    users.map(async x => {
-      const member = guild.members.cache.get(x.userID);
-      if (!member) return;
-
-      top.push({
-        name: member.nickname || member.user.username,
-        pp: member.avatar ? member.displayAvatarURL({
-          extension: 'png'
-        }) : member.user.displayAvatarURL({
-          extension: 'png'
-        }),
-        class: index,
-        xp: x.stats.xp,
-        level: x.stats.lvl
-      });
-      index++;
-    });
-
-    const maxPage = Math.ceil(top.length / 10);
-    var page = 1;
-
-    if (interaction.type === 3) {
-      switch (interaction.customId) {
-        case "topFirstPage": {
-          page = 1
+        users.sort(function (a, b) {
+        if (a.level === b.level) {
+            return b.xp > a.xp ? 1 : -1;
         }
-          break
-        case "topPastPage": {
-          page = parseInt(interaction.message.components[0].components[2].label) - 1
+        return a.level < b.level ? 1 : -1;
+        });
+
+        const top = [];
+        var index = 0;
+
+        users.map(async x => {
+        const member = guild.members.cache.get(x.user_id);
+        if (!member) return;
+
+        top.push({
+            name: member.nickname || member.user.username,
+            pp: member.avatar ? member.displayAvatarURL({
+            extension: 'png'
+            }) : member.user.displayAvatarURL({
+            extension: 'png'
+            }),
+            class: index,
+            xp: x.xp,
+            level: x.level
+        });
+        index++;
+        });
+
+        const maxPage = Math.ceil(top.length / 10);
+        var page = 1;
+
+        if (interaction.type === 3) {
+        switch (interaction.customId) {
+            case "topFirstPage": {
+            page = 1
+            }
+            break
+            case "topPastPage": {
+            page = parseInt(interaction.message.components[0].components[2].label) - 1
+            }
+            break
+            case "topNextPage": {
+            page = parseInt(interaction.message.components[0].components[2].label) + 1
+            }
+            break
+            case "topLastPage": {
+            page = maxPage
+            }
+            break
         }
-          break
-        case "topNextPage": {
-          page = parseInt(interaction.message.components[0].components[2].label) + 1
         }
-          break
-        case "topLastPage": {
-          page = maxPage
-        }
-          break
-      }
-    }
 
-    const min = (page - 1) * 10;
-    const max = page * 10 - 1;
-    const n = top.length > page * 10 ? "10" : top.length - (page - 1) * 10;
+        const min = (page - 1) * 10;
+        const max = page * 10 - 1;
+        const n = top.length > page * 10 ? "10" : top.length - (page - 1) * 10;
 
-    const canvas = Canvas.createCanvas(1000, 96 * n);
-    const context = canvas.getContext('2d');
+        const canvas = Canvas.createCanvas(1000, 96 * n);
+        const context = canvas.getContext('2d');
 
-    await Promise.all(top.map(async (x, index) => {
-      if (x.class < min || x.class > max) return;
+        await Promise.all(top.map(async (x, index) => {
+        if (x.class < min || x.class > max) return;
 
-      let y = 48 + 96 * String(index).slice(-1);
+        let y = 48 + 96 * String(index).slice(-1);
 
-      // Fond
-      const ProgressBar = await Canvas.loadImage('./pictures/fondleader.png');
-      context.globalAlpha = 0.5
-      context.drawImage(ProgressBar, 0, 8 + 96 * String(index).slice(-1), 1000, 80, 0, 8 + 96 * String(index).slice(-1), 1000, 80);
-      context.globalAlpha = 1
+        // Fond
+        const ProgressBar = await Canvas.loadImage('./pictures/fondleader.png');
+        context.globalAlpha = 0.5
+        context.drawImage(ProgressBar, 0, 8 + 96 * String(index).slice(-1), 1000, 80, 0, 8 + 96 * String(index).slice(-1), 1000, 80);
+        context.globalAlpha = 1
 
-      // Rank
-      context.font = '42px Gill Sans MT';
-      context.fillStyle = '#ffffff';
-      context.textAlign = "left";
-      context.textBaseline = 'middle';
-      context.fillText(`#${x.class + 1}`, 100, y);
-
-      // Nom
-      context.font = '42px Gill Sans MT';
-      if (x.class === 0) {
-        context.fillStyle = '#DA0000'; // Premier 
-      } else if (x.class === 1) {
-        context.fillStyle = '#f51f23'; // Deuxieme
-      } else if (x.class === 2) {
-        context.fillStyle = '#dd6767'; // Troisieme
-      } else {
+        // Rank
+        context.font = '42px Gill Sans MT';
         context.fillStyle = '#ffffff';
-      }
-      context.textAlign = "center";
-      context.textBaseline = 'middle';
-      context.fillText(`• ${x.name} •`, 500, y);
+        context.textAlign = "left";
+        context.textBaseline = 'middle';
+        context.fillText(`#${x.class + 1}`, 100, y);
 
-      // Level
-      context.font = '42px Gill Sans MT';
-      context.fillStyle = '#ffffff';
-      context.textAlign = "right";
-      context.textBaseline = 'middle';
-      context.fillText(`Lvl. ${x.level}`, 985, y);
+        // Nom
+        context.font = '42px Gill Sans MT';
+        if (x.class === 0) {
+            context.fillStyle = '#DA0000'; // Premier 
+        } else if (x.class === 1) {
+            context.fillStyle = '#f51f23'; // Deuxieme
+        } else if (x.class === 2) {
+            context.fillStyle = '#dd6767'; // Troisieme
+        } else {
+            context.fillStyle = '#ffffff';
+        }
+        context.textAlign = "center";
+        context.textBaseline = 'middle';
+        context.fillText(`• ${x.name} •`, 500, y);
 
-      const {
-        body
-      } = await request(x.pp)
-      const pp = await Canvas.loadImage(await body.arrayBuffer());
-      context.drawImage(pp, 0, y - 40, 80, 80)
-    }));
+        // Level
+        context.font = '42px Gill Sans MT';
+        context.fillStyle = '#ffffff';
+        context.textAlign = "right";
+        context.textBaseline = 'middle';
+        context.fillText(`Lvl. ${x.level}`, 985, y);
 
-    const attachment = new AttachmentBuilder(await canvas.encode('png'), {
-      name: 'leaderboard.png'
-    });
+        const {
+            body
+        } = await request(x.pp)
+        const pp = await Canvas.loadImage(await body.arrayBuffer());
+        context.drawImage(pp, 0, y - 40, 80, 80)
+        }));
 
-    const embed = new EmbedBuilder()
-      .setTitle("Classement le Donjon")
-      .setImage('attachment://leaderboard.png')
-      .setTimestamp()
+        const attachment = new AttachmentBuilder(await canvas.encode('png'), {
+        name: 'leaderboard.png'
+        });
 
-    const row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-          .setCustomId('topFirstPage')
-          .setEmoji('⏪')
-          .setDisabled(page <= 2 ? true : false)
-          .setStyle(page <= 2 ? ButtonStyle.Secondary : ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId('topPastPage')
-          .setEmoji('◀️')
-          .setDisabled(page == 1 ? true : false)
-          .setStyle(page == 1 ? ButtonStyle.Secondary : ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId('topNumber')
-          .setLabel(`${page}`)
-          .setDisabled(true)
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId('topNextPage')
-          .setEmoji('▶️')
-          .setDisabled(page == maxPage ? true : false)
-          .setStyle(page == maxPage ? ButtonStyle.Secondary : ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId('topLastPage')
-          .setEmoji('⏩')
-          .setDisabled(page >= maxPage - 1 ? true : false)
-          .setStyle(page >= maxPage - 1 ? ButtonStyle.Secondary : ButtonStyle.Primary),
-      );
+        const embed = new EmbedBuilder()
+        .setTitle("Classement le Donjon")
+        .setImage('attachment://leaderboard.png')
+        .setTimestamp()
 
-    if (interaction.type == 3) {
-      try {
-        interaction.message.edit({
-          components: [row],
-          embeds: [embed],
-          files: [attachment]
-        }).then(async msg => {
-          await interaction.deferUpdate()
-        })
-      } catch (err) { }
-    } else {
-      interaction.reply({
-        components: [row],
-        embeds: [embed],
-        files: [attachment]
-      });
+        const row = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+            .setCustomId('topFirstPage')
+            .setEmoji('⏪')
+            .setDisabled(page <= 2 ? true : false)
+            .setStyle(page <= 2 ? ButtonStyle.Secondary : ButtonStyle.Primary),
+            new ButtonBuilder()
+            .setCustomId('topPastPage')
+            .setEmoji('◀️')
+            .setDisabled(page == 1 ? true : false)
+            .setStyle(page == 1 ? ButtonStyle.Secondary : ButtonStyle.Primary),
+            new ButtonBuilder()
+            .setCustomId('topNumber')
+            .setLabel(`${page}`)
+            .setDisabled(true)
+            .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
+            .setCustomId('topNextPage')
+            .setEmoji('▶️')
+            .setDisabled(page == maxPage ? true : false)
+            .setStyle(page == maxPage ? ButtonStyle.Secondary : ButtonStyle.Primary),
+            new ButtonBuilder()
+            .setCustomId('topLastPage')
+            .setEmoji('⏩')
+            .setDisabled(page >= maxPage - 1 ? true : false)
+            .setStyle(page >= maxPage - 1 ? ButtonStyle.Secondary : ButtonStyle.Primary),
+        );
+
+        if (interaction.type == 3) {
+        try {
+            interaction.message.edit({
+            components: [row],
+            embeds: [embed],
+            files: [attachment]
+            }).then(async msg => {
+            await interaction.deferUpdate()
+            })
+        } catch (err) { }
+        } else {
+        interaction.reply({
+            components: [row],
+            embeds: [embed],
+            files: [attachment]
+        });
+        }
+
+    } catch(e) {
+        return interaction.reply({
+            embeds: [
+            new Discord.EmbedBuilder()
+                .setDescription(`Aïe.. une erreur est survenue. \`\`\`js\n${e}\`\`\``)
+                .setColor("FF0000")
+            ],
+            ephemeral: true
+        });
     }
   }
+
 }
 
 function roundRect(ctx, x, y, w, h, radius) {
