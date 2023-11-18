@@ -1,25 +1,20 @@
-try {
-  require("dotenv").config()
-} catch (e) { console.log(e) }
+try {require("dotenv").config()} catch (e) { console.log(e) }
 
 let START_MODE = 2 // 1: Dév | 2: Production
 
-function getToken() {
-  return START_MODE == 1 ? process.env.TOKEN_TEST : process.env.TOKEN_PROD
-}
-
+function getToken() {  return START_MODE == 1 ? process.env.TOKEN_TEST : process.env.TOKEN_PROD}
 function getCurrentGuildID() { return CONFIG.guildId[START_MODE] }
 
 let CONFIG = {
   token: getToken(), // Le Donjon
   startMode: START_MODE,
   clientId: {
-    "1": "1160565576461209700",
-    "2": "1160598942044672000"
+    "1": "1160565576461209700", // bot prod ID
+    "2": "1160598942044672000" // bot test ID
   },
   guildId: {
-    "1": "1160467551252385852",
-    "2": "1094318705883762719"
+    "1": "1160467551252385852", // id guilde prod
+    "2": "1094318705883762719" // id guilde test
   },
   getCurrentGuildID: () => { return getCurrentGuildID() },
   mongodbURL: process.env.MONGODB_URL,
@@ -66,8 +61,64 @@ let CONFIG = {
       }
     },
     users: {
-      seikam: "467333274314997760"
+      seikam: "467333274314997760", //Arrivé/Départ
+      clo :  "461898434346221568"
     },
+    voiceJoinLeaveGifs: [
+      {
+        userID: "467333274314997760", // seikam
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://media.tenor.com/PMpUZsVhJiwAAAAC/diggah-tunnah-lion-king.gif",
+          exceptions: { // Envoyer un gif spécial à la place du défaut dans un channel précis
+            // "channel id": "gif"
+            // example: 
+            // "35050502320424": "https://media.tenor.com/PMpUZsVhJiwAAAAC/diggah-tunnah-lion-king.gif",
+          }
+        },
+        leave: {
+          default: "https://media.tenor.com/biFbiJjGADgAAAAC/lion-king-simba.gif",
+          exceptions: {}
+        },
+      },
+      {
+        userID: "467333274314997760", // clo
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://media.tenor.com/7-ezfXCrbkEAAAAC/chomusuke-fire-breath.gif",
+          exceptions: {}
+        },
+        leave: {
+          default: "https://media.tenor.com/7-ezfXCrbkEAAAAC/chomusuke-fire-breath.gif",
+          exceptions: {}
+        },
+      },
+      {
+        userID: "770334301609787392", // Sylicium
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: false // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://tenor.com/view/oozora-duck-duck-dance-gif-21251804",
+          exceptions: {
+            "1165025400376795316": "https://tenor.com/view/bears-hug-love-kiss-teddy-gif-20595312"
+          }
+        },
+        leave: {
+          default: "https://tenor.com/view/duck-gif-18144587",
+          exceptions: {
+            "1165025400376795316": "https://tenor.com/view/bear-crying-sad-gif-7836949"
+          }
+        },
+      }
+    ],
     logChannels: {
       global: "1165711757751357520",
       voice: "1165712056079622215",
@@ -139,7 +190,7 @@ let CONFIG = {
         canEarnXP: true
       },
       {
-        id: "1162498653617934376",
+        id: "1174897729676259369",
         whitelistCamera: true,
         canEarnXP: true
       },

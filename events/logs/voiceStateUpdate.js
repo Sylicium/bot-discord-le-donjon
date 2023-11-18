@@ -13,7 +13,7 @@ module.exports = async (client, oldState, newState) => {
 
   // console.log("member.displayAvatarURL",member.displayAvatarURL())
   // console.log("member.user.displayAvatarURL",member.user.displayAvatarURL())
-
+  
 
   let all_channels_with_no_mic = [
     {
@@ -54,6 +54,8 @@ module.exports = async (client, oldState, newState) => {
     { id: "964474149793828865", name: "Un black" },
     { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },
     { id: "411916947773587456", name: "Un bot inférieur à moi" },
+    { id: "461898434346221568", name: "Le chragon d'Emy" },
+    { id: "718015664975249438", name: "Je suis lesbienne mais je ne vous ai pas encore testés ET ALORS ?" },
   ]
 
   let specialNickname = specialNickname_list.find(x => {
@@ -112,17 +114,22 @@ module.exports = async (client, oldState, newState) => {
       }).catch(e => {
         console.log("pas envoyé:",e)
       })
-      if(newState.member.id == client.config.static.users.seikam) {
-        le_no_micro_channel[0].send({
-          content: (
-            newState?.channel?.parent?.id == client.config.static.categories.regression ?
-            "https://tenor.com/view/lick-c-at-cute-tongue-out-gif-15308597"
-            : "https://media.tenor.com/PMpUZsVhJiwAAAAC/diggah-tunnah-lion-king.gif"
-          )
-        }).catch(e => {
-          console.log("pas envoyé:",e)
-        })
-      }
+
+      // Gif perso JOIN channel | Pour modifier aller dans config.js > static > voiceJoinLeaveGifs
+      client.config.static.voiceJoinLeaveGifs.forEach(item => {
+        try {
+          if(item.userID != newState.member.id) return;
+          if(!item.config.enabled) return;
+          if(item.join.exceptions.hasOwnProperty(newState.channel.id) && item.config.enableExceptions) {
+            le_no_micro_channel[0].send({ content: item.join.exceptions[newState.channel.id] })
+          } else {
+            le_no_micro_channel[0].send({ content: item.join.default })
+          }
+        } catch(e) {
+          console.warn(`[WARN /logs/voiceStateUpdate.js]`,e)
+        }
+      })
+
     } else {
       console.log("No no-mic channel found for voiceUpdate join.")
     }
@@ -160,17 +167,22 @@ module.exports = async (client, oldState, newState) => {
       }).catch(e => {
         console.log("pas envoyé:",e)
       })
-      if(oldState.member.id == client.config.static.users.seikam) {
-        le_no_micro_channel[0].send({
-          content: (
-            newState?.channel?.parent?.id == client.config.static.categories.regression ?
-            "https://tenor.com/view/diggah-tunnah-lion-king-dig-a-tunnel-meerkat-what-was-that-gif-27707671"
-            : "https://media.tenor.com/biFbiJjGADgAAAAC/lion-king-simba.gif"
-          )
-        }).catch(e => {
-          console.log("pas envoyé:",e)
-        })
-      }
+
+      // Gif perso LEAVE channel | Pour modifier aller dans config.js > static > voiceJoinLeaveGifs
+      client.config.static.voiceJoinLeaveGifs.forEach(item => {
+        try {
+          if(item.userID != oldState.member.id) return;
+          if(!item.config.enabled) return;
+          if(item.leave.exceptions.hasOwnProperty(oldState.channel.id) && item.config.enableExceptions) {
+            le_no_micro_channel[0].send({ content: item.leave.exceptions[oldState.channel.id] })
+          } else {
+            le_no_micro_channel[0].send({ content: item.leave.default })
+          }
+        } catch(e) {
+          console.warn(`[WARN /logs/voiceStateUpdate.js]`,e)
+        }
+      })
+
     } else {
       console.log("No no-mic channel found for voiceUpdate join.")
     }
