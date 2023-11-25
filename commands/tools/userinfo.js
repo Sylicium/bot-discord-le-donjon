@@ -1,7 +1,5 @@
-const { EmbedBuilder } = require("discord.js")
-const {
-  ApplicationCommandType
-} = require('discord.js');
+const Discord = require('discord.js');
+const { EmbedBuilder, DiscordAPIError, ApplicationCommandType} = Discord
 const moment = require("moment");
 
 module.exports = {
@@ -15,54 +13,50 @@ module.exports = {
   }],
   run: async (client, interaction) => {
 
+    const member = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getMember('utilisateur').id) : interaction.member;
+    const userDB = await client.db.getUserStats(member.id)
 
-    /****** DISABLED COMMAND ******/
-    return client.disabledCommand(interaction)
-    /****** DISABLED COMMAND ******/
+    if(!userDB) {
+      return interaction.reply({
+        embeds: [
+          new Discord.EmbedBuilder()
+          .setColor("FF0000")
+          .setDescription(`Utilisateur introuvablze`)
+        ]
+      })
+    }
 
-
-
-
-    const user = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
-    const userDB = await client.db.users.findOne({
-      userID: user.id,
-      guildID: interaction.guild.id
-    }).catch(e => { console.log(e) });
-    const nick = user.nickname === null ? "Pas de pseudo" : user.nickname;
-    const usericon = user.displayAvatarURL({
-      size: 2048,
-      dynamic: true,
-      format: "png",
-    });
+    const nick = member.nickname == null ? "Pas de pseudo" : member.nickname;
+    const usericon = member.displayAvatarURL().replace(".webp",".png?size=4096");
 
     if (!userDB) return interaction.reply({ content: `Cet utilisateur n'a pas de BDD. Ceci n'est pas normal ! Contactez StarKleey.` });
 
-    var duration = moment.duration(userDB.stats.voc, 'minutes')
-    const durationString = userDB.stats.voc > 0 ? [duration.months() ? duration.months() + 'Mois' : '', duration.days() ? duration.days() + 'J' : '', duration.hours() ? duration.hours() + 'H' : '', duration.minutes() ? duration.minutes() + 'M' : ''].filter(elm => elm).join(' ') : '0 minutes';
+    var duration = moment.duration(userDB.minutesInVoice, 'minutes')
+    const durationString = userDB.minutesInVoice > 0 ? [duration.months() ? duration.months() + 'Mois' : '', duration.days() ? duration.days() + 'J' : '', duration.hours() ? duration.hours() + 'H' : '', duration.minutes() ? duration.minutes() + 'M' : ''].filter(elm => elm).join(' ') : '0 minutes';
 
     const embed = new EmbedBuilder()
       .setTitle(`User Info`)
       .setThumbnail(usericon)
       .addFields([{
         name: `General Info`,
-        value: `Pseudo: \`${user.user.username}\` \nID:  \`${user.id}\` \nTag: \`${user.user.discriminator}\` \nsurnom: \`${nick}\``
+        value: `Pseudo: \`${member.user.username}\` \nID:  \`${member.id}\` \nTag: \`${member.user.discriminator}\` \nsurnom: \`${nick}\``
       }, {
         name: 'Niveau/XP: ',
-        value: `Level: \`${userDB.stats.lvl}\`\nXP: \`${userDB.stats.xp}\`\nBonus: \`${userDB.stats.bonus}\``,
+        value: `Level: \`${userDB.level}\`\nXP: \`${userDB.xp}\`\nBonus: \`${userDB.bonus}\``,
       }, {
         name: 'Stats', //durationString
-        value: `Message: \`${userDB.stats.msg}\`\nTemps de vocal: \`${durationString}\`\nImage: \`${userDB.stats.img}\`\nReaction: \`${userDB.stats.react}\``,
+        value: `Message: \`${userDB.messages}\`\nTemps de vocal: \`${durationString}\`\nImage: \`${userDB.img}\`\nReaction: \`${userDB.react}\``,
         inline: true
       }, {
         name: `Roles:`,
-        value: `<@&${user._roles.join(">  <@&")}>`
+        value: `<@&${member._roles.join(">  <@&")}>`
       }, {
         name: 'Compte créé le:',
-        value: `\`${moment(user.user.createdAt).locale('fr').format("LLL")}\``,
+        value: `\`${moment(member.user.createdAt).locale('fr').format("LLL")}\``,
         inline: true
       }, {
         name: 'À rejoint le serveur le:',
-        value: `\`${moment(user.joinedAt).locale('fr').format("LLL")}\``,
+        value: `\`${moment(member.joinedAt).locale('fr').format("LLL")}\``,
         inline: true
       }]);
     interaction.reply({
