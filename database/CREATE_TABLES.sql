@@ -1,3 +1,6 @@
+
+USE donjon;
+
 -- donjon.levels definition
 
 CREATE TABLE `levels` (
