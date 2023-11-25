@@ -95,9 +95,18 @@ let list = [{"user_id":"467333274314997760","level":"136","xp":"197910","bonus":
 {"user_id":"974585722164097045","level":"0","xp":"0","bonus":"0"}]
 
 
-list.map(x => {
+// FIX XP -202402842424 :
+t1 = list.map(x => {
+    let t = x
+    t.xp = ( parseInt(x.level) * 10 + 110) *  parseInt(x.level) + 1 // CHECK AVEC events/functions/userStats.js ligne ~ 269
+    t.level = parseInt(t.level) + 1
+    return t
+})
+result = list.map(x => {
     return `INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (${x.user_id},${x.xp},0,0, 0,0,0,${x.level}, ${x.bonus}) ON DUPLICATE KEY UPDATE user_id=user_id;`
 })
+console.log(result.join("\n"))
+
 /*
 , // user_id
 , // xp
