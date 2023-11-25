@@ -263,6 +263,8 @@ async function checklevelUp(client, guild_id, user_id) {
 
   let user_datas = await getUserDatas(client, user_id)
 
+  if(!user_datas) return;
+
   if (checklevelUpCooldown.has(user_id)) return;
   checklevelUpCooldown.add(user_id);
 
