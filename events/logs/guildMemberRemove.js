@@ -33,11 +33,10 @@ module.exports = async (client, member) => {
 	*/
 
 	
-	client.db._makeQuery(`INSERT INTO users (user_id, guild_id, isMember) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
+	client.db._makeQuery(`INSERT INTO users (user_id, isMember) VALUES(?,?) ON DUPLICATE KEY UPDATE    
 	isMember=?
 	`, [
 	  member.id,
-	  member.guild.id,
 	  false,
 	  false,
 	])
