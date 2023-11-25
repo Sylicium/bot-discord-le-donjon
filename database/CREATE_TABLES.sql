@@ -21,7 +21,8 @@ CREATE TABLE `user_stats` (
   `react` bigint(20) unsigned DEFAULT 0,
   `img` int(10) unsigned DEFAULT 0,
   `level` int(10) unsigned DEFAULT 0,
-  `bonus` bigint(20) unsigned DEFAULT 0
+  `bonus` bigint(20) unsigned DEFAULT 0,
+  PRIMARY KEY (`user_id`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

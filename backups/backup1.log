@@ -93,3 +93,19 @@ let list = [{"user_id":"467333274314997760","level":"136","xp":"197910","bonus":
 {"user_id":"899468280673239051","level":"0","xp":"0","bonus":"0"},
 {"user_id":"944290819609862154","level":"0","xp":"0","bonus":"0"},
 {"user_id":"974585722164097045","level":"0","xp":"0","bonus":"0"}]
+
+
+list.map(x => {
+    return `INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (${x.user_id},${x.xp},0,0, 0,0,0,${x.level}, ${x.bonus}) ON DUPLICATE KEY UPDATE user_id=user_id;`
+})
+/*
+, // user_id
+, // xp
+0, // messages
+0, // hoursInVoice
+0, // adminGive
+0, // react
+0, // img
+x.level, // level
+x.bonus, // bonus
+*/
