@@ -61,8 +61,7 @@ let CONFIG = {
       }
     },
     users: {
-      seikam: "467333274314997760", //Arrivé/Départ
-      clo :  "461898434346221568"
+      
     },
     voiceJoinLeaveGifs: [
       {
@@ -96,6 +95,81 @@ let CONFIG = {
         },
         leave: {
           default: "https://media.tenor.com/7-ezfXCrbkEAAAAC/chomusuke-fire-breath.gif",
+          exceptions: {}
+        },
+      },
+      {
+        userID: "233322709604368385", // Emy
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://media4.giphy.com/media/e9iiMNbPtLgKQuGsAo/giphy.gif",
+          exceptions: {}
+        },
+        leave: {
+          default: "https://media1.giphy.com/media/KDhrRVW4574ZKI79pZ/giphy.gif",
+          exceptions: {}
+        },
+      },
+      {
+        userID: "904401609939886100", // Angelyne
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://media.tenor.com/GiOKQDwkWQcAAAAd/katy-keene-entrance.gif",
+          exceptions: {}
+        },
+        leave: {
+          default: "https://tenor.com/view/dress-on-fire-cruella-de-vil-emma-stone-cruella-setting-clothes-on-fire-gif-21414457",
+          exceptions: {}
+        },
+      },
+      {
+        userID: "718015664975249438", // Elyxir
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://media.tenor.com/ll7-EZw2ZRQAAAAC/hihi-giddy.gif",
+          exceptions: {}
+        },
+        leave: {
+          default: "https://media.tenor.com/WcLeJZjq2yIAAAAd/devil-or-your-angel-cat.gif",
+          exceptions: {}
+        },
+      },
+      {
+        userID: "326458774757834753", // Soso
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://media.tenor.com/U9QvmmZ9x-EAAAAd/cat-witch.gif",
+          exceptions: {}
+        },
+        leave: {
+          default: "https://media.tenor.com/CHVfbpHz4rMAAAAd/cat-snow.gif",
+          exceptions: {}
+        },
+      },
+      {
+        userID: "575402346591420447", // Iza
+        config: {
+          enabled: true, // Si off, aucun gif n'est envoyé
+          enableExceptions: true // Si off, le gif par défaut sera envoyé dans les channels d'exception à la place du custom
+        },
+        join: {
+          default: "https://media.tenor.com/Tzi2Xy8IfFEAAAAC/iza-saute-iza.gif",
+          exceptions: {}
+        },
+        leave: {
+          default: "https://media.tenor.com/cIG7ho6lok4AAAAC/baby-hard-week.gif",
           exceptions: {}
         },
       },
@@ -196,6 +270,11 @@ let CONFIG = {
       },
       {
         id: "1165764310153302106",
+        whitelistCamera: true,
+        canEarnXP: true
+      },
+      {
+        id: "1177422281409052732",
         whitelistCamera: true,
         canEarnXP: true
       }

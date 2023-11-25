@@ -43,19 +43,19 @@ module.exports = async (client, oldState, newState) => {
   ]
 
   let specialNickname_list = [
-    { id: "526528898876440608", name: "Le souffre douleur d'Angelyne" },
-    { id: "233322709604368385", name: "Déesse Emy" },
-    { id: "904401609939886100", name: "The Mother of Dragonjons" },
-    { id: "770334301609787392", name: "Oh ! Une dév" },
-    { id: "467333274314997760", name: "Le diktateur" },
-    { id: "575402346591420447", name: "La salope du diktateur" },
-    { id: "959198467224387584", name: "La soubrette de Seikam" },
-    { id: "300399893611151361", name: "Le Jaybécois" },
-    { id: "964474149793828865", name: "Un black" },
-    { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },
-    { id: "411916947773587456", name: "Un bot inférieur à moi" },
-    { id: "461898434346221568", name: "Le chragon d'Emy" },
-    { id: "718015664975249438", name: "Je suis lesbienne mais je ne vous ai pas encore testés ET ALORS ?" },
+    { id: "526528898876440608", name: "Le souffre douleur d'Angelyne" },//Kami
+    { id: "233322709604368385", name: "Prosternez-vous devant la Reine du Lesbianisme !" },//Emy
+    { id: "904401609939886100", name: "Inclinez-vous, la Maman du Donjon" },//Angelyne
+    { id: "770334301609787392", name: "Oh ! Une dév" },//Sylicium
+    { id: "467333274314997760", name: "Le diktateur" },//Seikam
+    { id: "575402346591420447", name: "La salope du diktateur" }, //Iza
+    { id: "959198467224387584", name: "La soubrette de Seikam" },//Rapu
+    { id: "300399893611151361", name: "Le Jaybécois" },//jay
+    { id: "964474149793828865", name: "Un black" },//White
+    { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },//aragorne
+    { id: "411916947773587456", name: "Un bot inférieur à moi" },//Jackie Music
+    { id: "461898434346221568", name: "Le chragon d'Emy" },//Clo
+    { id: "718015664975249438", name: "Je suis lesbienne mais je ne vous ai pas encore testés ET ALORS ?" },//Elyxir
   ]
 
   let specialNickname = specialNickname_list.find(x => {
