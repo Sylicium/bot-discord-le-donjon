@@ -14,7 +14,7 @@ module.exports = {
   name: "embed",
   type: ApplicationCommandType.ChatInput,
   description: "votre genre",
-  // default_member_permissions: ['Administrator'],
+  default_member_permissions: ['Administrator'],
   options: [{
     name: "type",
     description: "Choisis l'embed à envoyer",
