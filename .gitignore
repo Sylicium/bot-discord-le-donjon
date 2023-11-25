@@ -1,3 +1,7 @@
 .env
 /node_modules
-/logs/*
+logs/*
+logs/mainUncaugh.log
+bot-discord-le-donjon_2.zip
+bot-discord-le-donjon.zip
+logs/mainUncaugh.log
