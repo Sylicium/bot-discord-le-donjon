@@ -61,7 +61,7 @@ let CONFIG = {
       }
     },
     users: {
-      
+      sylicium: "770334301609787392"
     },
     voiceJoinLeaveGifs: [
       {
