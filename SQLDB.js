@@ -141,7 +141,7 @@ class Database {
      * @deprecated use getUserStats(user_id)
      */
     async getUserDatas(user_id) {
-        return await this.getUserStats()
+        return this.getUserStats(user_id)
     }
     
     async getUserStats(user_id) {

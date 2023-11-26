@@ -50,9 +50,9 @@ module.exports = {
 
     const guild = client.guilds.cache.get(interaction.guild.id);
     const user = interaction.options.getUser('utilisateur') ? interaction.guild.members.cache.get(interaction.options.getUser('utilisateur').id) : interaction.member;
-    const users = await client.db._makeQuery(`SELECT * FROM users`)
+    const users = await client.db._makeQuery(`SELECT * FROM users;`)
 
-    const user_db = client.db.getUser(user.id)
+    const user_db = await client.db.getUser(user.id)
 
     if(!user_db) {
       return interaction.reply({
