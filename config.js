@@ -9,7 +9,7 @@ let CONFIG = {
   token: getToken(), // Le Donjon
   startMode: START_MODE,
   developpement: {
-    restrictedMode: true, // Only whitelisted users can interact with the bot
+    restrictedMode: false, // Only whitelisted users can interact with the bot
     whitelistedUsers: [
       "770334301609787392",
       "467333274314997760"
