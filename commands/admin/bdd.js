@@ -155,7 +155,7 @@ module.exports = {
       const user_id = target.id
       const guild_id = interaction.guild.id
 
-      const user = await client.db.getUserDatas(target.id)
+      const user = await client.db.getUserStats(target.id)
 
       if (!user) return interaction.reply({ content: `${target}, n'est pas dans la base de donnée.`, ephemeral: true });
 

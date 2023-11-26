@@ -138,12 +138,7 @@ class Database {
      * f(): Récupère toutes les statistiques d'un utilisateur donnée sur une guilde
      * @param {*} user_id - Identifiant de l'utilisateur
      * @returns Object
-     * @deprecated use getUserStats(user_id)
      */
-    async getUserDatas(user_id) {
-        return this.getUserStats(user_id)
-    }
-    
     async getUserStats(user_id) {
         let user_datas_temp = await this._makeQuery(`SELECT * FROM user_stats
         WHERE

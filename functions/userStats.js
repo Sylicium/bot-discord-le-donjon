@@ -12,8 +12,8 @@ let Temp = {
 }
 
 
-async function getUserDatas(client, user_id) {
-  return await client.db.getUserDatas(user_id)
+async function getUserStats(client, user_id) {
+  return await client.db.getUserStats(user_id)
 }
 
 
@@ -177,7 +177,7 @@ module.exports = {
         return x.id == x.channelId
       })
 
-      let user_datas = await getUserDatas(client, x.id)
+      let user_datas = await getUserStats(client, x.id)
       if(!user_datas) return;
 
       if ((voiceChannelInConfig ? voiceChannelInConfig.canEarnXP : true) && !x.selfMute && !x.selfDeaf && !x.serverDeaf && !x.serverMute && user_datas.level >= 10) {
@@ -261,7 +261,7 @@ module.exports = {
 
 async function checklevelUp(client, guild_id, user_id) {
 
-  let user_datas = await getUserDatas(client, user_id)
+  let user_datas = await getUserStats(client, user_id)
 
   if(!user_datas) return;
 

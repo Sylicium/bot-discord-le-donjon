@@ -62,7 +62,7 @@ module.exports = {
     
     const member = interaction.guild.members.cache.get(user.id);
 
-    const userDatas = await client.db.getUserDatas(user.id)
+    const userDatas = await client.db.getUserStats(user.id)
 
     if(!userDatas) {
       return interaction.reply({
