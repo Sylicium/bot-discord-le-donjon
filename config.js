@@ -8,6 +8,13 @@ function getCurrentGuildID() { return CONFIG.guildId[START_MODE] }
 let CONFIG = {
   token: getToken(), // Le Donjon
   startMode: START_MODE,
+  developpement: {
+    restrictedMode: true, // Only whitelisted users can interact with the bot
+    whitelistedUsers: [
+      "770334301609787392",
+      "467333274314997760"
+    ]
+  },
   clientId: {
     "1": "1160565576461209700", // bot prod ID
     "2": "1160598942044672000" // bot test ID

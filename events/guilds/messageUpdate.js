@@ -27,7 +27,7 @@ module.exports = async (client, oldMessage, newMessage) => {
       return `[${x.name}](${x.url})`
     }).join(", ")
 
-    console.log("fileList:",fileList)
+    // console.log("fileList:",fileList)
 
     logChannel.send({
       embeds: [
