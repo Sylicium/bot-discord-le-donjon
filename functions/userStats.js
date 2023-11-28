@@ -148,7 +148,7 @@ module.exports = {
     }, client.config.stats.img.cooldown * 1000);
   },
   addVoc: function (client) {
-
+    // console.log("[DEBUG:9APW3] addVoc 1")
     const guild = client.guilds.cache.get(client.config.getCurrentGuildID());
 
     guild.voiceStates.cache.map(async x => {
@@ -167,10 +167,11 @@ module.exports = {
 
       if (voiceChannel.members.size < n) return;
 
-      
+      // console.log("[DEBUG:9APW3] addVoc 2. user:",x.id)
       let userIsMember = await user_isMember(client, guild.id, x.id)
       if(!userIsMember) return;
 
+      // console.log("[DEBUG:9APW3] addVoc 3. user:",x.id)
       const member = guild.members.cache.get(x.id);
 
       let voiceChannelInConfig = client.config.static.voiceChannels.find(x => {
@@ -179,14 +180,16 @@ module.exports = {
 
       let user_datas = await getUserStats(client, x.id)
       if(!user_datas) return;
-
+      // console.log("[DEBUG:9APW3] addVoc 4. user:",member.user.username)
       if ((voiceChannelInConfig ? voiceChannelInConfig.canEarnXP : true) && !x.selfMute && !x.selfDeaf && !x.serverDeaf && !x.serverMute && user_datas.level >= 10) {
+        // console.log("[DEBUG:9APW3] addVoc 5. user:",member.user.username)
         if (somef.any(member._roles, [
           client.config.static.roles.porte_noire,
           client.config.static.roles.porte_rouge,
           client.config.static.roles["."]
         ])
         ) {
+          // console.log("[DEBUG:9APW3] addVoc 6. user:",member.user.username)
           client.db._makeQuery(`UPDATE user_stats
           SET minutesInVoice=minutesInVoice+1, xp=xp+?
           WHERE user_id=?`, [
@@ -194,6 +197,7 @@ module.exports = {
             x.id
           ])
         } else {
+          console.log("[DEBUG:9APW3] addVoc 7. user:",member.user.username)
           client.db._makeQuery(`UPDATE user_stats
           SET minutesInVoice=minutesInVoice+1, xp=xp+?
           WHERE user_id=?`, [
@@ -202,6 +206,7 @@ module.exports = {
           ])
         }
       } else {
+        // console.log("[DEBUG:9APW3] addVoc 8. user:",member.user.username)
         client.db._makeQuery(`UPDATE user_stats
         SET minutesInVoice=minutesInVoice+1
         WHERE user_id=?`, [
@@ -209,7 +214,7 @@ module.exports = {
           x.id
         ])
       }
-      
+      //console.log("[DEBUG:9APW3] addVoc 9. user:",member.user.username)
       checklevelUp(client, voiceChannel.guild.id, x.id);
 
       // await user.save().catch(e => console.log(e));
