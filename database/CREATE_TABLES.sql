@@ -7,7 +7,7 @@ CREATE TABLE `levels` (
   `discord_id` varchar(100) NOT NULL,
   `xp` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`discord_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 
 
 -- donjon.user_stats definition
@@ -23,7 +23,7 @@ CREATE TABLE `user_stats` (
   `level` int(10) unsigned DEFAULT 0,
   `bonus` bigint(20) unsigned DEFAULT 0,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 
 
 -- donjon.users definition
@@ -33,4 +33,4 @@ CREATE TABLE `users` (
   `isMember` tinyint(1) DEFAULT 0,
   `discord_username` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);

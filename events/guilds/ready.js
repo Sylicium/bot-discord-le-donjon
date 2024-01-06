@@ -31,7 +31,8 @@ module.exports = async (client) => {
     }
   });
 
-  cron.schedule('0 * * * *', async () => { // Toutes les heures
+ // Toutes les heures '0 * * * *',
+  cron.schedule('0 1 * * *', async () => { // Tous les jours '0 1 * * *'
     /*
     const dtb = {
       users: [],
