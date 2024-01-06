@@ -98,6 +98,13 @@ process
 
 
 
+client.on("messageCreate", (msg) => {
+    if(msg.content ==`<@${client.user.id}>`) {
+        return msg.reply({
+            content: "Oe ? c'est moi"
+        })
+    }
+})
 
 
 
