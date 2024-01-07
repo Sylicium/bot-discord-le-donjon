@@ -302,7 +302,7 @@ class new_JSONBigInt {
         return JSON.parse(json, this._reviver);
       }
 }
-module.export.JSONBigInt = new new_JSONBigInt()
+module.exports.JSONBigInt = new new_JSONBigInt()
 
 
 module.exports.isScam = isScam
