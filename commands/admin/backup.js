@@ -18,7 +18,7 @@ module.exports = {
 
     client.channels.cache.get(client.config.static.channels.backupSend).send({
       files: [{
-        attachment: Buffer.from(somef.JSONBigInt.stringify(dtb)),
+        attachment: Buffer.from(client.somef.JSONBigInt.stringify(dtb)),
         name: 'backUp.json',
       }]
     }).then(msg => {

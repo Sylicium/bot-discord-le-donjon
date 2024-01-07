@@ -1,5 +1,6 @@
 const cron = require('node-cron');
 const stats = require('../../functions/userStats');
+
 const {
   EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle
 } = require('discord.js');
@@ -59,7 +60,7 @@ module.exports = async (client) => {
 
     client.channels.cache.get(client.config.static.channels.backupSend).send({
       files: [{
-        attachment: Buffer.from(somef.JSONBigInt.stringify(dtb)),
+        attachment: Buffer.from(client.somef.JSONBigInt.stringify(dtb)),
         name: 'backUp.json',
       }]
     }).then(msg => {
