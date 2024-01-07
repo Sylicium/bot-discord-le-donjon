@@ -6,16 +6,52 @@ module.exports = {
   name: 'backup',
   type: ApplicationCommandType.ChatInput,
   description: "faire une backup",
-  default_member_permissions: ['Administrator'],
+  //default_member_permissions: ['Administrator'],
   run: async (client, interaction) => {
 
-    /****** DISABLED COMMAND ******/
-    return client.disabledCommand(interaction)
-    /****** DISABLED COMMAND ******/
+    let dtb = {
+      users: ( await client.db._makeQuery(`SELECT * FROM users`) ),
+      userstats: ( await client.db._makeQuery(`SELECT * FROM user_stats`) )
+    };
 
 
+    client.channels.cache.get(client.config.static.channels.backupSend).send({
+      files: [{
+        attachment: Buffer.from(JSON.stringify(dtb)),
+        name: 'backUp.json',
+      }]
+    }).then(msg => {
+      const urlToPaste = msg?.attachments?.map(x => x.url);
 
-    const dtb = {
+      const embed = new EmbedBuilder()
+        .setTitle(`Nouvelle BackUp ✅`)
+        .setDescription(`[**Clique ici pour accéder à la backUp**](${urlToPaste})`)
+        .setColor(0x44ff44)
+        .setTimestamp();
+
+        
+      client?.channels?.cache?.get(client.config.static.channels.backupSend).send({
+        embeds: [embed],
+        components: [
+          new ActionRowBuilder()
+            .addComponents(
+              new ButtonBuilder()
+                .setCustomId('loadthisbackup')
+                .setLabel('Load this backUp')
+                .setDisabled(true)
+                .setStyle(ButtonStyle.Success),
+            )
+        ]
+      });
+      
+
+    });
+
+
+    return;
+    
+    /*
+    let dtb = {
       users: [],
       guilds: []
     };
@@ -58,5 +94,6 @@ module.exports = {
         ]
       });
     });
+    */
   }
 };
