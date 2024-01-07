@@ -9,6 +9,15 @@ module.exports = {
   //default_member_permissions: ['Administrator'],
   run: async (client, interaction) => {
 
+
+    function toObject() {
+      return JSON.parse(JSON.stringify(this, (key, value) =>
+          typeof value === 'bigint'
+              ? value.toString()
+              : value // return everything else unchanged
+      ));
+    }
+
     let dtb = {
       users: ( await client.db._makeQuery(`SELECT * FROM users`) ),
       userstats: ( await client.db._makeQuery(`SELECT * FROM user_stats`) )
@@ -17,7 +26,7 @@ module.exports = {
 
     client.channels.cache.get(client.config.static.channels.backupSend).send({
       files: [{
-        attachment: Buffer.from(JSON.stringify(dtb)),
+        attachment: Buffer.from(toObject(dtb)),
         name: 'backUp.json',
       }]
     }).then(msg => {
