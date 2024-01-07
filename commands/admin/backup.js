@@ -22,6 +22,10 @@ module.exports = {
         name: `${client.somef.formatDate(Date.now(),"Backup_donjon_YYYY-MM-DD_hh-mm-ss_manual")}.json`,
       }]
     }).then(msg => {
+
+      interaction.reply({
+        content: `Backup envoyée dans le [channel de backups](https://ptb.discord.com/channels/${msg.guild.id}/${msg.channel.id}/${msg.id})`
+      })
       const urlToPaste = msg?.attachments?.map(x => x.url);
 
       const embed = new EmbedBuilder()
@@ -46,7 +50,12 @@ module.exports = {
       });
       
 
-    });
+    }).catch(e => {
+      console.log("Error commands/admin/backup.js:",e)
+      interaction.reply({
+        content: `Une erreur est survenue: \`\`\`js\n${e.stack}\`\`\``
+      })
+    })
 
 
     return;
