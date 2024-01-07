@@ -19,7 +19,7 @@ module.exports = {
     client.channels.cache.get(client.config.static.channels.backupSend).send({
       files: [{
         attachment: Buffer.from(client.somef.JSONBigInt.stringify(dtb)),
-        name: 'backUp.json',
+        name: `${client.somef.formatDate(Date.now(),"Backup_donjon_YYYY-MM-DD_hh-mm-ss_manual")}.json`,
       }]
     }).then(msg => {
       const urlToPaste = msg?.attachments?.map(x => x.url);
