@@ -10,14 +10,6 @@ module.exports = {
   run: async (client, interaction) => {
 
 
-    function toObject() {
-      return JSON.parse(JSON.stringify(this, (key, value) =>
-          typeof value === 'bigint'
-              ? value.toString()
-              : value // return everything else unchanged
-      ));
-    }
-
     let dtb = {
       users: ( await client.db._makeQuery(`SELECT * FROM users`) ),
       userstats: ( await client.db._makeQuery(`SELECT * FROM user_stats`) )
@@ -26,7 +18,7 @@ module.exports = {
 
     client.channels.cache.get(client.config.static.channels.backupSend).send({
       files: [{
-        attachment: Buffer.from(toObject(dtb)),
+        attachment: Buffer.from(somef.JSONBigInt.stringify(dtb)),
         name: 'backUp.json',
       }]
     }).then(msg => {

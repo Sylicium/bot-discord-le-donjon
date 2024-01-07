@@ -1,15 +1,27 @@
 
 /**
- * @version 2.1.10 // 10/10/2023
+ * @version 3.3.0 // 07/01/2024
  * @author Sylicium
  * @description Module someFunction qui réunit plein de fonction utiles
  * @github https://github.com/Sylicium/someScripts/edit/main/modules/someFunctions.js
 */
 
-
+/* Import modules */
 const fs = require("fs")
 const node_crypto = require('node:crypto');
 
+try {
+    let config = require("../config")
+
+    module.exports.isSuperAdmin = isSuperAdmin
+    /**
+     * f() : Booléen qui retourne true si l'ID est celui d'un SuperAdmin
+     * @param {string} user_id - L'id de l'utilisateur a check
+     */
+    function isSuperAdmin(user_id) {
+        return ( config.superAdminList.indexOf(user_id) != -1 )
+    }
+} catch(e) { console.log("[WARN someFunctions.js] Did not loaded isSuperAdmin() due to error.") }
 
 module.exports.shuffle = shuffle
 /**
@@ -28,6 +40,7 @@ module.exports.randInt = randInt
  * f() : Renvoie un nombre entier aléatoire entre min (inclu) et max (exclu)
  * @param {Number} min - La nombre minimum (inclu)
  * @param {Number} max - La nombre maximum (exclu)
+ * @deprecated Use Random.randInt()
  */
 function randInt(min, max) {
     return Math.floor(Math.random()*(max-min)+min)
@@ -37,6 +50,7 @@ module.exports.randFloat = randFloat
  * f() : Renvoie un nombre flotant aléatoire entre min (inclu) et max (exclu)
  * @param {Number} min - La nombre minimum (inclu)
  * @param {Number} max - La nombre maximum (exclu)
+ * @deprecated Use Random.randFloat()
  */
 function randFloat(min, max) {
     return Math.random()*(max-min)
@@ -55,6 +69,7 @@ module.exports.choice = choice
 /**
  * f() : Retourne un élément àléatoire de la liste
  * @param {Array} list - La liste en entrée
+ * @deprecated Use Random.choice()
  */
 function choice(list) {
     return list[Math.floor(Math.random()*list.length)]
@@ -65,17 +80,88 @@ module.exports.genHex = genHex
  * f() : Retourne une chaine héxadécimale de la longueur voulue
  * @param {Number} length - Longueur de la chaine voulue
  * @param {Boolean} capitalize - Mettre la chaine en caractères majuscule
+ * @deprecated use Random.randHex()
  */
 function genHex(length, capitalize=false) {
     let str = [...Array(length)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
     return (capitalize ? str.toUpperCase() : str.toLowerCase())
 }
 
+class new_Random {
+    constructor() {
+        this.version = "1.0.0"
+    }
+
+    /**
+     * f() : Retourne une chaine héxadécimale de la longueur voulue
+     * @param {Number} length - Longueur de la chaine voulue
+     * @param {Boolean} capitalize - Mettre la chaine en caractères majuscule
+     * @deprecated use Random.randHex()
+     */
+    randHex(length, capitalize=false) {
+        let str = [...Array(length)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+        return (capitalize ? str.toUpperCase() : str.toLowerCase())
+    }
+
+    /**
+     * f() : Renvoie un nombre entier aléatoire entre min (inclu) et max (exclu)
+     * @param {Number} min - La nombre minimum (inclu)
+     * @param {Number} max - La nombre maximum (exclu)
+     * @returns {Number}
+     */
+    randInt(min, max) {
+        return Math.floor(Math.random()*(max-min)+min)
+    }
+
+    /**
+     * f() : Renvoie un nombre flotant aléatoire entre min (inclu) et max (exclu)
+     * @param {Float} min - La nombre minimum (inclu)
+     * @param {Float} max - La nombre maximum (exclu)
+     * @returns {Float}
+     */
+    randFloat(min, max) {
+        return Math.random()*(max-min)
+    }
+
+    /**
+     * f() : Mélange aléatoirement la liste donnée.
+     * @param {Array} list - La liste a mélanger
+     * @returns {Array}
+     */
+    shuffle(list) {
+        for (let i = list.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [list[i], list[j]] = [list[j], list[i]];
+        }
+    }
+
+    /**
+     * f() : Retourne un élément àléatoire de la liste
+     * @param {Array} list - La liste en entrée
+     */
+    choice(list) {
+        return list[Math.floor(Math.random()*list.length)]
+    }
+
+    /**
+     * f() : Retourne une chaine aléatoire de la longueur voulue contenant des lettres minusules et majuscules ainsi que des chiffres
+     * @param {Number} length - Longueur de la chaine voulue
+     * @param {Boolean} list - Mettre la chaine en caractères majuscule
+     */
+    randString(length, charList=undefined) {
+        charList = charList || "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
+        return [...Array(length)].map((x) => choice(charList)).join('');
+    }
+}
+module.exports.Random = new new_Random()
+
+
 module.exports.randomString = randomString
 /**
  * f() : Retourne une chaine aléatoire de la longueur voulue contenant des lettres minusules et majuscules ainsi que des chiffres
  * @param {Number} length - Longueur de la chaine voulue
  * @param {Boolean} list - Mettre la chaine en caractères majuscule
+ * @deprecated Use Random.randString()
  */
 function randomString(length, charList) {
     charList = charList || "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
@@ -100,23 +186,22 @@ function any(list, list_two, caseSensitive=true) {
     return false
 }
 
-module.exports.anyWordInText = anyWordInText
+module.exports.arrayToChunks = arrayToChunks
 /**
- * f() : Retourne true si au moins 1 élément se trouve dans le texte
- * @param {String} text - Le texte
- * @param {Array} list - La liste
- * @param {Boolean} caseSensitive - Prendre en compte ou non la casse. Default: true
+ * f() : Retourne une liste contenant des chunks de la liste donnée, de taille maximum specifié
+ * @param {Array} list - La liste qui doit être découpée en chunks
+ * @param {Number} chunkSize - La taille maximum d'un chunk
+ * @returns Array
  */
-function anyWordInText(text, list, caseSensitive=true) {
-    if(!caseSensitive) {
-        list = list.map(f=>{ return f.toLowerCase(); });
-        text = text.toLowerCase()
-    }
-    for(let i in list) {
-        if(text.indexOf(list[i]) != -1) return true
-    }
-    return false
-}
+function arrayToChunks(list, chunkSize) {
+    if(list == undefined || !Array.isArray(list)) throw new Error("list must be type of Array.")
+    if(chunkSize == undefined || typeof chunkSize != 'number' || !Number.isInteger(chunkSize) || chunkSize<=0) throw new Error("Chunk size must me a valid positive integer > 0")
+    return list.reduce((all,one,i) => {
+        const ch = Math.floor(i/chunkSize); 
+        all[ch] = [].concat((all[ch]||[]),one); 
+        return all
+    }, [])
+} 
 
 module.exports.all = all
 /**
@@ -137,10 +222,94 @@ function all(from_list, list_in, caseSensitive=true) {
     return true
 }
 
+module.exports.anyWordInText = isBufferEqual
+/**
+ * isBufferEqual() : Compare deux buffer en XOR. Résiste au time attack.
+ * @param {String} a - Premier buffer
+ * @param {Array} b - Deuxieme buffer
+ * @returns {Boolean} - Booléen
+ */
+function isBufferEqual(a,b) {
+    // shortcutting on type is necessary for correctness
+    if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+        return false;
+    }
+    
+    // buffer sizes should be well-known information, so despite this
+    // shortcutting, it doesn't leak any information about the *contents* of the
+    // buffers.
+    if (a.length !== b.length) {
+        return false;
+    }
+    
+    var c = 0;
+    for (var i = 0; i < a.length; i++) {
+        /*jshint bitwise:false */
+        c |= a[i] ^ b[i]; // XOR
+    }
+    return c === 0;
+}
+
+module.exports.anyWordInText = anyWordInText
+/**
+ * f() : Retourne true si au moins 1 élément se trouve dans le texte
+ * @param {String} text - Le texte
+ * @param {Array} list - La liste
+ * @param {Boolean} caseSensitive - Prendre en compte ou non la casse. Default: true
+ */
+function anyWordInText(text, list, caseSensitive=true) {
+    if(!caseSensitive) {
+        list = list.map(f=>{ return f.toLowerCase(); });
+        text = text.toLowerCase()
+    }
+    for(let i in list) {
+        if(text.indexOf(list[i]) != -1) return true
+    }
+    return false
+}
+
+/**
+f(): Permet de faire des JSON.parse() et JSON.stringify() qui supporte les BigInt
+*/
+class new_JSONBigInt {
+      constructor() {}
+      parse(json) {
+        return this._forceParse(json)
+      }
+      stringify(json) {
+        return this._forceStringify(json)
+      }
+      _replacer(key, value) {
+        if (typeof value === 'bigint') {
+          return {
+            type: 'bigint',
+            value: value.toString()
+          };
+        } else {
+          return value;
+        }
+      }
+      _reviver(key, value) {
+        if (value && value.type == 'bigint') {
+          return BigInt(value.value);  
+        }
+        return value;
+      }
+      _forceStringify(json) {
+        return JSON.stringify(json, this._replacer);
+      }
+      _forceParse(json) {
+        return JSON.parse(json, this._reviver);
+      }
+}
+module.export.JSONBigInt = new new_JSONBigInt()
+
+
 module.exports.isScam = isScam
 /**
  * f() : Renvoie True si le texte entré est détecté comme une arnaque Version 1.1.1 | 21/06/2022
  * @param {String} text - La chaine de texte à tester
+ * @author Sylicium
  */
 function isScam(text) {
     /*
@@ -273,6 +442,21 @@ module.exports.createHash = createHash
 
 let _normalize = (str) => { return (`${str}`.normalize('NFKD').replace(/[^\w ]/g, '')).toLowerCase().replace(/\s+/g, ' ').trim() }
 module.exports._normalize = _normalize
+
+
+module.exports.splitAndJoin = splitAndJoin
+/**
+ * splitAndJoin() : remplace toutes les clé du dictionnaire donné par sa valeur
+ * @param {String} text - Le texte à traiter
+ * @param {Object} dict - Le dictionnaire sous la forme { "replaceFrom": "replaceTo", "replaceFrom2": "replaceTo2" }
+ */
+function splitAndJoin(text, dict) {
+    let new_text = text
+    for(let key in dict) {
+        new_text = new_text.split(key).join(dict[key])
+    }
+    return new_text
+}
 
 let _normalizeRegex = (str) => {
     return `(${splitAndJoin(_normalize(str.toLowerCase().trim()), {
@@ -508,3 +692,16 @@ module.exports.sleep = sleep
 /*******************************************************/
 /*******************************************************/
 /*******************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+

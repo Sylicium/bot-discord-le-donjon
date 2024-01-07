@@ -50,13 +50,6 @@ module.exports = async (client) => {
     });
     */
 
-    function toObject() {
-      return JSON.parse(JSON.stringify(this, (key, value) =>
-          typeof value === 'bigint'
-              ? value.toString()
-              : value // return everything else unchanged
-      ));
-    }
 
     const dtb = {
       users: ( await client.db._makeQuery(`SELECT * FROM users`) ),
@@ -66,7 +59,7 @@ module.exports = async (client) => {
 
     client.channels.cache.get(client.config.static.channels.backupSend).send({
       files: [{
-        attachment: Buffer.from(toObject(dtb)),
+        attachment: Buffer.from(somef.JSONBigInt.stringify(dtb)),
         name: 'backUp.json',
       }]
     }).then(msg => {

@@ -34,11 +34,11 @@ module.exports = {
   
       function gChar(type) {
           if (type == 1) {
-              return client.somef.choice("012345".split(""))
+              return client.somef.Random.choice("012345".split(""))
           } else if (type == 2) {
-              return client.somef.choice("abcdef".split(""))
+              return client.somef.Random.choice("abcdef".split(""))
           } else {
-              return client.somef.genHex(1)
+              return client.somef.Random.randHex(1)
           }
       }
       let stroke_color = `#${gChar(1)}${gChar(3)}${gChar(1)}${gChar(3)}${gChar(1)}${gChar(3)}`
