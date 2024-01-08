@@ -353,14 +353,14 @@ let CONFIG = {
     voiceChannels: [
       {
         //name: "Bar",
-        voiceID: "1161066145453969448",
+        id: "1161066145453969448",
         whitelistCamera: false,
         canEarnXP: true,
         noMicChannel_roleID: "1161065670138662963"
       },
       {
         //name: "Cocoon",
-        voiceID: "1165025400376795316",
+        id: "1165025400376795316",
         whitelistCamera: false,
         canEarnXP: true,
         noMicChannel_roleID: "1165024794920624198"
