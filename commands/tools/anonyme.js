@@ -49,18 +49,18 @@ module.exports = {
 
 
 		
-		function isParentIDokFor(parentID) {
-			return (interaction.channel.parent?.id != parentID
-				&& interaction.channel.parent?.parent?.id != parentID
-				&& interaction.channel.parent?.parent?.parent?.id != parentID
+		function isParentIDequalTo(parentID) {
+			return (interaction.channel.parent?.id == parentID
+				|| interaction.channel.parent?.parent?.id == parentID
+				|| interaction.channel.parent?.parent?.parent?.id == parentID
 			)
 		}
 
 		if(
-			!isParentIDokFor(client.config.static.categories.animation)
-			&& !isParentIDokFor(client.config.static.categories.corridor)
+			!isParentIDequalTo(client.config.static.categories.animation)
+			&& !isParentIDequalTo(client.config.static.categories.corridor)
 		) return interaction.reply({
-			content: `Impossible d'utiliser la commande en dehors de la catégorie Animation !`,
+			content: `Impossible d'utiliser la commande en dehors de la catégorie Animation et Corridor !`,
 			ephemeral: true
 		})
 		
@@ -77,7 +77,7 @@ module.exports = {
 			return !!x
 		})
 
-		console.log("fichier:",fichiers)
+		// console.log("/anonyme -> fichier:",fichiers)
 
 		interaction.channel.send({
 			content: `> **Message anonyme**\n\n${message}`,
