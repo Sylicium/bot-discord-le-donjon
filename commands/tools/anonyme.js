@@ -1,4 +1,4 @@
-const Discord= require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
 	name: 'anonyme',
@@ -88,7 +88,7 @@ module.exports = {
 			let logMessage = await logChannel.send({
 				embed: [
 					new Discord.EmbedBuilder()
-						.setTitle("/anonyme")
+						.setTitle("-anonyme")
 						.setAuthor({ name: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
 						.setColor("00FF00")
 						.setDescription([
