@@ -19,7 +19,7 @@ module.exports = async (client, oldState, newState) => {
     return (
       x.hasOwnProperty("noMicChannel_roleID")
       && x.noMicChannel_roleID
-      && client.guilds.cache.get(config.getCurrentGuildID()).roles.cache.get(x.all_channels_with_no_mic) != undefined
+      && client.guilds.cache.get(client.config.getCurrentGuildID()).roles.cache.get(x.all_channels_with_no_mic) != undefined
     )
   })
 
