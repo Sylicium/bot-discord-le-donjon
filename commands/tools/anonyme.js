@@ -157,7 +157,7 @@ module.exports = {
 							embeds: [
 								new Discord.EmbedBuilder()
 									.setTitle("/anonyme")
-									.setAuthor({ user: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
+									.setAuthor({ name: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
 									.setColor("FF0000")
 									.setDescription([
 										`❌ **Envoi annulé par le membre.**`,
@@ -182,6 +182,7 @@ module.exports = {
 							ephemeral: true
 						})
 					} catch(e) {
+						console.log(e)
 						interaction.editReply({
 							embeds: [
 								new Discord.EmbedBuilder()
