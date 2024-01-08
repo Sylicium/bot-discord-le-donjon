@@ -44,13 +44,6 @@ module.exports = async (client, oldState, newState) => {
   }
 
   if(oldState.channelId != newState.channelId) {
-    let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(configVoiceChannel => {
-      return configVoiceChannel.id == newState.channelId
-    })
-    if(temp1_chan_no_mic_list.length > 0){
-      let temp1_chan_no_mic = temp1_chan_no_mic_list[0]
-      newState.member.roles.add(temp1_chan_no_mic.noMicChannel_roleID)
-    }
     
     let temp2_chan_no_mic_list = all_channels_with_no_mic.filter(configVoiceChannel => {
       return configVoiceChannel.id == oldState.channelId
@@ -59,6 +52,15 @@ module.exports = async (client, oldState, newState) => {
       let temp2_chan_no_mic = temp2_chan_no_mic_list[0]
       newState.member.roles.remove(temp2_chan_no_mic.noMicChannel_roleID)
     }
+    
+    let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(configVoiceChannel => {
+      return configVoiceChannel.id == newState.channelId
+    })
+    if(temp1_chan_no_mic_list.length > 0){
+      let temp1_chan_no_mic = temp1_chan_no_mic_list[0]
+      newState.member.roles.add(temp1_chan_no_mic.noMicChannel_roleID)
+    }
+    
   }
 
 

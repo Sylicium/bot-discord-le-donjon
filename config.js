@@ -99,8 +99,8 @@ let CONFIG = {
         id: "770334301609787392",//Sylicium
         name: "Oh ! Une dév",
         voice: {
-          join: "dev1", // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
-          leave: "dev2"
+          join: false, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: false
         }
       },
       {
