@@ -89,7 +89,7 @@ module.exports = {
 				embed: [
 					new Discord.EmbedBuilder()
 						.setTitle("/anonyme")
-						.setAuthor({ user: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
+						.setAuthor({ name: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
 						.setColor("00FF00")
 						.setDescription([
 							`Membre: <@${interaction.user.id}>`,
