@@ -24,11 +24,22 @@ module.exports = async (client, oldState, newState) => {
   })
 
   let specialNickname_list = client.config.static.specialNicknames
-
-  let specialNickname = specialNickname_list.find(x => {
+  let _specialNickname_value = specialNickname_list.find(x => {
     return x.id == newState.member.id
-  })?.name ?? null
-
+  }) ?? null
+  
+  let specialNickname = {}
+  specialNickname.getDefault = () => { return _specialNickname_value.name ?? (newState.member.nickname || newState.member.user.username) }
+  specialNickname.getJoin = () => {
+    if(_specialNickname_value.voice.join == true) return specialNickname.getDefault()
+    else if(typeof _specialNickname_value.voice.join == 'string') return _specialNickname_value.voice.join
+    else { return (newState.member.nickname || newState.member.user.username) }
+  }
+  specialNickname.getLeave = () => {
+    if(_specialNickname_value.voice.leave == true) return specialNickname.getDefault()
+    else if(typeof _specialNickname_value.voice.leave == 'string') return _specialNickname_value.voice.leave
+    else { return (newState.member.nickname || newState.member.user.username) }
+  }
 
   if(oldState.channelId != newState.channelId) {
     let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(configVoiceChannel => {
@@ -75,7 +86,7 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `${specialNickname ?? member.nickname ?? member.user.username} est arrivé !`, iconURL: member.displayAvatarURL() })
+            .setAuthor({ name: `${specialNickname.getJoin()} est arrivé !`, iconURL: member.displayAvatarURL() })
             .setColor("00FF00")
         ]
       }).catch(e => {
@@ -128,7 +139,7 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `${specialNickname ?? member.nickname ?? member.user.username} est parti ..`, iconURL: member.displayAvatarURL() })
+            .setAuthor({ name: `${specialNickname.getLeave()} est parti ..`, iconURL: member.displayAvatarURL() })
             .setColor("FF0000")
         ]
       }).catch(e => {

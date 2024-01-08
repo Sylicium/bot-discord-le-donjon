@@ -71,19 +71,110 @@ let CONFIG = {
       sylicium: "770334301609787392"
     },
     specialNicknames: [
-      { id: "526528898876440608", name: "Le souffre douleur d'Angelyne" },//Kami
-      { id: "233322709604368385", name: "Prosternez-vous devant la Reine du Lesbianisme !" },//Emy
-      { id: "904401609939886100", name: "Inclinez-vous, la Maman du Donjon" },//Angelyne
-      { id: "770334301609787392", name: "Oh ! Une dév" },//Sylicium
-      { id: "467333274314997760", name: "Le diktateur" },//Seikam
-      { id: "575402346591420447", name: "La salope du diktateur" }, //Iza
-      { id: "959198467224387584", name: "La soubrette de Seikam" },//Rapu
-      { id: "300399893611151361", name: "Le Jaybécois" },//jay
-      { id: "964474149793828865", name: "Un black" },//White
-      { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },//aragorne
-      { id: "411916947773587456", name: "Un bot inférieur à moi" },//Jackie Music
-      { id: "461898434346221568", name: "Le chragon d'Emy" },//Clo
-      { id: "718015664975249438", name: "Je suis lesbienne mais je ne vous ai pas encore testés ET ALORS ?" },//Elyxir
+      {
+        id: "526528898876440608", //Kami
+        name: "Le souffre douleur d'Angelyne",
+        voice: {
+          join: true, // true = default special name, de au dessus, false = aucun (pseudo discord par défaut), et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "233322709604368385",//Emy
+        name: "Prosternez-vous devant la Reine du Lesbianisme !",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "904401609939886100",//Angelyne
+        name: "Inclinez-vous, la Maman du Donjon",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "770334301609787392",//Sylicium
+        name: "Oh ! Une dév",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "467333274314997760",//Seikam
+        name: "Le diktateur",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "575402346591420447",//Iza
+        name: "La salope du diktateur",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "959198467224387584",//Rapu
+        name: "La soubrette de Seikam",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "300399893611151361",//jay
+        name: "Le Jaybécois",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "964474149793828865",//White
+        name: "Un black",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "262306247628423168",//aragorne
+        name: "J'aime les elfes, car j'en suis un",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "411916947773587456",//Jackie Music
+        name: "Un bot inférieur à moi",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "461898434346221568",//Clo
+        name: "Le chragon d'Emy",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
+      {
+        id: "718015664975249438",//Elyxir
+        name: "Je suis lesbienne mais je ne vous ai pas encore testés ET ALORS ?",
+        voice: {
+          join: true, // true = default name, de au dessus, false = aucun, et "quelque chose" = un truc précis
+          leave: true
+        }
+      },
     ],
     voiceJoinLeaveGifs: [
       {
