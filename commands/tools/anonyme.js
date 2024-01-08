@@ -86,9 +86,9 @@ module.exports = {
 			let logChannel = await client.channels.cache.get(client.config.static.logChannels.command_anonyme)
 
 			let logMessage = await logChannel.send({
-				embed: [
+				embeds: [
 					new Discord.EmbedBuilder()
-						.setTitle("-anonyme")
+						.setTitle("/anonyme")
 						.setAuthor({ name: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
 						.setColor("00FF00")
 						.setDescription([
@@ -154,7 +154,7 @@ module.exports = {
 						await msg_anonyme.delete()
 
 						logMessage.edit({
-							embed: [
+							embeds: [
 								new Discord.EmbedBuilder()
 									.setTitle("/anonyme")
 									.setAuthor({ user: `Par ${interaction.member.nickname ?? interaction.user.username}`, iconURL: interaction.member.displayAvatarURL() })
