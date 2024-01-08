@@ -70,6 +70,21 @@ let CONFIG = {
     users: {
       sylicium: "770334301609787392"
     },
+    specialNicknames: [
+      { id: "526528898876440608", name: "Le souffre douleur d'Angelyne" },//Kami
+      { id: "233322709604368385", name: "Prosternez-vous devant la Reine du Lesbianisme !" },//Emy
+      { id: "904401609939886100", name: "Inclinez-vous, la Maman du Donjon" },//Angelyne
+      { id: "770334301609787392", name: "Oh ! Une dév" },//Sylicium
+      { id: "467333274314997760", name: "Le diktateur" },//Seikam
+      { id: "575402346591420447", name: "La salope du diktateur" }, //Iza
+      { id: "959198467224387584", name: "La soubrette de Seikam" },//Rapu
+      { id: "300399893611151361", name: "Le Jaybécois" },//jay
+      { id: "964474149793828865", name: "Un black" },//White
+      { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },//aragorne
+      { id: "411916947773587456", name: "Un bot inférieur à moi" },//Jackie Music
+      { id: "461898434346221568", name: "Le chragon d'Emy" },//Clo
+      { id: "718015664975249438", name: "Je suis lesbienne mais je ne vous ai pas encore testés ET ALORS ?" },//Elyxir
+    ],
     voiceJoinLeaveGifs: [
       {
         userID: "467333274314997760", // seikam
@@ -246,44 +261,68 @@ let CONFIG = {
     },
     voiceChannels: [
       {
-        id: "1161068132484526081",
-        whitelistCamera: true,
-        canEarnXP: true
+        //name: "Bar",
+        voiceID: "1161066145453969448",
+        whitelistCamera: false,
+        canEarnXP: true,
+        noMicChannel_roleID: "1161065670138662963"
       },
       {
+        //name: "Cocoon",
+        voiceID: "1165025400376795316",
+        whitelistCamera: false,
+        canEarnXP: true,
+        noMicChannel_roleID: "1165024794920624198"
+      },
+      {
+        //name: "Chambre noire",
+        id: "1161068132484526081",
+        whitelistCamera: true,
+        canEarnXP: true,
+        noMicChannel_roleID: "1161065752170868747",
+      },
+      {
+        //name: "duo",
         id: "1161066757881069568",
         whitelistCamera: true,
-        canEarnXP: true
+        canEarnXP: true,
+        noMicChannel_roleID: "1161065722022199437",
       },
       {
         id: "1162498653617934376",
         whitelistCamera: true,
-        canEarnXP: true
+        canEarnXP: true,
+        noMicChannel_roleID: false
       },
       {
         id: "1160282909480079400",
         whitelistCamera: true,
-        canEarnXP: true
+        canEarnXP: true,
+        noMicChannel_roleID: false
       },
       {
         id: "1159895568789811211",
         whitelistCamera: true,
-        canEarnXP: true
+        canEarnXP: true,
+        noMicChannel_roleID: false
       },
       {
         id: "1174897729676259369",
         whitelistCamera: true,
-        canEarnXP: true
+        canEarnXP: true,
+        noMicChannel_roleID: false
       },
       {
         id: "1165764310153302106",
         whitelistCamera: true,
-        canEarnXP: true
+        canEarnXP: true,
+        noMicChannel_roleID: false
       },
       {
         id: "1177422281409052732",
         whitelistCamera: true,
-        canEarnXP: true
+        canEarnXP: true,
+        noMicChannel_roleID: false
       }
     ]
   },

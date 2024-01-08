@@ -162,3 +162,64 @@ File created on 10/10/2023, 20:37:31
 [11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.js:282:31)
 [11/10/2023, 20:50:35 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\Sylicium\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
 [11/10/2023, 20:50:35 ERROR] (unknown): 
+[06/01/2024 22:34:56 ERROR] (unknown): Unhandled Rejection (process.on handle) Error [TokenInvalid]: An invalid token was provided.
+[06/01/2024 22:34:56 ERROR] (unknown):     at Client.login (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\Client.js:216:52)
+[06/01/2024 22:34:56 ERROR] (unknown):     at Object.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\main.js:51:8)
+[06/01/2024 22:34:56 ERROR] (unknown):     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[06/01/2024 22:34:56 ERROR] (unknown):     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[06/01/2024 22:34:56 ERROR] (unknown):     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[06/01/2024 22:34:56 ERROR] (unknown):     at Module._load (node:internal/modules/cjs/loader:958:12)
+[06/01/2024 22:34:56 ERROR] (unknown):     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+[06/01/2024 22:34:56 ERROR] (unknown):     at node:internal/main/run_main_module:23:47
+[06/01/2024 22:34:56 ERROR] (unknown): 
+[06/01/2024 22:36:36 ERROR] (unknown): Unhandled Rejection (process.on handle) Error [TokenInvalid]: An invalid token was provided.
+[06/01/2024 22:36:36 ERROR] (unknown):     at Client.login (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\Client.js:216:52)
+[06/01/2024 22:36:36 ERROR] (unknown):     at Object.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\main.js:51:8)
+[06/01/2024 22:36:36 ERROR] (unknown):     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[06/01/2024 22:36:36 ERROR] (unknown):     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[06/01/2024 22:36:36 ERROR] (unknown):     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[06/01/2024 22:36:36 ERROR] (unknown):     at Module._load (node:internal/modules/cjs/loader:958:12)
+[06/01/2024 22:36:36 ERROR] (unknown):     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+[06/01/2024 22:36:36 ERROR] (unknown):     at node:internal/main/run_main_module:23:47
+[06/01/2024 22:36:36 ERROR] (unknown): 
+[06/01/2024 22:39:49 ERROR] (unknown): Unhandled Rejection (process.on handle) TypeError: msg.mentions.includes is not a function
+[06/01/2024 22:39:49 ERROR] (unknown):     at Client.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\main.js:102:21)
+[06/01/2024 22:39:49 ERROR] (unknown):     at Client.emit (node:events:525:35)
+[06/01/2024 22:39:49 ERROR] (unknown):     at MessageCreateAction.handle (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\MessageCreate.js:28:14)
+[06/01/2024 22:39:49 ERROR] (unknown):     at module.exports [as MESSAGE_CREATE] (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+[06/01/2024 22:39:49 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[06/01/2024 22:39:49 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[06/01/2024 22:39:49 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.cjs:282:31)
+[06/01/2024 22:39:49 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[06/01/2024 22:39:49 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.cjs:282:31)
+[06/01/2024 22:39:49 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[06/01/2024 22:39:49 ERROR] (unknown): 
+[06/01/2024 22:39:59 ERROR] (unknown): Unhandled Rejection (process.on handle) TypeError: Cannot read properties of undefined (reading 'length')
+[06/01/2024 22:39:59 ERROR] (unknown):     at Database.getUser (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\SQLDB.js:157:33)
+[06/01/2024 22:39:59 ERROR] (unknown):     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[06/01/2024 22:39:59 ERROR] (unknown):     at async user_isMember (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\functions\userStats.js:29:16)
+[06/01/2024 22:39:59 ERROR] (unknown):     at async Object.addMess (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\functions\userStats.js:51:24)
+[06/01/2024 22:39:59 ERROR] (unknown): 
+[06/01/2024 22:40:11 ERROR] (unknown): Unhandled Rejection (process.on handle) TypeError: Cannot read properties of undefined (reading 'length')
+[06/01/2024 22:40:11 ERROR] (unknown):     at Database.getUser (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\SQLDB.js:157:33)
+[06/01/2024 22:40:11 ERROR] (unknown):     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[06/01/2024 22:40:11 ERROR] (unknown):     at async Object.sendProfile (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\functions\canvasCmd.js:55:21)
+[06/01/2024 22:40:11 ERROR] (unknown): 
+[06/01/2024 22:40:12 ERROR] (unknown): Unhandled Rejection (process.on handle) TypeError: msg.mentions.includes is not a function
+[06/01/2024 22:40:12 ERROR] (unknown):     at Client.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\main.js:102:21)
+[06/01/2024 22:40:12 ERROR] (unknown):     at Client.emit (node:events:525:35)
+[06/01/2024 22:40:12 ERROR] (unknown):     at MessageCreateAction.handle (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\actions\MessageCreate.js:28:14)
+[06/01/2024 22:40:12 ERROR] (unknown):     at module.exports [as MESSAGE_CREATE] (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\handlers\MESSAGE_CREATE.js:4:32)
+[06/01/2024 22:40:12 ERROR] (unknown):     at WebSocketManager.handlePacket (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:355:31)
+[06/01/2024 22:40:12 ERROR] (unknown):     at WebSocketManager.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\discord.js\src\client\websocket\WebSocketManager.js:239:12)
+[06/01/2024 22:40:12 ERROR] (unknown):     at WebSocketManager.emit (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.cjs:282:31)
+[06/01/2024 22:40:12 ERROR] (unknown):     at WebSocketShard.<anonymous> (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:1173:51)
+[06/01/2024 22:40:12 ERROR] (unknown):     at WebSocketShard.emit (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@vladfrangu\async_event_emitter\dist\index.cjs:282:31)
+[06/01/2024 22:40:12 ERROR] (unknown):     at WebSocketShard.onMessage (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\node_modules\@discordjs\ws\dist\index.js:988:14)
+[06/01/2024 22:40:12 ERROR] (unknown): 
+[06/01/2024 22:40:43 ERROR] (unknown): Unhandled Rejection (process.on handle) TypeError: Cannot read properties of undefined (reading 'length')
+[06/01/2024 22:40:43 ERROR] (unknown):     at Database.getUser (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\SQLDB.js:157:33)
+[06/01/2024 22:40:43 ERROR] (unknown):     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[06/01/2024 22:40:43 ERROR] (unknown):     at async user_isMember (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\functions\userStats.js:29:16)
+[06/01/2024 22:40:43 ERROR] (unknown):     at async Object.addMess (C:\Users\33695\Documents\GitHub\bot-discord-le-donjon\functions\userStats.js:51:24)
+[06/01/2024 22:40:43 ERROR] (unknown): 

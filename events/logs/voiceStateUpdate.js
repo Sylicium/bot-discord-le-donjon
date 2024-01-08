@@ -15,48 +15,15 @@ module.exports = async (client, oldState, newState) => {
   // console.log("member.user.displayAvatarURL",member.user.displayAvatarURL())
   
 
-  let all_channels_with_no_mic = [
-    {
-      name: "Bar",
-      voiceID: "1161066145453969448",
-      noMicroID: "1163904727768109056",
-      roleID: "1161065670138662963"
-    },
-    {
-      name: "Cocoon",
-      voiceID: "1165025400376795316",
-      noMicroID: "1165024738146529370",
-      roleID: "1165024794920624198"
-    },
-    {
-      name: "Chambre noire",
-      voiceID: "1161068132484526081",
-      noMicroID: "1164117124873207818",
-      roleID: "1161065752170868747"
-    },
-    {
-      name: "duo",
-      voiceID: "1161066757881069568",
-      noMicroID: "1164726981976412191",
-      roleID: "1161065722022199437"
-    }
-  ]
+  let all_channels_with_no_mic = client.config.static.voiceChannels.filter(x => {
+    return (
+      x.hasOwnProperty("noMicChannel_roleID")
+      && x.noMicChannel_roleID
+      && client.guilds.cache.get(config.getCurrentGuildID()).roles.cache.get(x.all_channels_with_no_mic) != undefined
+    )
+  })
 
-  let specialNickname_list = [
-    { id: "526528898876440608", name: "Le souffre douleur d'Angelyne" },//Kami
-    { id: "233322709604368385", name: "Prosternez-vous devant la Reine du Lesbianisme !" },//Emy
-    { id: "904401609939886100", name: "Inclinez-vous, la Maman du Donjon" },//Angelyne
-    { id: "770334301609787392", name: "Oh ! Une dév" },//Sylicium
-    { id: "467333274314997760", name: "Le diktateur" },//Seikam
-    { id: "575402346591420447", name: "La salope du diktateur" }, //Iza
-    { id: "959198467224387584", name: "La soubrette de Seikam" },//Rapu
-    { id: "300399893611151361", name: "Le Jaybécois" },//jay
-    { id: "964474149793828865", name: "Un black" },//White
-    { id: "262306247628423168", name: "J'aime les elfes, car j'en suis un" },//aragorne
-    { id: "411916947773587456", name: "Un bot inférieur à moi" },//Jackie Music
-    { id: "461898434346221568", name: "Le chragon d'Emy" },//Clo
-    { id: "718015664975249438", name: "Je suis lesbienne mais je ne vous ai pas encore testés ET ALORS ?" },//Elyxir
-  ]
+  let specialNickname_list = client.config.static.specialNicknames
 
   let specialNickname = specialNickname_list.find(x => {
     return x.id == newState.member.id
@@ -64,20 +31,20 @@ module.exports = async (client, oldState, newState) => {
 
 
   if(oldState.channelId != newState.channelId) {
-    let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(x => {
-      return x.voiceID == newState.channelId
+    let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(configVoiceChannel => {
+      return configVoiceChannel.id == newState.channelId
     })
     if(temp1_chan_no_mic_list.length > 0){
       let temp1_chan_no_mic = temp1_chan_no_mic_list[0]
-      newState.member.roles.add(temp1_chan_no_mic.roleID)
+      newState.member.roles.add(temp1_chan_no_mic.noMicChannel_roleID)
     }
     
-    let temp2_chan_no_mic_list = all_channels_with_no_mic.filter(x => {
-      return x.voiceID == oldState.channelId
+    let temp2_chan_no_mic_list = all_channels_with_no_mic.filter(configVoiceChannel => {
+      return configVoiceChannel.id == oldState.channelId
     })
     if(temp2_chan_no_mic_list.length > 0){
       let temp2_chan_no_mic = temp2_chan_no_mic_list[0]
-      newState.member.roles.remove(temp2_chan_no_mic.roleID)
+      newState.member.roles.remove(temp2_chan_no_mic.noMicChannel_roleID)
     }
   }
 
