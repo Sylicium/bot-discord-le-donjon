@@ -21,7 +21,7 @@ module.exports = async (client, oldState, newState) => {
       && x.noMicChannel_roleID != undefined
       && x.noMicChannel_roleID != false
       && typeof x.noMicChannel_roleID == 'string'
-      && guild.roles.cache.get(x.all_channels_with_no_mic) != undefined
+      && guild.roles.cache.get(x.noMicChannel_roleID) != undefined
     )
   })
 
