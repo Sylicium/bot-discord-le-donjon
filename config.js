@@ -317,6 +317,7 @@ let CONFIG = {
     },
     categories: {
       animation: "1160236790104477756",
+      corridor: "1159893069731201054",
       logs: "1165711661169115146",
       regression: "1159893165331992718",
       ticketCreate: "1159895522514063390",

@@ -49,10 +49,16 @@ module.exports = {
 
 
 		
+		function isParentIDokFor(parentID) {
+			return (interaction.channel.parent?.id != parentID
+				&& interaction.channel.parent?.parent?.id != parentID
+				&& interaction.channel.parent?.parent?.parent?.id != parentID
+			)
+		}
 
-		if(interaction.channel.parent?.id != client.config.static.categories.animation
-			&& interaction.channel.parent?.parent?.id != client.config.static.categories.animation
-			&& interaction.channel.parent?.parent?.parent?.id != client.config.static.categories.animation
+		if(
+			!isParentIDokFor(client.config.static.categories.animation)
+			&& !isParentIDokFor(client.config.static.categories.corridor)
 		) return interaction.reply({
 			content: `Impossible d'utiliser la commande en dehors de la catégorie Animation !`,
 			ephemeral: true
