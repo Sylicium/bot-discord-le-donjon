@@ -50,6 +50,7 @@ module.exports = async (client, oldState, newState) => {
       let temp1_chan_no_mic_list = all_channels_with_no_mic.filter(configVoiceChannel => {
         return configVoiceChannel.id == channelID
       })
+      console.log("temp1_chan_no_mic_list:",temp1_chan_no_mic_list)
       if(temp1_chan_no_mic_list.length > 0){
         let temp1_chan_no_mic = temp1_chan_no_mic_list[0]
         return temp1_chan_no_mic.noMicChannel_roleID
