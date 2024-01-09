@@ -31,7 +31,7 @@ module.exports = async (client, oldState, newState) => {
   }) ?? null
   
   let specialNickname = {}
-  specialNickname.getDefault = () => { return _specialNickname_value.name ?? (newState.member.nickname || newState.member.user.username) }
+  specialNickname.getDefault = () => { return _specialNickname_value?.name || (newState.member.nickname || newState.member.user.username) }
   specialNickname.getJoin = () => {
     if(_specialNickname_value.voice.join == true) return specialNickname.getDefault()
     else if(typeof _specialNickname_value.voice.join == 'string') return _specialNickname_value.voice.join
