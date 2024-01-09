@@ -13,6 +13,15 @@ module.exports = async (client, oldState, newState) => {
 
   // console.log("member.displayAvatarURL",member.displayAvatarURL())
   // console.log("member.user.displayAvatarURL",member.user.displayAvatarURL())
+
+
+  function getInclusiveEnd() {
+    return (
+      member.roles.has(client.config.static.roles.homme) ? "" : (
+        member.roles.has(client.config.static.roles.femme) ? "e" : "(e)"
+      )
+    )
+  }
   
 
   let all_channels_with_no_mic = client.config.static.voiceChannels.filter(x => {
@@ -103,7 +112,7 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `${specialNickname.getJoin()} est arrivé !`, iconURL: member.displayAvatarURL() })
+            .setAuthor({ name: `${specialNickname.getJoin()} est arrivé${getInclusiveEnd()} !`, iconURL: member.displayAvatarURL() })
             .setColor("00FF00")
         ]
       }).catch(e => {
@@ -156,7 +165,7 @@ module.exports = async (client, oldState, newState) => {
       le_no_micro_channel[0].send({
         embeds: [
           new Discord.EmbedBuilder()
-            .setAuthor({ name: `${specialNickname.getLeave()} est parti ..`, iconURL: member.displayAvatarURL() })
+            .setAuthor({ name: `${specialNickname.getLeave()} est parti${getInclusiveEnd()} ..`, iconURL: member.displayAvatarURL() })
             .setColor("FF0000")
         ]
       }).catch(e => {
