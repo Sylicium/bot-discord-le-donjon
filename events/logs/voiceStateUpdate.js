@@ -17,8 +17,8 @@ module.exports = async (client, oldState, newState) => {
 
   function getInclusiveEnd() {
     return (
-      member.roles.has(client.config.static.roles.homme) ? "" : (
-        member.roles.has(client.config.static.roles.femme) ? "e" : "(e)"
+      member._roles.includes(client.config.static.roles.homme) ? "" : (
+        member._roles.includes(client.config.static.roles.femme) ? "e" : "(e)"
       )
     )
   }
