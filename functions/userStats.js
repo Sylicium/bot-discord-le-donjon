@@ -283,7 +283,7 @@ async function checklevelUp(client, guild_id, user_id) {
       user_id,
     ])
 
-    levelUp(client, user_id, user_datas.level)
+    levelUp(client, user_id, parseInt(user_datas.level)+1)
   }
 
   setTimeout(() => {
