@@ -1,5 +1,5 @@
 {
-  "name": "f",
+  "name": "bot-discord-le-donjon",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -23,7 +23,8 @@
     "mongoose": "^7.6.0",
     "node-cron": "^3.0.2",
     "node-svg2img": "^1.1.0",
-    "ppfun-captcha": "^1.6.7"
+    "ppfun-captcha": "^1.6.7",
+    "somefunctions": "^3.4.2"
   },
   "repository": {
     "type": "git",
