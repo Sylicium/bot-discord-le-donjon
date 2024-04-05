@@ -1,0 +1,5 @@
+- Copier coller dans ce répertoire (/backups/) un fichier de backup.json.
+- Dupliquez le (afin de garder l'original si des erreurs surviennent) et renommez le deuxieme en "backup_input.json"
+- Entrez la commande "node push_backup.js" cela créera un fichier "backup_ouput.sql"
+- Entrez la commande "sudo mariadb < backup_output.sql" pour ajouter la backup dans la base de donnée.
+- Finit
