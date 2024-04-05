@@ -1,5 +1,4 @@
 
-const { table } = require("console")
 const fs = require("fs")
 
 let config = {
