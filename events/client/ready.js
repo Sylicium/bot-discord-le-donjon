@@ -3,19 +3,13 @@
 const SQLDB = require("../../SQLDB");
 const somef = require("../../someFunctions")
 const Discord = require("discord.js")
-
+const config = require("../../config")
 
 module.exports = async (client) => {
   console.log(`[BOT] Bot démarré en tant que ${client.user.tag} (${client.user.id})`)
 
   client.somef = somef
-  client.db = await SQLDB({
-                host: 'localhost', 
-                user:'bot',
-                password: 'ledonjon',
-                database: 'donjon',
-                connectionLimit: 100
-            }, true)
+  client.db = await SQLDB(config._SQLCredentials, true)
 
   client.disabledCommand = (interaction) => {
     return interaction.reply({
