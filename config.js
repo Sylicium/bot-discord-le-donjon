@@ -6,6 +6,13 @@ function getToken() {  return START_MODE == 1 ? process.env.TOKEN_TEST : process
 function getCurrentGuildID() { return CONFIG.guildId[START_MODE] }
 
 let CONFIG = {
+  _SQLCredentials: {
+                host: '127.0.0.1',  // NOT LOCALHOST SINON BUG AU Pool.getConnection() qui empeche de faire des requetes !!!!
+                user:'bot',
+                password: 'ledonjon',
+                database: 'donjon',
+                connectionLimit: 100
+  },
   token: getToken(), // Le Donjon
   startMode: START_MODE,
   developpement: {
