@@ -9,7 +9,13 @@ module.exports = async (client) => {
   console.log(`[BOT] Bot démarré en tant que ${client.user.tag} (${client.user.id})`)
 
   client.somef = somef
-  client.db = SQLDB
+  client.db = await SQLDB({
+                host: 'localhost', 
+                user:'bot',
+                password: 'ledonjon',
+                database: 'donjon',
+                connectionLimit: 100
+            }, true)
 
   client.disabledCommand = (interaction) => {
     return interaction.reply({
