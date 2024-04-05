@@ -154,6 +154,70 @@ class Database {
 
     __get__() { return this }
 
+    
+    async initUser(user) {
+        if(
+            !user.hasOwnProperty("id")
+            || !user.hasOwnProperty("username")
+            || !user.hasOwnProperty("banner")
+            || !user.hasOwnProperty("avatar")
+            || !user.hasOwnProperty("flags")
+            || !user.hasOwnProperty("bot")
+            || !user.hasOwnProperty("accentColor")
+        ) {
+            throw new Error("the user passed seems to not be an actual user object..")
+        }
+        let res1 = await this._makeQuery(`INSERT INTO users (user_id, isMember, discord_username) VALUES(?,?,?) ON DUPLICATE KEY UPDATE    
+      isMember=?
+      `, [
+        user.id, // user_id
+        true, // isMember
+        user?.user?.username ?? ( user.username ?? "<erreur>"), // discord_username
+        true, // isMember ON DUPLICATE KEY UPDATE
+      ])
+      let res2 = await this._makeQuery(`INSERT INTO user_stats (user_id, xp, messages, minutesInVoice, adminGive, react, img, level, bonus) VALUES (?,?,?,?, ?,?,?,?, ?) ON DUPLICATE KEY UPDATE user_id=user_id`, [
+        user.id, // user_id
+        0, // xp
+        0, // messages
+        0, // hoursInVoice
+
+        0, // adminGive
+        0, // react
+        0, // img
+        0, // level
+
+        0, // bonus
+      ])
+      return {
+        res1: res1,
+        res2: res2
+      }
+
+    }
+
+    /**
+     * f(): Récupère toutes les statistiques d'un utilisateur donnée sur une guilde
+     * @param {*} user_id - Identifiant de l'utilisateur
+     * @returns Object
+     */
+    async getUserStats(user_id) {
+        let user_datas_temp = await this._makeQuery(`SELECT * FROM user_stats
+        WHERE
+          user_id=?`, [
+            user_id
+        ])
+      
+        return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
+    }
+
+    async getUser(user_id) {
+        let user_datas_temp = await this._makeQuery(`SELECT * FROM users
+        WHERE user_id=?`, [
+            user_id
+        ])
+        return (user_datas_temp.length == 0 ? null : user_datas_temp[0])
+    }
+    
 }
 
 /**
