@@ -153,20 +153,20 @@ module.exports.updateTickets = async (client, interaction, type) => {
           permissionOverwrites: selected === "form" ? [{
             id: interaction.user.id,
             allow: ["ViewChannel", "SendMessages", "AttachFiles", "ReadMessageHistory"]
-          }, {
+          }, /*{
             id: client.config.static.roles.kapott,
             allow: ["ViewChannel", "SendMessages", "AttachFiles", "ReadMessageHistory"]
-          }, {
+          }, */ {
             id: interaction?.guild?.id,
             deny: ["ViewChannel"]
           }] : [{
             id: interaction?.user?.id,
             allow: ["ViewChannel", "SendMessages", "AttachFiles", "ReadMessageHistory"]
-          }, {
+          }, /*{
             id: client.config.static.roles.kapott,
             allow: ["ViewChannel", "ReadMessageHistory"],
             deny: ["SendMessages", "AttachFiles"]
-          }, {
+          }, */ {
             id: interaction?.guild?.id,
             deny: ["ViewChannel"]
           }]
